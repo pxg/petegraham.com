@@ -285,7 +285,7 @@ em, i { font-style: italic; }
 .post h2.headline {
     /*font: italic 22px/1.3em Georgia,serif;*/
     font: normal 13px/1.5em "Helvetica Neue",Helvetica,Arial,sans-serif;
-    margin: -5px 0 40px 0;
+    margin: -5px 0 16px 0;
     color: #b2b9be;
       font-size: 13px;
       text-transform: uppercase;
