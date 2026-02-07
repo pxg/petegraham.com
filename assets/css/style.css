@@ -436,14 +436,14 @@ Post List
 #post-list a {
     color: #333;
     display: block;
-    font: bold 19px/1.7 "Helvetica Neue",helvetica,Arial,sans-serif;
+    font: bold 19px/1.7 "Courier New", Courier, monospace;
 }
 
 #post-list .dates {
     float: right;
     position: relative;
     top: 1px;
-    font: 300 17px/1.8 "Helvetica Neue",helvetica,Arial,sans-serif;
+    font: 300 17px/1.8 "Courier New", Courier, monospace;
     color: #bbb;
 }
 
