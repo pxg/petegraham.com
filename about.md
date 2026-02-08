@@ -3,18 +3,30 @@ title: About
 permalink: about/
 profile: true
 ---
-<img class="center" src="/assets/images/pete_graham.jpg" alt="Image of Pete Graham wearing a nice suit"/>
-
-Hi I'm Pete Graham,
-
-I'm a fractional CTO, I help companies with their technical strategy and how to run high performing engineering teams. I've advised teams of all sizes improve their practices and delivery, from one developer to teams of over a hundred.
-
-I've been involved in over fifty technical due diligence deals for major PE and VC companies through the work I do with [Seedcloud](https://www.seedcloud.com/). 
-
-I was previously CTO at [Zero Deposit](https://www.zerodeposit.com) and [Roomix](https://roomix.com). My background is in software development. I'm particularly interested in the overlap between business, technology and customer experience.
-
- - [https://github.com/pxg](https://github.com/pxg)
- - [https://twitter.com/petexgraham](https://twitter.com/petexgraham)
- - [https://www.linkedin.com/in/petexgraham](https://www.linkedin.com/in/petexgraham)
+<section id="post-body" class="about-content">
+  <p>
+    <img class="center" src="/assets/images/pete_graham.jpg" alt="Portrait of Pete Graham wearing a suit"/>
+  </p>
+  <p>Hi, I'm Pete Graham.</p>
+  <p>
+    I'm a fractional CTO who helps companies shape technical strategy and build high-performing engineering teams.
+    I've advised teams from a single developer to organizations of more than a hundred, improving practices and delivery.
+  </p>
+  <p>
+    Through my work with <a href="https://www.seedcloud.com/">Seedcloud</a>, I've been involved in over fifty technical due diligence
+    engagements for major PE and VC firms.
+  </p>
+  <p>
+    Previously, I was CTO at <a href="https://www.zerodeposit.com">Zero Deposit</a> and <a href="https://roomix.com">Roomix</a>.
+    My background is in software development, and I'm particularly interested in the overlap between business, technology,
+    and customer experience.
+  </p>
+  <p><strong>Find me online</strong></p>
+  <ul>
+    <li><a href="https://github.com/pxg">GitHub</a></li>
+    <li><a href="https://twitter.com/petexgraham">Twitter</a></li>
+    <li><a href="https://www.linkedin.com/in/petexgraham">LinkedIn</a></li>
+  </ul>
+</section>
 
 {% include footer.html %}
