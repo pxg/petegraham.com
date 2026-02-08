@@ -272,7 +272,7 @@ em, i { font-style: italic; }
 .post h1, h1.post-list {
     margin-bottom: 18px;
     color: #222;
-    font: 300 30px/1.3em "Courier New", Courier, monospace;
+    font: 300 30px/1.3em "Helvetica Neue", Helvetica,Arial,sans-serif;
 }
 
 .post h2 {
