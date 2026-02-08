@@ -429,21 +429,21 @@ Post List
 }
 
 #post-list li+li {
-    padding-top: 20px;
+    padding-top: 18px;
     border-top: 1px solid #eee;
 }
 
 #post-list a {
     color: #333;
     display: block;
-    font: bold 19px/1.7 "Helvetica Neue",helvetica,Arial,sans-serif;
+    font: bold 18px/1.65 "Helvetica Neue",helvetica,Arial,sans-serif;
 }
 
 #post-list .dates {
     float: right;
     position: relative;
     top: 1px;
-    font: 300 17px/1.8 "Helvetica Neue",helvetica,Arial,sans-serif;
+    font: 300 16px/1.7 "Helvetica Neue",helvetica,Arial,sans-serif;
     color: #bbb;
 }
 
