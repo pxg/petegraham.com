@@ -120,7 +120,7 @@ h2 {
 }
 
 nav.main-nav {
-    padding: 20px 20px 0;
+    padding: 20px 40px 0;
 
     max-width: 700px;
     width: 100%;
@@ -199,7 +199,8 @@ nav.main-nav a.cta {
 }
 
 .about-content {
-    max-width: 60ch;
+    max-width: 700px;
+    width: 100%;
     margin: 0 auto;
     font-size: 18px;
     line-height: 1.7;
