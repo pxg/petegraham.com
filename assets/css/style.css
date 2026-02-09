@@ -179,6 +179,50 @@ nav.main-nav a.cta {
     border-radius: 50%;
 }
 
+.home #wrapper p,
+.home #wrapper ul {
+    margin: 0 0 22px;
+    line-height: 1.7;
+}
+
+.home #wrapper ul {
+    padding-left: 22px;
+    list-style-position: outside;
+}
+
+.home #wrapper li {
+    margin-bottom: 6px;
+}
+
+.home #wrapper img.center {
+    margin-bottom: 18px;
+}
+
+.about-content {
+    max-width: 60ch;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.about-content p,
+.about-content ul {
+    margin: 0 0 20px;
+}
+
+.about-content ul {
+    padding-left: 20px;
+    list-style-position: outside;
+}
+
+.about-content li {
+    margin-bottom: 6px;
+}
+
+.about-content img.center {
+    margin: 10px auto 24px;
+}
+
 /* Typography */
 /*Accent color*/
 a,
