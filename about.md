@@ -5,7 +5,7 @@ profile: false
 ---
 <div class="about-content" markdown="1">
 
-<h1>Hi I'm Pete Graham</h1>
+<h1>Hi I'm Pete Graham 👋</h1>
 
 <img class="center" src="/assets/images/pete_graham.jpg" alt="Image of Pete Graham wearing a nice suit"/>
 
