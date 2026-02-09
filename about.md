@@ -1,11 +1,15 @@
 ---
 title: About
 permalink: about/
-profile: true
+profile: false
 ---
+<div class="about-content" markdown="1">
+
+<h1>Hi I'm Pete Graham</h1>
+
 <img class="center" src="/assets/images/pete_graham.jpg" alt="Image of Pete Graham wearing a nice suit"/>
 
-Hi I'm Pete Graham,
+
 
 I'm a fractional CTO, I help companies with their technical strategy and how to run high performing engineering teams. I've advised teams of all sizes improve their practices and delivery, from one developer to teams of over a hundred.
 
@@ -16,5 +20,5 @@ I was previously CTO at [Zero Deposit](https://www.zerodeposit.com) and [Roomix]
  - [https://github.com/pxg](https://github.com/pxg)
  - [https://twitter.com/petexgraham](https://twitter.com/petexgraham)
  - [https://www.linkedin.com/in/petexgraham](https://www.linkedin.com/in/petexgraham)
-
+</div>
 {% include footer.html %}
