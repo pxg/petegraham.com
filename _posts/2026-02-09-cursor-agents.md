@@ -11,8 +11,6 @@ It turns out that with [Cursor Agents](https://cursor.com/agents) not only is th
 
 This site's GitHub repo is set up for auto-deployment on commit to main, so once I approve PRs, they get deployed, which all feels kind of auto-magical.
 
-![](/assets/images/posts/IMG_8778.png)
-
 ![](/assets/images/posts/IMG_8779.png)
 
 One enhancement I'd like to explore is to have a development version of the site spun up for each PR so I can review.
