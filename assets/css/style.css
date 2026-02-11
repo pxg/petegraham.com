@@ -251,9 +251,7 @@ a,
 
 p a {
     color: #5694f1;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    text-decoration: none;
 }
 
 /*Transitions*/
