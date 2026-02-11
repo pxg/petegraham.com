@@ -2,7 +2,7 @@
 title: Articles
 permalink: /blog/
 layout: default
-profile: false
+profile: true
 ---
 
 {% include post-list-blog.html %}
