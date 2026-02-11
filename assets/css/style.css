@@ -214,10 +214,23 @@ nav.main-nav a.cta {
 .about-content ul {
     padding-left: 20px;
     list-style-position: outside;
+    margin-bottom: 10px;
+}
+
+/* Tighter gap when a heading follows a list */
+.about-content ul + h2 {
+    margin-top: 14px;
 }
 
 .about-content li {
     margin-bottom: 6px;
+}
+
+.about-content em,
+.about-content i {
+    color: #f28c28;
+    font-style: normal;
+    font-weight: bold;
 }
 
 .about-content img.center {
