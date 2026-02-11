@@ -111,12 +111,11 @@ h2 {
 
 .profile h2 {
     font-size: 20px;
-      font-weight: 300;
-      color: #aaa;
-      margin-top: 10px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-style: normal;
-
+    font-weight: 300;
+    color: #777;
+    margin-top: 10px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: normal;
 }
 
 nav.main-nav {
@@ -144,8 +143,6 @@ nav.main-nav a {
     font-weight: 600;
     line-height: 1.35;
     border-radius: 3px;
-    font-family: "Courier New", Courier, monospace;
-
 }
 
 nav.main-nav a.brand {
