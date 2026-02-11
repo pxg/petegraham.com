@@ -1,24 +1,32 @@
 ---
 title: About
 permalink: about/
-profile: false
+profile: true
 ---
 <div class="about-content" markdown="1">
 
-<h1>Hi I'm Pete Graham 👋</h1>
+Most engineering teams can build an MVP, but few are structured to scale beyond a Series A investment, especially in highly regulated sectors like **FinTech, InsurTech, and HealthTech**.
 
-<img class="center" src="/assets/images/pete_graham.jpg" alt="Image of Pete Graham wearing a nice suit"/>
+I bridge the gap between **technology strategy** and business scaling. As a Fractional CTO, I ensure your technology doesn't just work—it supports the next 10x of your business growth.
 
+**How I help:**
 
+* **Investor Readiness & Due Diligence:** Having performed over 50 technical due diligence deals, I have developed deep **pattern matching** for the architectural mistakes that kill deals. I help founders **avoid the common pitfalls** that blocks funding rounds.
+* **Bridging Technology & Business Strategy:** I translate **technology strategy** into business outcomes, ensuring your architecture and technology choices support your scaling goals.
+* **Developing High-Performing Engineering Teams:** I provide the leadership needed to navigate high-growth phases, improving velocity and engineering culture without adding unnecessary corporate overhead.
 
-I'm a fractional CTO, I help companies with their technical strategy and how to run high performing engineering teams. I've advised teams of all sizes improve their practices and delivery, from one developer to teams of over a hundred.
+**I'm typically brought in when:**
 
-I've been involved in over fifty technical due diligence deals for major PE and VC companies through the work I do with [Seedcloud](https://www.seedcloud.com/). 
+* You’re scaling a regulated product and need to ensure your technical foundations meet both performance and compliance standards.
+* Your engineering team is moving fast, but technical debt is starting to slow down feature delivery and product roadmap execution.
+* The "AI Hangover" is real: you launched an LLM-based feature for a demo, and now it needs to be turned into a robust, cost-effective, and secure production system.
 
-I was previously CTO at [Zero Deposit](https://www.zerodeposit.com) and [Roomix](https://roomix.com). My background is in software development. I'm particularly interested in the overlap between business, technology and customer experience.
+I don't just offer high-level advice; I provide the pragmatic, hands-on leadership required to scale technology and business in sync.
 
- - [https://github.com/pxg](https://github.com/pxg)
- - [https://twitter.com/petexgraham](https://twitter.com/petexgraham)
- - [https://www.linkedin.com/in/petexgraham](https://www.linkedin.com/in/petexgraham)
+**The Next Step:**
+I offer a **30-day Technical Audit** for teams preparing for scale or investment. We'll identify the debt holding you back and build a roadmap to fix it.
+
+**Email [pete@petegraham.co.uk](mailto:pete@petegraham.co.uk) to discuss your current scaling challenges.**
+
 </div>
 {% include footer.html %}
