@@ -16,12 +16,12 @@ paginate_path: "/page/:num/"
 future: true
 
 baseurl: ""
-domain_name: 'http://petegraham.co.uk'
+domain_name: 'https://petegraham.com'
 google_analytics: 'UA-1161798-1'
 disqus_shortname: 'your-disqus-shortname'
 
 # Details for the RSS feed generator
-url:            'http://petegraham.co.uk'
+url:            'https://petegraham.com'
 author:         'Pete Graham'
 authorTwitter:  'petexgraham'
 
