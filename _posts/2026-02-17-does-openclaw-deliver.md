@@ -4,7 +4,7 @@ date: 2026-02-17
 layout: post
 ---
 
-There's been a huge amount of hype recently about [OpenClaw](https://openclaw.ai/). I tried it twice to see if it delivers—here's what I learned. You may have heard it called OpenClaw/Moltbot/The artist formerly known as ClawdBot. It's the AI bot that's been taking the tech world by storm, tech bros have been buying mac minis in their droves to install OpenClaw and use it to automate all sorts of aspects of their lives, from buying groceries to sending messages to their girlfriends. Which I find in equal parts dystopian and intriguing.
+There's been a huge amount of hype recently about [OpenClaw](https://openclaw.ai/). I tried it twice to see if it delivers and here's what I learned. You may have heard it called OpenClaw/Moltbot/The artist formerly known as ClawdBot. It's the AI bot that's been taking the tech world by storm, tech bros have been buying mac minis in their droves to install OpenClaw and use it to automate all sorts of aspects of their lives, from buying groceries to sending messages to their girlfriends. Which I find in equal parts dystopian and intriguing.
 
 ![](/assets/images/posts/clawdbot_mac_mini.png)
 
@@ -25,7 +25,9 @@ I used the official one click [security hardened OpenClaw installation made by D
 
 I went through the initial set-up which was fairly painless apart from a bit of security faff to access the OpenClaw webUI.
 
-I configured it to use the Anthropic API, by default it was using the Opus model which is expensive, I wanted to use Sonnet so it would cost me less. I tried to change the model and it was very fiddly and required me editing config files in Vim, restarting the Openclaw service, and generally dicking about in the terminal. OpenClaw itself wasn't very useful at giving information as in the security hardened installation it's locked down so out-of-the-box it can't access the internet. Trying to grant OpenClaw internet access was equally fiddly. I lost track of the amount of times I ran `openclaw gateway restart`.
+![](/assets/images/posts/openclaw_webui.jpeg)
+
+I configured it to use the Anthropic API, by default it was using the Opus model which is expensive, I wanted to use Sonnet so it would cost me less. I tried to change the model and it was very fiddly and required me editing config files in Vim, restarting the Openclaw service, and generally monkeying about in the terminal. OpenClaw itself wasn't very useful at giving information as in the security hardened installation it's locked down so out-of-the-box it can't access the internet. Trying to grant OpenClaw internet access was equally fiddly. I lost track of the amount of times I ran `openclaw gateway restart`.
 
 OpenClaw does support fallback models but it doesn't support switching them easily, I was surprised at this as was expecting it to support models suited to different tasks. I was also expecting cost tracking of LLM tokens built-in, although I do believe there's a skill for this. 
 
