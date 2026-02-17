@@ -1,6 +1,6 @@
 ---
 layout: til
-title: "Today I learnt about the built-in Cursor markdown preview 📝"
+title: "Today I learnt about Cursor markdown preview 👀"
 date: 2026-02-17
 ---
 
@@ -8,3 +8,4 @@ I've been writing more markdown in [Cursor](https://www.cursor.com/) lately. I'v
 
 Turns out Cursor (like VS Code it's based on) has markdown preview built right in **`Cmd+Shift+V`** (Mac) / **`Ctrl+Shift+V`** (Windows/Linux) opens the markdown preview in the current tab. You can also right-click in a markdown file and choose *Open Preview* from the context menu.
 
+This also led me to discover that [Obsidian](https://obsidian.md/) has its own flavour of markdown—extensions like wikilinks, tags, and block references that work great within Obsidian but don't render the same way in standard markdown preview. Something to keep in mind when moving notes between tools.
