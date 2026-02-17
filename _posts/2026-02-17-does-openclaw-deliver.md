@@ -52,8 +52,6 @@ To be truly collaborative I thought it would be good if we could both edit the f
 At this point I decided to stop, step back and think about what I wanted to achieve. 
 
 ## What do you want to do today?
-Firstly, as an experiment, I wanted OpenClaw to retrieve some information from my calendar and create some calendar events for me, it turns out Google Gemini support this if you're using Google Calendar.
+Stepping back, I asked myself what I actually wanted. A simple test: have OpenClaw fetch information from my calendar and create events. It turns out Google Gemini can do that directly if you're using Google Calendar—no OpenClaw required. For collaboration on projects and task assignment, I realised I can likely get most of what I want from Cursor, Cursor Agents (which I've been using), GitHub and some custom actions. That's what I plan to experiment with next.
 
-I then thought about my desire to collaborate on projects and assign tasks to agents, and co-author documents. What struck me was that I can likely get most of the behaviour I want from OpenClaw using a combination of Cursor, Cursor Agents (which I've been using), Github and potentially some custom github actions for specialised agent workflow, this is what I plan to experiment with and write about next.
-
-OpenClaw promises a lot, but to me at this point it feels a bit too much like tech proof of concept rather than a tool ready for mainstream adoption. To be fair, maybe my mental model of how it would work was different from what it does and I need to invent my own TaskAI solution.
+**Verdict:** OpenClaw is ambitious and the vision is compelling; a personal AI you own and control. But right now it feels like a proof of concept; setup is fiddly, behaviour isn't always robust, and switching models or granting internet access means wrestling with config files. Maybe my expectations were off, I wanted something more reliable and polished out of the box. I'll keep an eye on it; the project moves fast. For now, I think there might be other options to achieve what OpenClaw promises hacking battled-hardened existing technologies to leverage AI.
