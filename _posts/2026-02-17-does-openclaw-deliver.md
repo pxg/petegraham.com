@@ -4,7 +4,7 @@ date: 2026-02-17
 layout: post
 ---
 
-There's been a huge amount of hype recently about [OpenClaw](https://openclaw.ai/). You may have heard it called OpenClaw/Moltbot/The artist formerly known as ClawdBot. It's the AI bot that's been taking the tech world by storm, tech bros have been buying mac minis in their droves to install OpenClaw and use it to automate all sorts of aspects of their lives, from buying groceries to sending messages to their girlfriends. Which I find in equal parts dystopian and intriguing.
+There's been a huge amount of hype recently about [OpenClaw](https://openclaw.ai/). I tried it twice to see if it delivers—here's what I learned. You may have heard it called OpenClaw/Moltbot/The artist formerly known as ClawdBot. It's the AI bot that's been taking the tech world by storm, tech bros have been buying mac minis in their droves to install OpenClaw and use it to automate all sorts of aspects of their lives, from buying groceries to sending messages to their girlfriends. Which I find in equal parts dystopian and intriguing.
 
 ![](/assets/images/posts/clawdbot_mac_mini.png)
 
