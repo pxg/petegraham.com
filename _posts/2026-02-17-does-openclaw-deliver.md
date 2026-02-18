@@ -47,11 +47,11 @@ Like some people, I found OpenClaw isn't great being asked to do lots of things 
 ## Can OpenClaw work with GitHub?
 To be truly collaborative I thought it would be good if we could both edit the files using Git and sync them using Github. To test OpenClaw's limits I tried to get it to sign-up for a Github account, it was unable to do this so I created an account for it myself. I then asked it to create a git repo and create ssh keys which I could associate with its Github account. It failed miserably to do this, maybe it's because I was using the cheaper Google Flash model, this was pretty disappointing, and not the Skynet style experience I was expecting.
 
-![](/assets/images/posts/terminator_rise.png)
+![](/assets/images/posts/josh_valentines_beach.png)
 
 At this point I decided to stop, step back and think about what I wanted to achieve. 
 
 ## What do you want to do today?
 Stepping back, I asked myself what I actually wanted. A simple test: have OpenClaw fetch information from my calendar and create events. It turns out Google Gemini can do that directly if you're using Google Calendar—no OpenClaw required. For collaboration on projects and task assignment, I realised I can likely get most of what I want from Cursor, Cursor Agents (which I've been using), GitHub and some custom actions. That's what I plan to experiment with next.
 
-**Verdict:** OpenClaw is ambitious and the vision is compelling; a personal AI you own and control. But right now it feels like a proof of concept; setup is fiddly, behaviour isn't always robust, and switching models or granting internet access means wrestling with config files. Maybe my expectations were off, I wanted something more reliable and polished out of the box. I'll keep an eye on it; the project moves fast. For now, I think we can achieve what OpenClaw promises by hacking battle-hardened existing technologies to leverage AI.
+**Verdict:** OpenClaw is ambitious and the vision is compelling; a personal AI you own and control. But right now it feels like a proof of concept; setup is fiddly, behaviour isn't always robust, and getting it working properly means wrestling with config files. Maybe my expectations were off, I wanted something more reliable and polished out of the box. I'll keep an eye on the project as it moves fast. My theory is we can achieve what OpenClaw promises by hacking battle-hardened existing technologies to leverage AI, resulting in more reliable and safer solutions.
