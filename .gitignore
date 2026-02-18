@@ -1,5 +1,6 @@
 _site/
 .sass-cache/
+.cursor/
 .DS_Store
 Gemfile.lock
 notes.md
