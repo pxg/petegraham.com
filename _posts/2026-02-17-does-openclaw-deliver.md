@@ -47,7 +47,7 @@ Like some people, I found OpenClaw isn't great being asked to do lots of things 
 ## Can OpenClaw work with GitHub?
 To be truly collaborative I thought it would be good if we could both edit the files using Git and sync them using Github. To test OpenClaw's limits I tried to get it to sign-up for a Github account, it was unable to do this so I created an account for it myself. I then asked it to create a git repo and create ssh keys which I could associate with its Github account. It failed miserably to do this, maybe it's because I was using the cheaper Google Flash model, this was pretty disappointing, and not the Skynet style experience I was expecting.
 
-![](/assets/images/posts/josh_valentines_beach.png)
+![](/assets/images/posts/josh_valentines_beach.jpeg)
 
 At this point I decided to stop, step back and think about what I wanted to achieve. 
 
