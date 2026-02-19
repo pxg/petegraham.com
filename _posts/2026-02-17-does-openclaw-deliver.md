@@ -38,7 +38,7 @@ At this point I was finding the experience pretty disappointing and frustrating,
 ## Second Attempt
 I started with a Ubuntu droplet on Digital Ocean, once you ssh you can install OpenClaw with `curl -fsSL https://openclaw.ai/install.sh | bash` which steps you through an installation wizard, I decided to call my bot Josh. By default OpenClaw then runs in TUI, which is a Terminal UI for chat. I found it a fun experience chatting with Josh and can see why people have been getting hooked on this.
 
-I then configured OpenClaw/Josh to work with a Signal bot, which I got working after quite a bit of messing about. I did find that OpenClaw sometimes hung or didn't reply to messages, it definitely didn't feel a robust experience.
+I then configured OpenClaw/Josh to work with a Telegram bot, which I got working after quite a bit of messing about. I did find that OpenClaw sometimes hung or didn't reply to messages, it definitely didn't feel a robust experience.
 
 I managed to grant this OpenClaw installation access to the internet, and then changed its model to Google's Gemini Flash (which is the free within limits) so it didn't cost me a fortune.
 
