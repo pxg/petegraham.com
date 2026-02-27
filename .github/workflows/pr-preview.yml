@@ -46,7 +46,7 @@ jobs:
           source-dir: ./_site
           preview-branch: gh-pages
           umbrella-dir: pr-preview
-          pages-base-url: https://petegraham.com/
+          pages-base-url: petegraham.com
           wait-for-pages-deployment: true
           qr-code: false
           action: deploy
@@ -57,7 +57,7 @@ jobs:
         with:
           preview-branch: gh-pages
           umbrella-dir: pr-preview
-          pages-base-url: https://petegraham.com/
+          pages-base-url: petegraham.com
           wait-for-pages-deployment: true
           qr-code: false
           action: remove
