@@ -12,7 +12,7 @@ archive: true
     <section id="post-body">
 
         {% if page.image %}
-        <img class="center" src="/assets/images/work/{{ page.image }}"/>
+        <img class="center" src='{{ "/assets/images/work/" | append: page.image | relative_url }}'/>
         {% endif %}
         <ul>
             <li>Technologies: {{ page.technologies }}</li>
@@ -27,8 +27,8 @@ archive: true
     </section>
 </article>
 <footer id="post-meta" class="clearfix">
-    <a href="{{ site.url }}">
-        <img class="avatar" src="/assets/images/avatar.png">
+    <a href='{{ "/" | relative_url }}'>
+        <img class="avatar" src='{{ "/assets/images/avatar.png" | relative_url }}'>
         <div>
             <span class="dark">{{ site.author }}</span>
             <span>{{ site.description }}</span>
@@ -51,7 +51,7 @@ archive: true
         <h3>Read more</h3>
         {% for post in site.posts %}
             <li>
-                <a href="{{ post.url }}">{{ post.title }}<aside class="dates">{{ post.date | date:"%b %d" }}</aside></a>
+                <a href='{{ post.url | relative_url }}'>{{ post.title }}<aside class="dates">{{ post.date | date:"%b %d" }}</aside></a>
             </li>
         {% endfor %}
     </ul>

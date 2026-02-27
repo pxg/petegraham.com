@@ -66,3 +66,27 @@ Simply push to main:
 ```
 git push
 ```
+
+## PR preview workflow
+
+This repository now includes two GitHub Actions workflows:
+
+- `.github/workflows/deploy-pages.yml`  
+  Builds Jekyll on pushes to `main` and deploys the generated `_site` to `gh-pages`.
+- `.github/workflows/pr-preview.yml`  
+  Builds a PR-specific preview and deploys it to `gh-pages/pr-preview/pr-<PR_NUMBER>/`, then comments the preview URL on the pull request.
+
+### One-time GitHub settings
+
+1. In **Settings → Pages**, set:
+   - **Source**: `Deploy from branch`
+   - **Branch**: `gh-pages`
+   - **Folder**: `/ (root)`
+2. In **Settings → Actions → General → Workflow permissions**, set:
+   - **Read and write permissions**
+
+Once enabled, preview links will follow:
+
+`https://petegraham.com/pr-preview/pr-<PR_NUMBER>/`
+
+> Note: preview deployment for forked pull requests is not supported by the current preview action configuration.

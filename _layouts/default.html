@@ -7,15 +7,15 @@
 
   {% seo title=false %}
   <title>{{ site.name }}{% if page.title %} - {{ page.title }}{% endif %}</title>
-  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-  <link rel="icon" href="/assets/images/favicon.ico">
-  <link rel="manifest" href="/assets/images/site.webmanifest">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/web-app-manifest-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/web-app-manifest-512x512.png">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/rss.xml">
-  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <link rel="apple-touch-icon" href='{{ "/assets/images/apple-touch-icon.png" | relative_url }}'>
+  <link rel="icon" type="image/svg+xml" href='{{ "/assets/images/favicon.svg" | relative_url }}'>
+  <link rel="icon" href='{{ "/assets/images/favicon.ico" | relative_url }}'>
+  <link rel="manifest" href='{{ "/assets/images/site.webmanifest" | relative_url }}'>
+  <link rel="icon" type="image/png" sizes="192x192" href='{{ "/assets/images/web-app-manifest-192x192.png" | relative_url }}'>
+  <link rel="icon" type="image/png" sizes="512x512" href='{{ "/assets/images/web-app-manifest-512x512.png" | relative_url }}'>
+  <link rel="stylesheet" href='{{ "/assets/css/style.css" | relative_url }}'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='{{ "/rss.xml" | relative_url }}'>
+  <link rel="stylesheet" href='{{ "/assets/css/highlight.css" | relative_url }}'>
 </head>
 <body>
 
@@ -30,8 +30,8 @@
   </section>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/highlight.js"></script>
+  <script src='{{ "/assets/js/main.js" | relative_url }}'></script>
+  <script src='{{ "/assets/js/highlight.js" | relative_url }}'></script>
   <script>hljs.initHighlightingOnLoad();</script>
 
   <script>
