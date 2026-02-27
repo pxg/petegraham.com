@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Today I learnt ordering Jekyll collections 👨‍💻" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This site in built using the Jekyll static site builder, I wanted to order the Today I Learnt page so the newest are first. til is one of my Jekyll collections, this is the code I have in _includes/til-list.html to sort by date in reverse order:" />
+<meta property="og:description" content="This site in built using the Jekyll static site builder, I wanted to order the Today I Learnt page so the newest are first. til is one of my Jekyll collections, this is the code I have in _includes/til-list.html to sort by date in reverse order:" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-4/TIL/jekyll_order_collection/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-4/TIL/jekyll_order_collection/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Today I learnt ordering Jekyll collections 👨‍💻" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2021-08-03T00:00:00+00:00","datePublished":"2021-08-03T00:00:00+00:00","description":"This site in built using the Jekyll static site builder, I wanted to order the Today I Learnt page so the newest are first. til is one of my Jekyll collections, this is the code I have in _includes/til-list.html to sort by date in reverse order:","headline":"Today I learnt ordering Jekyll collections 👨‍💻","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-4/TIL/jekyll_order_collection/"},"url":"https://petegraham.com/pr-preview/pr-4/TIL/jekyll_order_collection/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Today I learnt ordering Jekyll collections 👨‍💻</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-4/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-4/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-4/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-4/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-4/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-4/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-4/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-4/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-4/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+    <a class="brand" href='/pr-preview/pr-4/'>petegraham.com</a>
+    <a href='/pr-preview/pr-4/blog/'>Articles</a>
+    <a href='/pr-preview/pr-4/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-4/'>About</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Today I learnt ordering Jekyll collections 👨‍💻</h1>
+        <h2 class="headline"></h2>
+    </header>
+    <section id="post-body">
+
+        <p>This site in built using the Jekyll static site builder, I wanted to order the <a href="/TIL">Today I Learnt</a> page so the newest are first. <code class="language-plaintext highlighter-rouge">til</code> is one of my Jekyll collections, this is the code I have in <code class="language-plaintext highlighter-rouge">_includes/til-list.html</code> to sort by date in reverse order:</p>
+
+<figure class="highlight"><pre><code class="language-liquid" data-lang="liquid">&lt;ul id="post-list"&gt;
+    <span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">sorted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">til</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'date'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">reverse</span><span class="w"> </span><span class="p">%}</span>
+    <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">post</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">sorted</span><span class="w"> </span><span class="p">%}</span>
+    &lt;li&gt;
+        &lt;a href='<span class="p">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>'&gt;&lt;aside class="dates"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">date</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">date</span><span class="p">:</span><span class="s2">"%b %d %Y"</span><span class="w"> </span><span class="p">}}</span>&lt;/aside&gt;&lt;/a&gt;
+        &lt;a href='<span class="p">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>'&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span> &lt;h2&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">description</span><span class="w"> </span><span class="p">}}</span>&lt;/h2&gt;&lt;/a&gt;
+    &lt;/li&gt;
+    <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+&lt;/ul&gt;</code></pre></figure>
+
+<p>Whilst aspiring to be an outspoken buffoon I’m no <a href="https://twitter.com/dhh">DHH</a>, I only know a little Ruby and didn’t invent this technique, I originally found it on <a href="https://gist.github.com/Phlow/1f27dfafdf2bbcc5c48e">this gist</a>.</p>
+
+
+    </section>
+</article>
+
+<nav id="post-nav">
+    
+        <span class="prev">
+                <a href='/pr-preview/pr-4/TIL/python_type_hints/'>
+                    <span class="arrow">←</span> Previous TIL
+                </a>
+        </span>
+    
+    
+        <span class="next">
+            <a href='/pr-preview/pr-4/TIL/tee/'>
+                Next TIL <span class="arrow">→</span>
+            </a>
+        </span>
+    
+</nav>
+
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-4/'>
+        <img class="avatar" src='/pr-preview/pr-4/assets/images/avatar.png'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-4/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-4/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

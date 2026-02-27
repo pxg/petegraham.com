@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Getting Redash running on macOS" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Getting a local version of Redash running on a Mac" />
+<meta property="og:description" content="Getting a local version of Redash running on a Mac" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-4/running-redash-on-mac-os/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-4/running-redash-on-mac-os/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-31T11:30:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Getting Redash running on macOS" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2018-03-31T11:30:00+00:00","datePublished":"2018-03-31T11:30:00+00:00","description":"Getting a local version of Redash running on a Mac","headline":"Getting Redash running on macOS","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-4/running-redash-on-mac-os/"},"url":"https://petegraham.com/pr-preview/pr-4/running-redash-on-mac-os/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Getting Redash running on macOS</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-4/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-4/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-4/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-4/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-4/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-4/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-4/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-4/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-4/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+    <a class="brand" href='/pr-preview/pr-4/'>petegraham.com</a>
+    <a href='/pr-preview/pr-4/blog/'>Articles</a>
+    <a href='/pr-preview/pr-4/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-4/'>About</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Getting Redash running on macOS</h1>
+    </header>
+    <section id="post-body">
+        <p>I wanted to try out the open source reporting software <a href="https://redash.io">Redash</a> so got a local copy running on my MacBook. These are the instructions.</p>
+
+<h2 id="installing-redash-locally">Installing Redash locally</h2>
+<p>Clone the Github repo:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:getredash/redash.git
+</code></pre></div></div>
+
+<p>The simplest way to run Redash is using Docker:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose -f docker-compose.production.yml run --rm server create_db
+docker-compose -f docker-compose.production.yml up
+</code></pre></div></div>
+
+<p>Your local Redash instance will be running on <a href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a> the first time you visit you’ll be prompted to set-up your admin user.</p>
+
+<p>Links:</p>
+<ul>
+  <li>Docker for Mac <a href="https://www.docker.com/docker-mac">https://www.docker.com/docker-mac</a></li>
+  <li>Official documentation <a href="https://redash.io/help/open-source/setup">https://redash.io/help/open-source/setup</a></li>
+</ul>
+
+<h2 id="setting-up-a-data-source">Setting up a Data Source</h2>
+<p>You’ll need some data to have a play about with Redash, I dumped a local Postgres databases for this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pg_dump -h localhost my_db &gt; my_dump.sql
+</code></pre></div></div>
+
+<p>Next copy the database dump to the Redash Postgres Docker container:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker cp my_dump.sql redash_postgres_1:/
+</code></pre></div></div>
+
+<p>Create your new database and read in the dump:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose exec postgres psql -U postgres
+CREATE DATABASE pete_test;
+\c pete_test
+\i my_dump.sql
+</code></pre></div></div>
+
+<p>Add a new datasource <a href="http://127.0.0.1:5000/queries/new">http://127.0.0.1:5000/queries/new</a> in the Redash UI:</p>
+<ul>
+  <li>Database IP is <code class="language-plaintext highlighter-rouge">postgres</code></li>
+  <li>Database username is <code class="language-plaintext highlighter-rouge">postgres</code></li>
+  <li>Full connection string <code class="language-plaintext highlighter-rouge">postgresql://postgres@postgres/pete_test</code></li>
+</ul>
+
+<p><img src="/assets/images/posts/redash_ui.png" alt="Screenshot of Redash UI" /></p>
+
+<p>You can test the connection from the UI to make sure it works ok.</p>
+
+<h2 id="creating-a-report">Creating a Report</h2>
+<p>Now go to <a href="http://127.0.0.1:5000/queries/new">http://127.0.0.1:5000/queries/new</a> and create a report by writing an SQL query. You can create visualisations of queries and create dashboards of multiple queries and visualisations.</p>
+
+<h2 id="first-impressions">First Impressions</h2>
+<p>First impressions are good! Next steps are to get Redash set-up on an AWS server and try it out on some real data sources with real users.</p>
+
+<p>I like the fact it can integrate with G Suite for login. Redash has an export feature to CSV and Excel, but doesn’t currently has an export to Google Sheets feature, this is something I’d be interested to develop if I become a regular Redash user.</p>
+
+<p>Redash v3, the current version, doesn’t have fine levels of access control for data sources, but it appears you can work round this by adding the same database as multiple data sources and restricting access to different queries this way.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">March 31, 2018</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-4/'>
+        <img class="avatar" src='/pr-preview/pr-4/assets/images/avatar.png' srcset='/pr-preview/pr-4/assets/images/avatar.png 1x, /pr-preview/pr-4/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-4/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-4/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
