@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Today I learnt why pdb can’t access an exception 🐍" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I like to use pdb for debugging in Python, I’d noticed when using it to debug exceptions I can’t always access the exception. Take the following code: import pdb try: 1/0 except Exception as err: pdb.set_trace()" />
+<meta property="og:description" content="I like to use pdb for debugging in Python, I’d noticed when using it to debug exceptions I can’t always access the exception. Take the following code: import pdb try: 1/0 except Exception as err: pdb.set_trace()" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-5/TIL/pdb_exception/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-5/TIL/pdb_exception/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-08-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Today I learnt why pdb can’t access an exception 🐍" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2023-08-03T00:00:00+00:00","datePublished":"2023-08-03T00:00:00+00:00","description":"I like to use pdb for debugging in Python, I’d noticed when using it to debug exceptions I can’t always access the exception. Take the following code: import pdb try: 1/0 except Exception as err: pdb.set_trace()","headline":"Today I learnt why pdb can’t access an exception 🐍","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-5/TIL/pdb_exception/"},"url":"https://petegraham.com/pr-preview/pr-5/TIL/pdb_exception/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Today I learnt why pdb can't access an exception 🐍</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-5/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-5/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-5/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-5/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-5/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-5/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-5/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-5/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-5/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+    <a class="brand" href='/pr-preview/pr-5/'>petegraham.com</a>
+    <a href='/pr-preview/pr-5/blog/'>Articles</a>
+    <a href='/pr-preview/pr-5/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-5/'>About</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Today I learnt why pdb can't access an exception 🐍</h1>
+        <h2 class="headline"></h2>
+    </header>
+    <section id="post-body">
+
+        <p>I like to use <code class="language-plaintext highlighter-rouge">pdb</code> for debugging in Python, I’d noticed when using it to debug exceptions I can’t always access the exception. Take the following code:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pdb</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="n">pdb</span><span class="p">.</span><span class="n">set_trace</span><span class="p">()</span></code></pre></figure>
+
+<p>If you run it and try and inspect the value of <code class="language-plaintext highlighter-rouge">err</code> you’ll see <code class="language-plaintext highlighter-rouge">*** NameError: name 'err' is not defined</code>. Why is this? 🤔</p>
+
+<p>The exception is only within scope in the <code class="language-plaintext highlighter-rouge">try</code> <code class="language-plaintext highlighter-rouge">except</code> block, if the call to <code class="language-plaintext highlighter-rouge">pdb.set_trace()</code> is the last line then the block has been closed when we enter the debugger.</p>
+
+<p>A simple way to get round this is to add a <code class="language-plaintext highlighter-rouge">pass</code> after the <code class="language-plaintext highlighter-rouge">pdb</code> call.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pdb</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="n">pdb</span><span class="p">.</span><span class="n">set_trace</span><span class="p">()</span>
+    <span class="k">pass</span></code></pre></figure>
+
+<p>Thanks to Stack Overflow for teaching me this!
+<a href="https://stackoverflow.com/questions/38672560/why-cant-pdb-access-a-variable-containing-an-exception">https://stackoverflow.com/questions/38672560/why-cant-pdb-access-a-variable-containing-an-exception</a>
+<br />
+<a href="https://stackoverflow.com/questions/62796591/breakpoint-in-except-clause-doesnt-have-access-to-the-bound-exception">https://stackoverflow.com/questions/62796591/breakpoint-in-except-clause-doesnt-have-access-to-the-bound-exception</a></p>
+
+
+
+    </section>
+</article>
+
+<nav id="post-nav">
+    
+        <span class="prev">
+                <a href='/pr-preview/pr-5/TIL/js_print/'>
+                    <span class="arrow">←</span> Previous TIL
+                </a>
+        </span>
+    
+    
+        <span class="next">
+            <a href='/pr-preview/pr-5/TIL/cursor_compose_line_break/'>
+                Next TIL <span class="arrow">→</span>
+            </a>
+        </span>
+    
+</nav>
+
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-5/'>
+        <img class="avatar" src='/pr-preview/pr-5/assets/images/avatar.png'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-5/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-5/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
