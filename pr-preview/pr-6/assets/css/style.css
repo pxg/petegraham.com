@@ -140,7 +140,7 @@ nav.main-nav a {
     padding: 8px 12px;
     color: #f5f5f5;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.35;
     border-radius: 3px;
 }
@@ -153,12 +153,13 @@ nav.main-nav a:focus-visible {
 
 nav.main-nav a.brand {
     margin-right: auto;
-    padding-left: 0;
+    padding: 8px 12px 8px 0;
     color: #ffb865;
     font-family: "Silkscreen", "Courier New", Courier, monospace;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: .03em;
+    letter-spacing: .02em;
+    line-height: 1.2;
 }
 nav.main-nav a.cta {
     background: #5badf0;
