@@ -1,14 +1,14 @@
 <nav id="post-nav">
     {% if page.previous_page %}
         <span class="prev">
-            <a href="/work/{{ page.previous_page }}/" title="Newer Work">
+            <a href='{{ "/work/" | append: page.previous_page | append: "/" | relative_url }}' title="Newer Work">
                 <span class="arrow">←</span> Newer Work
             </a>
         </span>
     {% endif %}
     {% if page.next_page %}
         <span class="next">
-            <a href="/work/{{ page.next_page }}/">
+            <a href='{{ "/work/" | append: page.next_page | append: "/" | relative_url }}'>
                 Older Work <span class="arrow">→</span>
             </a>
         </span>

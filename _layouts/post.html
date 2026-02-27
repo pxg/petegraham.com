@@ -17,8 +17,8 @@ archive: true
     <h2 class="headline">{{ page.date | date:"%B %-d, %Y" }}</h2>
 </article>
 <footer id="post-meta" class="clearfix">
-    <a href="{{ site.url }}">
-        <img class="avatar" src="/assets/images/avatar.png" srcset="/assets/images/avatar.png 1x, /assets/images/avatar@2x.png 2x">
+    <a href='{{ "/" | relative_url }}'>
+        <img class="avatar" src='{{ "/assets/images/avatar.png" | relative_url }}' srcset='{{ "/assets/images/avatar.png" | relative_url }} 1x, {{ "/assets/images/avatar@2x.png" | relative_url }} 2x'>
         <div>
             <span class="dark">{{ site.author }}</span>
             <span>{{ site.description }}</span>
@@ -43,7 +43,7 @@ archive: true
         {% for post in site.posts %}
             {% if post.draft != true %}
             <li>
-                <a href="{{ post.url }}">{{ post.title }}<aside class="dates">{{ post.date | date:"%b %d" }}</aside></a>
+                <a href='{{ post.url | relative_url }}'>{{ post.title }}<aside class="dates">{{ post.date | date:"%b %d" }}</aside></a>
             </li>
             {% endif %}
         {% endfor %}

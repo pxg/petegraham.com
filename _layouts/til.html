@@ -19,14 +19,14 @@ archive: true
 <nav id="post-nav">
     {% if page.previous.url %}
         <span class="prev">
-                <a href="{{ page.previous.url }}">
+                <a href='{{ page.previous.url | relative_url }}'>
                     <span class="arrow">←</span> Previous TIL
                 </a>
         </span>
     {% endif %}
     {% if page.next.url %}
         <span class="next">
-            <a href="{{ page.next.url }}">
+            <a href='{{ page.next.url | relative_url }}'>
                 Next TIL <span class="arrow">→</span>
             </a>
         </span>
@@ -34,8 +34,8 @@ archive: true
 </nav>
 
 <footer id="post-meta" class="clearfix">
-    <a href="{{ site.url }}">
-        <img class="avatar" src="/assets/images/avatar.png">
+    <a href='{{ "/" | relative_url }}'>
+        <img class="avatar" src='{{ "/assets/images/avatar.png" | relative_url }}'>
         <div>
             <span class="dark">{{ site.author }}</span>
             <span>{{ site.description }}</span>

@@ -1,0 +1,63 @@
+name: Deploy PR preview
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: pr-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        if: github.event.action != 'closed'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+
+      - name: Install gems
+        if: github.event.action != 'closed'
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Build Jekyll preview
+        if: github.event.action != 'closed'
+        run: bundle exec jekyll build --trace --baseurl "/pr-preview/pr-${{ github.event.number }}"
+
+      - name: Deploy PR preview
+        if: github.event.action != 'closed'
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./_site
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          pages-base-url: https://petegraham.com/
+          wait-for-pages-deployment: true
+          qr-code: false
+          action: deploy
+
+      - name: Remove PR preview
+        if: github.event.action == 'closed'
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          pages-base-url: https://petegraham.com/
+          wait-for-pages-deployment: true
+          qr-code: false
+          action: remove
