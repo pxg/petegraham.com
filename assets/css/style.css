@@ -120,8 +120,6 @@ h2 {
 
 nav.main-nav {
     padding: 20px 40px 0;
-
-    max-width: 700px;
     width: 100%;
     background: #000;
     background: rgba(0, 0, 0, .92);
