@@ -123,8 +123,8 @@ nav.main-nav {
 
     max-width: 700px;
     width: 100%;
-    background: #fff;
-    background: rgba(255,255,255,.90);
+    background: #000;
+    background: rgba(0, 0, 0, .92);
     margin: 0 auto;
     text-align: right;
     /*position: fixed;*/
@@ -138,17 +138,23 @@ nav.main-nav a {
     top: 8px;
     right: 6px;
     padding: 8px 12px;
-    color: #5badf0;
+    color: #f5f5f5;
     font-size: 13px;
     font-weight: 600;
     line-height: 1.35;
     border-radius: 3px;
 }
 
+nav.main-nav a:hover,
+nav.main-nav a:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, .16);
+}
+
 nav.main-nav a.brand {
     margin-right: auto;
     padding-left: 0;
-    color: #f28c28;
+    color: #ffb865;
     font-weight: 600;
 }
 nav.main-nav a.cta {
