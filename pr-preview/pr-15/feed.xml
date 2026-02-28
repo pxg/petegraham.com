@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>GitHub Pages PR Previews</title>
+        
+        
+          <description>&lt;p&gt;I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/github-pr-previews/</link>
+        <guid isPermaLink="true">https://petegraham.com/github-pr-previews/</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Cursor Cloud Agents While You Sleep (or Walk to the Pub)</title>
         
         
@@ -137,21 +152,6 @@
         <pubDate>Thu, 29 Jan 2026 17:36:00 +0000</pubDate>
         <link>https://petegraham.com/iphone-writing-stand/</link>
         <guid isPermaLink="true">https://petegraham.com/iphone-writing-stand/</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Magic Keyboard on iPhone</title>
-        
-        
-          <description>&lt;p&gt;&lt;a href=&quot;/writing/&quot;&gt;I want to do more writing this year&lt;/a&gt; and have been &lt;a href=&quot;/iphone-writing/&quot;&gt;experimenting with iPhone compatible Bluetooth keyboards&lt;/a&gt; for an ultra portable writing set up. Recently I discovered that the iPhone has surprising good support for Apple’s Magic Keyboard,  likely because there’s a popular iPad version which doubles as a case which has led to good iOS support.&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sat, 24 Jan 2026 12:07:00 +0000</pubDate>
-        <link>https://petegraham.com/magic-keyboard-on-iphone/</link>
-        <guid isPermaLink="true">https://petegraham.com/magic-keyboard-on-iphone/</guid>
       </item>
       
     
