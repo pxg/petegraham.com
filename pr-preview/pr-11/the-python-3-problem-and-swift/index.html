@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="The Python 3 Problem and how Swift side steps it" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Challenges with new language version adoption" />
+<meta property="og:description" content="Challenges with new language version adoption" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-11/the-python-3-problem-and-swift/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-11/the-python-3-problem-and-swift/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-08-05T10:48:43+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Python 3 Problem and how Swift side steps it" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2015-08-05T10:48:43+00:00","datePublished":"2015-08-05T10:48:43+00:00","description":"Challenges with new language version adoption","headline":"The Python 3 Problem and how Swift side steps it","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-11/the-python-3-problem-and-swift/"},"url":"https://petegraham.com/pr-preview/pr-11/the-python-3-problem-and-swift/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - The Python 3 Problem and how Swift side steps it</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-11/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-11/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-11/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-11/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-11/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-11/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-11/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-11/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-11/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-11/'>petegraham.com</a>
+    <a href='/pr-preview/pr-11/blog/'>Articles</a>
+    <a href='/pr-preview/pr-11/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-11/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>The Python 3 Problem and how Swift side steps it</h1>
+    </header>
+    <section id="post-body">
+        <p>A frequently discussed problem in the Python community is the slow adoption of Python 3. This problem isn’t unique to Python, a similar situation happened with the switch from PHP 4 to PHP 5. The new version of the language brought many improvements but introduced backwards incompatible changes. For some the benefits introduced by upgrading didn’t outweigh the effort of porting.</p>
+
+<p>When PHP 5 was released many people were using shared hosting. Today, with the popularity of cloud hosting providers, being locked into an old version of a language by your hosting provider is rare. The tipping point for PHP 5 happened when majority of the big packages, WordPress, Drupal etc, provided PHP 5 versions. At this point the shared hosting providers could upgrade their servers without fear of breaking millions of WordPress blogs.</p>
+
+<p>The influence of a large package switching to a new version of the language shouldn’t be under estimated. <a href="http://fourhourworkweek.com/2015/02/09/matt-mullenweg/">WordPress runs more than 22% of the entire web</a>, a very impressive feat. PHP 4 was discontinued on 31st December 2007 and everyone in PHP land lived happily ever after. Well apart from people <a href="http://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/">ripping on the language</a> all the time.</p>
+
+<p>There’s been a lot of effort to encourage people to move to Python 3. One is the <a href="https://python3wos.appspot.com/">Python 3 Wall of Superpowers</a> promoting people to port the most popular packages. The majority of the most popular and widely used packages have now been ported. I dug into why packages I use, such as <a href="http://supervisord.org/">Supervisor</a>, <a href="http://www.ansible.com/">Ansible</a> and <a href="http://www.fabfile.org/">Fabric</a>, haven’t been ported yet. I was pleased to find out the next major versions of them are in development and will support Python 3. <a href="http://www.scipy.org/">SciPy</a> and <a href="http://www.numpy.org/">NumPy</a>, the big Python numerical and scientific packages, support Python 3 along with <a href="http://scikit-learn.org/">scikit-learn</a> which is the most popular machine learning package.</p>
+
+<p>If most open source packages have been upgraded to Python 3 then what’s holding us back? Guido Van Rossum, the inventor of Python, talked about this at both <a href="https://www.youtube.com/watch?v=G-uKNd5TSBw">Pycon in Montreal</a> and <a href="https://lwn.net/Articles/651967/">Pycon Europe</a> this year. His very pragmatic reasoning is “It’s a lot of hard work that could be spent on other things”, such as new features or services. Surprisingly he mentioned that Dropbox, his employer, still uses Python 2.7. Presumably Dropbox has a large codebase which would be a lot of work to switch to Python 3.</p>
+
+<p>In many ways Python 2 has become a victim of its own success, companies have built large mission critical systems in the language and are now reluctant to port them. If companies build systems with a compartmentalised microservice approach, then it’d be easier to migrate services one at a time. However there are <a href="http://martinfowler.com/articles/microservice-trade-offs.html">trade-offs with choosing to use microservices</a> and I don’t believe it’s realistic, or appropriate, for everything to be built in this way.</p>
+
+<p>Apple has a clever approach at avoiding this language upgrade problem. Recently I updated my iPhone to iOS 8.4, when I went to use XCode it wouldn’t let me run the app I was developing on my iPhone until I upgraded to XCode 6.4. New versions of XCode often come bundled with a new version of Swift, XCode 6.4 for example came bundled with Swift 1.2. Even thought Swift 1.2 was not a major new version of the language, Swift 1.1 code needed to be ported to run on 1.2. To clarify Swift 1.1 code wouldn’t run “out of the box” in XCode 6.4 without making the effort to update the code.</p>
+
+<p>One advantage Apple has over the <a href="https://www.python.org/psf/">Python Software Foundation</a> is it is running a closed ecosystem it can control. With the announcement Swift will be open source, it will be interesting to see if this impacts how rapidly people adopt new versions. Currently Swift 2 and XCode 7 are in beta. They will be released with iOS 9 later this year, I predict the adoption of Swift 2 will be incredibly fast, especially in comparison to Python 3.</p>
+
+<p>Another advantage Swift has over Python, in terms of language upgrades, is many of the libraries used by Swift developers are those provided by Apple. While <a href="https://cocoapods.org/">Cocapods</a> provides third party libraries for Swift and Objective-C, I wouldn’t find myself using it for a typical iOS project to the same extend that I’d use <a href="https://pypi.python.org/">Pypi</a> for a Python project.</p>
+
+<p>As Swift is a relatively new language, there are not many very large codebases in Swift yet. As the language matures and grows in popularity we should see Swift codebases of increasing magnitude. I speculate the community may become annoyed if they are being forced to port these larger codebases on each XCode upgrade. What I speculate will likely happen is new versions of XCode and Swift will contain new features and optimisations. A more gradual upgrade path will be provided with deprecated syntax and features first raising warnings before support is dropped in a later release.</p>
+
+<p>In general I’ve been surprised and impressed with the pace of how quickly Swift has gathered momentum replacing Objective-C. One speculation I’d make is that the appeal and excitement of switching to a completely new language is greater than porting code to a newer version of an existing language.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">August 5, 2015</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-11/'>
+        <img class="avatar" src='/pr-preview/pr-11/assets/images/avatar.png' srcset='/pr-preview/pr-11/assets/images/avatar.png 1x, /pr-preview/pr-11/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-11/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-11/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
