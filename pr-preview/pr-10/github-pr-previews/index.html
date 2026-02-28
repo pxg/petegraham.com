@@ -15,12 +15,14 @@
 <link rel="canonical" href="https://petegraham.com/pr-preview/pr-10/github-pr-previews/" />
 <meta property="og:url" content="https://petegraham.com/pr-preview/pr-10/github-pr-previews/" />
 <meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:image" content="https://petegraham.com/pr-preview/pr-10/assets/images/posts/pr_preview_workflow.svg" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-02-28T00:00:00+00:00" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://petegraham.com/pr-preview/pr-10/assets/images/posts/pr_preview_workflow.svg" />
 <meta property="twitter:title" content="Setting Up GitHub PR Previews for This Jekyll Site" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.","headline":"Setting Up GitHub PR Previews for This Jekyll Site","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-10/github-pr-previews/"},"url":"https://petegraham.com/pr-preview/pr-10/github-pr-previews/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.","headline":"Setting Up GitHub PR Previews for This Jekyll Site","image":"https://petegraham.com/pr-preview/pr-10/assets/images/posts/pr_preview_workflow.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-10/github-pr-previews/"},"url":"https://petegraham.com/pr-preview/pr-10/github-pr-previews/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <title>Pete Graham - CTO - Setting Up GitHub PR Previews for This Jekyll Site</title>
@@ -58,6 +60,10 @@
 
 <p>So I finally set up PR previews for this blog.</p>
 
+<p><img src="/assets/images/posts/pr_preview_workflow.svg" alt="" /></p>
+
+<p>High-level PR preview lifecycle: build, publish, comment, clean up.</p>
+
 <h2 id="what-i-wanted">What I wanted</h2>
 
 <p>The goal was to keep things lightweight:</p>
@@ -89,6 +95,10 @@
 <h2 id="the-one-detail-that-saves-headaches">The one detail that saves headaches</h2>
 
 <p>My main deploy workflow now excludes the preview umbrella directory from clean-up (<code class="language-plaintext highlighter-rouge">clean-exclude: pr-preview</code>). Without that, a regular deploy to <code class="language-plaintext highlighter-rouge">main</code> can wipe all preview sites.</p>
+
+<p><img src="/assets/images/posts/pr_preview_gh_pages_layout.svg" alt="" /></p>
+
+<p>How production files and PR preview folders coexist on <code class="language-plaintext highlighter-rouge">gh-pages</code>.</p>
 
 <p>So the setup works because the two workflows cooperate:</p>
 
