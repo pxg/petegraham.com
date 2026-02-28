@@ -9,7 +9,7 @@ I've been using Cursor Agents a lot more for this site, which means I'm often re
 
 So I finally set up PR previews for this blog.
 
-![](/assets/images/posts/pr_preview_workflow.svg)
+![]({{ "/assets/images/posts/pr_preview_workflow.svg" | relative_url }})
 
 High-level PR preview lifecycle: build, publish, comment, clean up.
 
@@ -43,7 +43,7 @@ When the PR is closed, the same workflow removes that preview directory.
 
 My main deploy workflow now excludes the preview umbrella directory from clean-up (`clean-exclude: pr-preview`). Without that, a regular deploy to `main` can wipe all preview sites.
 
-![](/assets/images/posts/pr_preview_gh_pages_layout.svg)
+![]({{ "/assets/images/posts/pr_preview_gh_pages_layout.svg" | relative_url }})
 
 How production files and PR preview folders coexist on `gh-pages`.
 
