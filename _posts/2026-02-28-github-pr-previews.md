@@ -2,11 +2,16 @@
 title: Setting Up GitHub PR Previews for This Jekyll Site
 date: 2026-02-28
 layout: post
+image: /assets/images/posts/pr_preview_workflow.svg
 ---
 
 I've been using Cursor Agents a lot more for this site, which means I'm often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.
 
 So I finally set up PR previews for this blog.
+
+![](/assets/images/posts/pr_preview_workflow.svg)
+
+High-level PR preview lifecycle: build, publish, comment, clean up.
 
 ## What I wanted
 
@@ -37,6 +42,10 @@ When the PR is closed, the same workflow removes that preview directory.
 ## The one detail that saves headaches
 
 My main deploy workflow now excludes the preview umbrella directory from clean-up (`clean-exclude: pr-preview`). Without that, a regular deploy to `main` can wipe all preview sites.
+
+![](/assets/images/posts/pr_preview_gh_pages_layout.svg)
+
+How production files and PR preview folders coexist on `gh-pages`.
 
 So the setup works because the two workflows cooperate:
 
