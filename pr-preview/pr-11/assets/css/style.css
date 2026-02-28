@@ -575,28 +575,14 @@ Post List
 }
 
 #footer {
-    position: relative;
+    box-shadow: inset 0 1px 0 #eee;
     padding: 40px 0 0 0;
     margin-top: 100px;
-    z-index: 0;
-}
-
-#footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 100vw;
-    height: 100%;
-    transform: translateX(-50%);
     background: var(--surface-off-white);
-    box-shadow: inset 0 1px 0 #eee;
-    z-index: 0;
-}
-
-#footer > * {
-    position: relative;
-    z-index: 1;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
 }
 
 /* Post Page */
