@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Interleave two strings in Python" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Interview question for combining two strings" />
+<meta property="og:description" content="Interview question for combining two strings" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-16/interleave-strings-in-python/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-16/interleave-strings-in-python/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-09-07T12:09:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Interleave two strings in Python" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2015-09-07T12:09:00+00:00","datePublished":"2015-09-07T12:09:00+00:00","description":"Interview question for combining two strings","headline":"Interleave two strings in Python","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-16/interleave-strings-in-python/"},"url":"https://petegraham.com/pr-preview/pr-16/interleave-strings-in-python/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Interleave two strings in Python</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-16/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-16/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-16/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-16/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-16/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-16/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-16/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-16/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-16/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-16/'>petegraham.com</a>
+    <a href='/pr-preview/pr-16/blog/'>Articles</a>
+    <a href='/pr-preview/pr-16/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-16/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Interleave two strings in Python</h1>
+        
+    </header>
+    <section id="post-body">
+        <p>One programming interview question I’ve seen is: “Write a function to interleave two strings. You should takes two strings as input and returns one string as output. For example if the input strings are <code class="language-plaintext highlighter-rouge">pete</code> and <code class="language-plaintext highlighter-rouge">paul</code> then the output should be <code class="language-plaintext highlighter-rouge">ppeatuel</code>”.</p>
+
+<p>I think it’s a good question as it’s a little bit tricker than it initially seams. The candidate needs to dig into the problem a further by checking what happens when the strings are of different length. Sensible behavior would be to add the extra characters to the end of the return string, if our input strings are <code class="language-plaintext highlighter-rouge">pete graham</code> and <code class="language-plaintext highlighter-rouge">paul</code> then the output should be <code class="language-plaintext highlighter-rouge">ppeatuel graham</code>.</p>
+
+<p>When I first saw this question my initial solution was to find the length of the larger of the strings. Then loop from the start to the end of the largest string constructing the return string:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">interleave_strings</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">):</span>
+    <span class="n">max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">string1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">string2</span><span class="p">))</span>
+    <span class="n">return_string</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_length</span><span class="p">):</span>
+        <span class="n">char1</span> <span class="o">=</span> <span class="n">get_char</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+        <span class="n">char2</span> <span class="o">=</span> <span class="n">get_char</span><span class="p">(</span><span class="n">string2</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+        <span class="n">return_string</span> <span class="o">+=</span> <span class="s">'{0}{1}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">char1</span><span class="p">,</span> <span class="n">char2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">return_string</span></code></pre></figure>
+
+<p>A function <code class="language-plaintext highlighter-rouge">get_char</code> is needed to return an empty string if the index is out of bounds:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_char</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">char</span> <span class="o">=</span> <span class="n">string</span><span class="p">[</span><span class="n">count</span><span class="p">]</span>
+    <span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
+        <span class="n">char</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="k">return</span> <span class="n">char</span></code></pre></figure>
+
+<p>This solution is easy to follow but fairly verbose. <a href="http://robb.re/">Rob Berry</a> pointed this can be done much more succinctly in Python using <code class="language-plaintext highlighter-rouge">zip</code>:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">interleave_strings</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string1</span><span class="p">))</span></code></pre></figure>
+
+<p>We need to cast the return value to a list in Python 3 or we’ll be returning a <code class="language-plaintext highlighter-rouge">zip object</code>. Calling the function with the inputs <code class="language-plaintext highlighter-rouge">pete</code> and <code class="language-plaintext highlighter-rouge">paul</code> gives us a list of tuples:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[(</span><span class="s">'p'</span><span class="p">,</span> <span class="s">'p'</span><span class="p">),</span> <span class="p">(</span><span class="s">'e'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">),</span> <span class="p">(</span><span class="s">'t'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">),</span> <span class="p">(</span><span class="s">'e'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">)]</span></code></pre></figure>
+
+<p>The data structure just needs to be flattened to get our desired result. However there is a flaw in this solution, to work correctly the strings must be the same length. Using <code class="language-plaintext highlighter-rouge">pete graham</code> and <code class="language-plaintext highlighter-rouge">paul</code> as the input our output is:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[(</span><span class="s">'p'</span><span class="p">,</span> <span class="s">'p'</span><span class="p">),</span> <span class="p">(</span><span class="s">'e'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">),</span> <span class="p">(</span><span class="s">'t'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">),</span> <span class="p">(</span><span class="s">'e'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">)]</span></code></pre></figure>
+
+<p>Not good! Our longer string has been truncated.</p>
+
+<p>This can be solved by replacing <code class="language-plaintext highlighter-rouge">zip</code> with <code class="language-plaintext highlighter-rouge">zip_longest</code> from the <code class="language-plaintext highlighter-rouge">itertools</code> module and providing a fill value of an empty string. Note: <code class="language-plaintext highlighter-rouge">zip_longest</code> was called <code class="language-plaintext highlighter-rouge">izip_longest</code> in Python 2.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">zip_longest</span>
+
+<span class="k">def</span> <span class="nf">interleave_strings</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">zip_longest</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="s">''</span><span class="p">))</span></code></pre></figure>
+
+<p>We have to cast our return value to a list otherwise an <code class="language-plaintext highlighter-rouge">itertools.zip_longest object</code> will be returned. Using the input values <code class="language-plaintext highlighter-rouge">pete graham</code> and <code class="language-plaintext highlighter-rouge">paul</code> we now get the following result:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[(</span><span class="s">'p'</span><span class="p">,</span> <span class="s">'p'</span><span class="p">),</span> <span class="p">(</span><span class="s">'e'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">),</span> <span class="p">(</span><span class="s">'t'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">),</span> <span class="p">(</span><span class="s">'e'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">),</span> <span class="p">(</span><span class="s">' '</span><span class="p">,</span> <span class="s">''</span><span class="p">),</span> <span class="p">(</span><span class="s">'g'</span><span class="p">,</span> <span class="s">''</span><span class="p">),</span> <span class="p">(</span><span class="s">'r'</span><span class="p">,</span> <span class="s">''</span><span class="p">),</span> <span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">''</span><span class="p">),</span> <span class="p">(</span><span class="s">'h'</span><span class="p">,</span> <span class="s">''</span><span class="p">),</span> <span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">''</span><span class="p">),</span> <span class="p">(</span><span class="s">'m'</span><span class="p">,</span> <span class="s">''</span><span class="p">)]</span></code></pre></figure>
+
+<p>Now we need to flatten the data structure. One solution is to force unpacking with <code class="language-plaintext highlighter-rouge">*</code> and then use <code class="language-plaintext highlighter-rouge">chain</code> from <code class="language-plaintext highlighter-rouge">itertools</code> to combine the iterators:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">zip_longest</span>
+
+<span class="k">def</span> <span class="nf">interleave_strings</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">zip_longest</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="s">''</span><span class="p">)))</span></code></pre></figure>
+
+<p>Using our inputs <code class="language-plaintext highlighter-rouge">pete graham</code> and <code class="language-plaintext highlighter-rouge">paul</code> this gives us a list as output:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="s">'p'</span><span class="p">,</span> <span class="s">'p'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'t'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">,</span> <span class="s">' '</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">'h'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">'m'</span><span class="p">,</span> <span class="s">''</span><span class="p">]</span></code></pre></figure>
+
+<p>The final piece of the puzzle is to join the list items to return a string:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">zip_longest</span>
+
+<span class="k">def</span> <span class="nf">interleave_strings</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">zip_longest</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="s">''</span><span class="p">)))</span></code></pre></figure>
+
+<p>This returns the string <code class="language-plaintext highlighter-rouge">ppeatuel graham</code>. <a href="https://www.youtube.com/watch?v=2sSofokAIiw">Wooh!</a></p>
+
+<p>The above code gives us our desired output, however it can be argued it looks cryptic. An alternative solution is to replace the use of <code class="language-plaintext highlighter-rouge">chain</code> with a longer hand solution that uses list comprehension:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">zip_longest</span>
+
+<span class="k">def</span> <span class="nf">interleave_strings</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">):</span>
+    <span class="n">tuples</span> <span class="o">=</span> <span class="n">zip_longest</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+    <span class="n">string_list</span> <span class="o">=</span> <span class="p">[</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tuples</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">string_list</span><span class="p">)</span></code></pre></figure>
+
+<p>I’ve covered three ways to solve the problem, they are many more which can be found on <a href="http://stackoverflow.com/questions/3083829/how-do-i-interleave-strings-in-python">Stack Overflow</a>. The fact the question can be answered in a number of different ways is part of what I think makes it a good one.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">September 7, 2015</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-16/'>
+        <img class="avatar" src='/pr-preview/pr-16/assets/images/avatar.png' srcset='/pr-preview/pr-16/assets/images/avatar.png 1x, /pr-preview/pr-16/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-16/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-16/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

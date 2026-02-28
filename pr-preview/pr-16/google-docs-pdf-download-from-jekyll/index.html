@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Google docs PDF download from Jekyll" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Providing the latest version of my CV from this site" />
+<meta property="og:description" content="Providing the latest version of my CV from this site" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-16/google-docs-pdf-download-from-jekyll/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-16/google-docs-pdf-download-from-jekyll/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-07-31T17:25:43+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Google docs PDF download from Jekyll" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2015-07-31T17:25:43+00:00","datePublished":"2015-07-31T17:25:43+00:00","description":"Providing the latest version of my CV from this site","headline":"Google docs PDF download from Jekyll","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-16/google-docs-pdf-download-from-jekyll/"},"url":"https://petegraham.com/pr-preview/pr-16/google-docs-pdf-download-from-jekyll/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Google docs PDF download from Jekyll</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-16/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-16/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-16/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-16/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-16/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-16/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-16/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-16/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-16/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-16/'>petegraham.com</a>
+    <a href='/pr-preview/pr-16/blog/'>Articles</a>
+    <a href='/pr-preview/pr-16/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-16/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Google docs PDF download from Jekyll</h1>
+        
+    </header>
+    <section id="post-body">
+        <p>For years I’d kept my CV as HTML. When I wanted to update my CV I’d edit the HTML. Editing HTML isn’t difficult, but you need to check the page in the browser after, to make sure you’ve not made a mistake, like missing a closing tag.</p>
+
+<p>The issue I had is recruiters and big companies always wanted a PDF or Word version of my CV. I’m not entirely sure why this is, I guess they must use software to process CVs which expects PDF or Word as input.</p>
+
+<p>So I’d end up opening my CV in the browser, going to print it and choosing the “print to PDF” option. A little bit tedious but not a big problem.</p>
+
+<p>I find it’s useful to keep a copy of my CV on-line, so it’s easy to give people the link.</p>
+
+<p>Somewhat ironically I’d keep the PDF not HTML version online for all these people who are obsessed with getting PDF or Word CVs (maybe it’s some sort of Pokemon style collection game?). My CV update process looked like this.</p>
+
+<ol>
+  <li>Edit HTML</li>
+  <li>Check HTML page in browser for errors</li>
+  <li>Print to PDF</li>
+  <li>Deploy PDF to petegraham.co.uk</li>
+</ol>
+
+<p>Surely there’s a better way than this. Surely we can automate this.</p>
+
+<p>#Google Docs PDF Download URL</p>
+
+<p>I decide to move my CV to Google docs for two reasons:</p>
+
+<ol>
+  <li>I didn’t have to manually check the document in my browser after editing.</li>
+  <li>It can automatically provide a PDF download link</li>
+</ol>
+
+<p>Every Google doc with link sharing on has a URL like this <code class="language-plaintext highlighter-rouge">https://docs.google.com/document/d/FILE_ID/edit?usp=sharing</code></p>
+
+<p>Here’s the one for my CV Google doc <code class="language-plaintext highlighter-rouge">https://docs.google.com/document/d/1eHTHX6pSbG7_FrNAVtmc_7GzR6WPU8VAYmpVzHsLmCQ/edit?usp=sharing</code></p>
+
+<p>Once you have the <code class="language-plaintext highlighter-rouge">FILE_ID</code> you can use can create the PDF download link like this <code class="language-plaintext highlighter-rouge">https://docs.google.com/document/d/FILE_ID/export?format=pdf</code></p>
+
+<p>This gives me the following URL for my CV PDF download <a href="https://docs.google.com/document/d/1eHTHX6pSbG7_FrNAVtmc_7GzR6WPU8VAYmpVzHsLmCQ/export?format=pdf">
+https://docs.google.com/document/d/1eHTHX6pSbG7_FrNAVtmc_7GzR6WPU8VAYmpVzHsLmCQ/export?format=pdf</a></p>
+
+<p>This is great. I can update my CV and easily have a link where people can get the newest version as a PDF. The problem is the link is difficult to remember unless you’re Derren Brown.</p>
+
+<p>#Jekyll Redirects</p>
+
+<p>This site is built with <a href="http://jekyllrb.com/">Jekyll</a> and hosted by <a href="https://pages.github.com/">Github pages</a>. As Github pages is static there isn’t a way to provide rewrites like you would with Nginx or Apache.</p>
+
+<p>Jekyll provides a redirect mechanism, using <a href="https://github.com/jekyll/jekyll-redirect-from">jekyll-redirect-from</a>. To install it</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">gem <span class="nb">install </span>jekyll-redirect-from</code></pre></figure>
+
+<p>Next add the following to your <code class="language-plaintext highlighter-rouge">_config.yml</code> file</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">gems:
+    - jekyll-redirect-from</code></pre></figure>
+
+<p>I want the url <a href="http://petegraham.co.uk/cv/">petegraham.co.uk/cv/</a> to be a link to my CV so I create a file called cv.md with the following contents:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">---</span>
+<span class="n">title</span><span class="p">:</span> <span class="n">Pete</span> <span class="n">Graham</span> <span class="n">CV</span>
+<span class="n">permalink</span><span class="p">:</span> <span class="n">cv</span><span class="o">/</span>
+<span class="n">redirect_to</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">document</span><span class="o">/</span><span class="n">d</span><span class="o">/</span><span class="mi">1</span><span class="n">eHTHX6pSbG7_FrNAVtmc_7GzR6WPU8VAYmpVzHsLmCQ</span><span class="o">/</span><span class="n">export</span><span class="err">?</span><span class="nb">format</span><span class="o">=</span><span class="n">pdf</span>
+<span class="o">---</span></code></pre></figure>
+
+<p>My only issue with this technique is the require is done client side. However I don’t think this is a huge deal. Maybe they’ll be an updated version of Github pages in the future which will support simple redirect rules.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">July 31, 2015</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-16/'>
+        <img class="avatar" src='/pr-preview/pr-16/assets/images/avatar.png' srcset='/pr-preview/pr-16/assets/images/avatar.png 1x, /pr-preview/pr-16/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-16/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-16/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
