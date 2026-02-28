@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Django Upgrade Maverick Style" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="My experience upgrading from Django 1.5 to 1.8" />
+<meta property="og:description" content="My experience upgrading from Django 1.5 to 1.8" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-13/django-upgrade-maverick-style/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-13/django-upgrade-maverick-style/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-08-21T12:09:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Django Upgrade Maverick Style" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2015-08-21T12:09:00+00:00","datePublished":"2015-08-21T12:09:00+00:00","description":"My experience upgrading from Django 1.5 to 1.8","headline":"Django Upgrade Maverick Style","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-13/django-upgrade-maverick-style/"},"url":"https://petegraham.com/pr-preview/pr-13/django-upgrade-maverick-style/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Django Upgrade Maverick Style</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-13/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-13/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-13/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-13/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-13/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-13/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-13/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-13/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-13/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-13/'>petegraham.com</a>
+    <a href='/pr-preview/pr-13/blog/'>Articles</a>
+    <a href='/pr-preview/pr-13/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-13/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Django Upgrade Maverick Style</h1>
+    </header>
+    <section id="post-body">
+        <p>I’m upgrading a website that was originally made in 2013. It’s only had minor edits in the last two years, and is stuck on Django 1.5.</p>
+
+<p>The site is for job applications and has a relatively small codebase. It lets applicants sign-up with a multistep form, they get emailed when they complete the form. The site uses Django Admin for content management and the admin can export all applicant data as a PDF. It’s a relatively small codebase so I decide I’m going to upgrade the site to Python 3, because I’m that kind of guy. Let the <a href="http://sethgodin.typepad.com/seths_blog/2005/03/dont_shave_that.html">yak shaving</a> commence!</p>
+
+<p>Django 1.5 was the first version of Django to support Python 3. I could try and port the code to Python 3 straight away. However Django 1.5 support finished on September 2nd 2014 so I definitely want to upgrade.</p>
+
+<p>I could upgrade to 1.7 and have support until December 2015, but I don’t want to upgrade to 1.7 because Django 1.7 is for losers. The newest supported version of Django at the time of writing is 1.8.3. Django 1.8 is an LTS (Long Term Support) version, this will give me support to at least April 2018.</p>
+
+<p>We start with the following dependencies:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">Django</span><span class="o">==</span>1.5.10
+<span class="nv">Fabric</span><span class="o">==</span>1.7.0
+<span class="nv">Pillow</span><span class="o">==</span>2.5.3
+<span class="nv">South</span><span class="o">==</span>0.8.2
+django-admin-sortable<span class="o">==</span>1.5.4
+<span class="nv">ipython</span><span class="o">==</span>1.1.0
+<span class="nv">paramiko</span><span class="o">==</span>1.11.0
+<span class="nv">psycopg2</span><span class="o">==</span>2.5.1
+<span class="nv">pycrypto</span><span class="o">==</span>2.6
+python-Levenshtein<span class="o">==</span>0.10.2
+<span class="nv">wsgiref</span><span class="o">==</span>0.1.2
+<span class="nv">pywurfl</span><span class="o">==</span>6.3.1b
+<span class="nv">singledispatch</span><span class="o">==</span>3.4.0.2
+django-user-agents<span class="o">==</span>0.3.0
+<span class="nv">xhtml2pdf</span><span class="o">==</span>0.0.6</code></pre></figure>
+
+<p>It’s a good idea to upgrade Django versions one at a time. I’m a maverick who doesn’t play by the rules, but gets results, so I upgrade straight to 1.8:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$pip</span> <span class="nb">install </span><span class="nv">Django</span><span class="o">==</span>1.8.3</code></pre></figure>
+
+<p>I need to remove <code class="language-plaintext highlighter-rouge">south</code> from <code class="language-plaintext highlighter-rouge">INSTALLED_APPS</code> to get the site to run. <code class="language-plaintext highlighter-rouge">south</code> isn’t supported as <a href="https://docs.djangoproject.com/en/1.8/topics/migrations/">Django migrations</a> were introduced in 1.7.</p>
+
+<p>I also need to delete my <code class="language-plaintext highlighter-rouge">migrations</code> folder from my apps to get the site to run without error. This flattens my migrations, I’m fine with this as production is up to date. I go to run my dev site:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$python</span> manage.py runserver
+
+...
+
+You have unapplied migrations<span class="p">;</span> your app may not work properly <span class="k">until </span>they are applied.
+Run <span class="s1">'python manage.py migrate'</span> to apply them.</code></pre></figure>
+
+<p>Django is complaining, I try and shut it up!</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$python</span> manage.py migrate
+
+...
+
+blah blah loads of Django errors
+...
+ <span class="k">return </span>self.cursor.execute<span class="o">(</span>sql<span class="o">)</span>
+django.db.utils.ProgrammingError: relation <span class="s2">"django_content_type"</span> already exists</code></pre></figure>
+
+<p>Argh! A big ugly stack trace. I’m starting to question my cavalier approach. But then I try again but with the <code class="language-plaintext highlighter-rouge">--fake-initial</code> flag:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$python</span> manage.py migrate <span class="nt">--fake-initial</span>
+
+...
+
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, adminsortable, applicant, messages, django_user_agents
+  Apply all migrations: admin, contenttypes, auth, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... FAKED
+  Applying auth.0001_initial... FAKED
+  Applying admin.0001_initial... FAKED
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying sessions.0001_initial... FAKED</code></pre></figure>
+
+<p>OK that seems to have worked. Still got it. Let’s run the site and check:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ImproperlyConfigured at /
+Creating a ModelForm without either the <span class="s1">'fields'</span> attribute or the <span class="s1">'exclude'</span> attribute is prohibited<span class="p">;</span> form ApplicationAnswerForm needs updating.</code></pre></figure>
+
+<p>Another stack trace, but this time in the browser. Let’s try and fix it by editing <code class="language-plaintext highlighter-rouge">forms.py</code> and adding the <code class="language-plaintext highlighter-rouge">exclude = {}</code> line:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">ApplicationAnswerForm</span><span class="p">(</span><span class="n">forms</span><span class="p">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Answer</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">{}</span></code></pre></figure>
+
+<p>I run the site agin, the anticipation is killing me as I refresh the browser, it works! That was easy. Not so fast, some quick testing on the admin reveals another error:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">AttributeError at /admin/applicant/faq/
+<span class="s1">'FaqAdmin'</span> object has no attribute <span class="s1">'queryset'</span></code></pre></figure>
+
+<p>The root of the error appears to be the <code class="language-plaintext highlighter-rouge">adminsortable</code> package so I upgrade this from 1.5.4:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip <span class="nb">install </span>django-admin-sortable <span class="nt">--upgrade</span></code></pre></figure>
+
+<p>We’re on version 1.8.4 now, and feeling much more futuristic. I test again. Success!</p>
+
+<p>The next error found is on our export applicants as PDF functionality. The root of this error is the following line:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">response</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">zipped_applicants</span><span class="p">,</span> <span class="n">mimetype</span><span class="o">=</span><span class="s">'application/zip'</span><span class="p">)</span></code></pre></figure>
+
+<p>A quick search reveals passing the <code class="language-plaintext highlighter-rouge">mimetype</code> argument to <code class="language-plaintext highlighter-rouge">HttpResponse</code> was removed in Django 1.7. That Django 1.7 has a lot to answer for. I change the code to use <code class="language-plaintext highlighter-rouge">content_type</code>:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">response</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">zipped_applicants</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="s">'application/zip'</span><span class="p">)</span></code></pre></figure>
+
+<p>I can now download my applications as a zip file containing PDFs. Nice.</p>
+
+<p>Next task is to test the multi-step application form is working correctly. The first thing I notice is the email fields displaying strangely. On further inspection it turns out the HTML for the emails fields has changed from:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"id_email"</span> <span class="na">maxlength=</span><span class="s">"254"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<p>To:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"id_email"</span> <span class="na">maxlength=</span><span class="s">"254"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<p>A quick CSS edit later and we’re looking good. I fill out the first step of the form and submit:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">IntegrityError at /apply
+null value in column "require_uk_work_permit_or_visa" violates not-null constraint
+DETAIL:  Failing row contains (123, mr_fake@gmail.com, , Mr, fakey, fako, null, null, null, null, 2015-08-17 15:33:17.064549+00, 2015-08-17 15:33:17.064571+00, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, f, null).</code></pre></figure>
+
+<p>Argh!</p>
+
+<p>The multi-step form works by saving to the DB on the first step then updating the database at each step.
+I can see that the problem column is <code class="language-plaintext highlighter-rouge">require_uk_work_permit_or_visa</code>. From running a manual test on the staging server (which is still running Django 1.5) I can see this field is being set to false after the first step saves. Time to check the models.</p>
+
+<p>The issue is <code class="language-plaintext highlighter-rouge">require_uk_work_permit_or_visa</code> is a non-null boolean field and it doesn’t have a default. I give it a default,  explicit is better than implicit after all:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">require_uk_work_permit_or_visa</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></code></pre></figure>
+
+<p>All steps of our form now work. Next task is to see what other packages need updating. Pip has a handy option to do this:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip list <span class="nt">--outdated</span>
+
+Fabric <span class="o">(</span>Current: 1.7.0 Latest: 1.10.2 <span class="o">[</span>wheel]<span class="o">)</span>
+ipython <span class="o">(</span>Current: 1.1.0 Latest: 4.0.0 <span class="o">[</span>wheel]<span class="o">)</span>
+paramiko <span class="o">(</span>Current: 1.11.0 Latest: 1.15.2 <span class="o">[</span>wheel]<span class="o">)</span>
+Pillow <span class="o">(</span>Current: 2.5.3 Latest: 2.9.0 <span class="o">[</span>wheel]<span class="o">)</span>
+psycopg2 <span class="o">(</span>Current: 2.5.1 Latest: 2.6.1 <span class="o">[</span>sdist]<span class="o">)</span>
+pycrypto <span class="o">(</span>Current: 2.6 Latest: 2.6.1 <span class="o">[</span>sdist]<span class="o">)</span>
+python-Levenshtein <span class="o">(</span>Current: 0.10.2 Latest: 0.12.0 <span class="o">[</span>sdist]<span class="o">)</span>
+pywurfl <span class="o">(</span>Current: 6.3.1b0 Latest: 7.2.1 <span class="o">[</span>sdist]<span class="o">)</span>
+setuptools <span class="o">(</span>Current: 18.0.1 Latest: 18.1 <span class="o">[</span>wheel]<span class="o">)</span>
+singledispatch <span class="o">(</span>Current: 3.4.0.2 Latest: 3.4.0.3 <span class="o">[</span>wheel]<span class="o">)</span>
+South <span class="o">(</span>Current: 0.8.2 Latest: 1.0.2 <span class="o">[</span>sdist]<span class="o">)</span></code></pre></figure>
+
+<p>This prints a list of outdated requirements in a human readable format. You can then decide which you want to update, by editing the version numbers in requirement.txt. Here’s what the updated file looks like:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">Django</span><span class="o">==</span>1.8.3
+<span class="nv">Fabric</span><span class="o">==</span>1.10.2
+<span class="nv">Pillow</span><span class="o">==</span>2.9.0
+django-admin-sortable<span class="o">==</span>1.8.4
+<span class="nv">ipython</span><span class="o">==</span>4.0.0
+<span class="nv">paramiko</span><span class="o">==</span>1.15.2
+<span class="nv">psycopg2</span><span class="o">==</span>2.6.1
+<span class="nv">pycrypto</span><span class="o">==</span>2.6.1
+python-Levenshtein<span class="o">==</span>0.12.0
+<span class="nv">wsgiref</span><span class="o">==</span>0.1.2
+<span class="nv">pywurfl</span><span class="o">==</span>7.2.1
+<span class="nv">singledispatch</span><span class="o">==</span>3.4.0.3
+django-user-agents<span class="o">==</span>0.3.0
+<span class="nv">xhtml2pdf</span><span class="o">==</span>0.0.6</code></pre></figure>
+
+<p>Time to test the new site now we’ve upgraded packages. Yes more manual testing! I really missed my calling as a QA. This project is one of the few I work on that doesn’t have automated tests. Tests weren’t written when the project was originally built because:</p>
+
+<ol>
+  <li>It was a small project.</li>
+  <li>We made it in on a tight deadline.</li>
+</ol>
+
+<p>Having unit tests in place would have made upgrading easier. The moral of the story; remember to write your tests kids, it will save you time in the long run.</p>
+
+<p>Ok so now we’ve upgraded Django and our other requirements. Is the fun over? Hell no it’s just started, we’ll be upgrading to Python 3 in the <a href="/django-and-python-3/">next part</a>.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">August 21, 2015</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-13/'>
+        <img class="avatar" src='/pr-preview/pr-13/assets/images/avatar.png' srcset='/pr-preview/pr-13/assets/images/avatar.png 1x, /pr-preview/pr-13/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-13/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-13/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

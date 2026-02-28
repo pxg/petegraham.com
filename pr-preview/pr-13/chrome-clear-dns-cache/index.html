@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="AWS and Chrome DNS tricks" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Some DNS techniques I tend to forget." />
+<meta property="og:description" content="Some DNS techniques I tend to forget." />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-13/chrome-clear-dns-cache/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-13/chrome-clear-dns-cache/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-08-02T17:25:43+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="AWS and Chrome DNS tricks" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2015-08-02T17:25:43+00:00","datePublished":"2015-08-02T17:25:43+00:00","description":"Some DNS techniques I tend to forget.","headline":"AWS and Chrome DNS tricks","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-13/chrome-clear-dns-cache/"},"url":"https://petegraham.com/pr-preview/pr-13/chrome-clear-dns-cache/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - AWS and Chrome DNS tricks</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-13/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-13/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-13/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-13/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-13/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-13/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-13/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-13/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-13/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-13/'>petegraham.com</a>
+    <a href='/pr-preview/pr-13/blog/'>Articles</a>
+    <a href='/pr-preview/pr-13/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-13/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>AWS and Chrome DNS tricks</h1>
+    </header>
+    <section id="post-body">
+        <p>Back in the noughties I used to like blogging, in fact I liked blogging so much I had two WordPress blogs <a href="http://blog.petegraham.co.uk">blog.petegraham.co.uk</a> and <a href="http://tech.petegraham.co.uk">tech.petegraham.co.uk</a>.</p>
+
+<p>Neither blog has been running for a while, however there are still some links to them. I wanted to redirect all traffic to either of these sub-domains to petegraham.co.uk with a permanently moved 301 header.</p>
+
+<p>The DNS for petegraham.co.uk is handled by Route 53, I didn’t want to have to set-up a server with Nginx just to handle redirects for a couple of sub-domains.</p>
+
+<h2 id="aws-domain-redirects">AWS Domain Redirects</h2>
+
+<p>Currently you can’t have domain redirects using just Route 53 however Adrian Holovaty has written a good article on how to set this up with a combination of Route 53 and S3’s “redirect all requests” feature <a href="http://www.holovaty.com/writing/aws-domain-redirection/">http://www.holovaty.com/writing/aws-domain-redirection/</a>.</p>
+
+<p>##Clear the DNS Cache in Chrome
+Clearing the Chrome DNS cache is always useful when fiddling about with DNS settings. However I’m always forgetting how to do it. I’ve put this here mainly as a reminder to myself. Put the following in your browser’s address bar:</p>
+
+<p><code class="language-plaintext highlighter-rouge">chrome://net-internals/#dns</code></p>
+
+<p>Then hit the “Clear host cache” button. Annoyingly if I make it into a hyper link it doesn’t work. I assume for security reasons.</p>
+
+<p>##Curl headers</p>
+
+<p>Another thing I forget is how to just get the headers with curl.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">curl <span class="nt">-I</span> blog.petegraham.co.uk</code></pre></figure>
+
+<p>Running this shows going to <a href="http://blog.petegraham.co.uk">blog.petegraham.co.uk</a> now gives us HTTP header <code class="language-plaintext highlighter-rouge">301 Moved Permanently</code> to <a href="http://petegraham.co.uk">petegraham.co.uk</a>.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">August 2, 2015</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-13/'>
+        <img class="avatar" src='/pr-preview/pr-13/assets/images/avatar.png' srcset='/pr-preview/pr-13/assets/images/avatar.png 1x, /pr-preview/pr-13/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-13/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-13/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
