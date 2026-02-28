@@ -2,7 +2,6 @@
 title: GitHub pages PR Previews
 date: 2026-02-28
 layout: post
-image: /assets/images/posts/pr_preview_workflow.svg
 ---
 I've been using Cursor Agents a lot more for this site, which means I'm often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.
 
