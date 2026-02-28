@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Pete Graham - CTO</title>
+    <description>Bridging Technology Strategy &amp; Business Scaling</description>
+    <link>https://petegraham.com</link>
+    <atom:link href="https://petegraham.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+      
+      <item>
+        <title>Cursor Cloud Agents While You Sleep (or Walk to the Pub)</title>
+        
+        
+          <description>&lt;p&gt;The dream is simple: use Cursor Cloud Agents to code while you sleep.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/cursor-cloud-agents-while-you-sleep/</link>
+        <guid isPermaLink="true">https://petegraham.com/cursor-cloud-agents-while-you-sleep/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Does OpenClaw Deliver?</title>
+        
+        
+          <description>&lt;p&gt;There’s been a huge amount of hype recently about &lt;a href=&quot;https://openclaw.ai/&quot;&gt;OpenClaw&lt;/a&gt;. I tried it twice to see if it delivers and here’s what I learned. You may have heard it called OpenClaw/Moltbot/The artist formerly known as ClawdBot. It’s the AI bot that’s been taking the tech world by storm, tech bros have been buying mac minis in their droves to install OpenClaw and use it to automate all sorts of aspects of their lives, from buying groceries to sending messages to their girlfriends. Which I find in equal parts dystopian and intriguing.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 17 Feb 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/does-openclaw-deliver/</link>
+        <guid isPermaLink="true">https://petegraham.com/does-openclaw-deliver/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Cursor Agents</title>
+        
+        
+          <description>&lt;p&gt;I use Cursor to develop this website, &lt;a href=&quot;/publishing-jekyll-articles-from-an-iphone/&quot;&gt;last week I set up Pages CMS&lt;/a&gt; so I could edit and publish articles from my phone. Now most of the time I’m prompting Cursor and reviewing code, which got me wondering if I could do this whole workflow from my phone, like how I can now publish articles.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/cursor-agents/</link>
+        <guid isPermaLink="true">https://petegraham.com/cursor-agents/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Hell Yeah or No</title>
+        
+        
+          <description>&lt;p&gt;“Hell Yeah or No” is something that I discovered from Derek Sivers. The idea is simple: when deciding whether to say yes to an opportunity, it should make you want to say “Hell Yeah!” If not, it should be a no.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 06 Feb 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/hell-yes-or-no/</link>
+        <guid isPermaLink="true">https://petegraham.com/hell-yes-or-no/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Publishing Jekyll Articles from an iPhone</title>
+        
+        
+          <description>&lt;p&gt;This site is built using Jekyll and GitHub pages. I’ve recently started writing articles on my phone, using Obsidian, but my publishing workflow involved me jumping on my laptop and publishing the post using Cursor and Git.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 05 Feb 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/publishing-jekyll-articles-from-an-iphone/</link>
+        <guid isPermaLink="true">https://petegraham.com/publishing-jekyll-articles-from-an-iphone/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Writing Why Keep It Short? Part 2</title>
+        
+        
+          <description>&lt;p&gt;With my writing attempts previously I’d often been overly ambitious then not manage to publish articles.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 04 Feb 2026 23:00:00 +0000</pubDate>
+        <link>https://petegraham.com/writing-why-keep-it-short-part-2/</link>
+        <guid isPermaLink="true">https://petegraham.com/writing-why-keep-it-short-part-2/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Writing Why Keep It Short?</title>
+        
+        
+          <description>&lt;p&gt;Simply shorter writing is better writing.&lt;/p&gt;
+</description>
+        
+        <pubDate>Wed, 04 Feb 2026 22:30:00 +0000</pubDate>
+        <link>https://petegraham.com/writing-why-keep-it-short/</link>
+        <guid isPermaLink="true">https://petegraham.com/writing-why-keep-it-short/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Why I’m Still Using a Laptop to Write on Trains</title>
+        
+        
+          <description>&lt;p&gt;I’ve been experimenting with &lt;a href=&quot;/iphone-writing-stand/&quot;&gt;different iPhone writing set-ups&lt;/a&gt;, today I’m heading into London and I’m writing this on the train on my laptop for a couple of reasons.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 30 Jan 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/the-laptop-train-advantage/</link>
+        <guid isPermaLink="true">https://petegraham.com/the-laptop-train-advantage/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iPhone Writing Stand</title>
+        
+        
+          <description>&lt;p&gt;As part of my ongoing Legend of Zelda style &lt;a href=&quot;/magic-keyboard-on-iphone/&quot;&gt;quest to create an ultra-portable writing setup&lt;/a&gt;, I decided to buy an iPhone stand to prevent neck strain.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 29 Jan 2026 17:36:00 +0000</pubDate>
+        <link>https://petegraham.com/iphone-writing-stand/</link>
+        <guid isPermaLink="true">https://petegraham.com/iphone-writing-stand/</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Magic Keyboard on iPhone</title>
+        
+        
+          <description>&lt;p&gt;&lt;a href=&quot;/writing/&quot;&gt;I want to do more writing this year&lt;/a&gt; and have been &lt;a href=&quot;/iphone-writing/&quot;&gt;experimenting with iPhone compatible Bluetooth keyboards&lt;/a&gt; for an ultra portable writing set up. Recently I discovered that the iPhone has surprising good support for Apple’s Magic Keyboard,  likely because there’s a popular iPad version which doubles as a case which has led to good iOS support.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 24 Jan 2026 12:07:00 +0000</pubDate>
+        <link>https://petegraham.com/magic-keyboard-on-iphone/</link>
+        <guid isPermaLink="true">https://petegraham.com/magic-keyboard-on-iphone/</guid>
+      </item>
+      
+    
+  </channel>
+</rss>

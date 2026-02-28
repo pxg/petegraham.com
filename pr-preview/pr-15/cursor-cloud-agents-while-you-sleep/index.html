@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Cursor Cloud Agents While You Sleep (or Walk to the Pub)" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The dream is simple: use Cursor Cloud Agents to code while you sleep." />
+<meta property="og:description" content="The dream is simple: use Cursor Cloud Agents to code while you sleep." />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-15/cursor-cloud-agents-while-you-sleep/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-15/cursor-cloud-agents-while-you-sleep/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Cursor Cloud Agents While You Sleep (or Walk to the Pub)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"The dream is simple: use Cursor Cloud Agents to code while you sleep.","headline":"Cursor Cloud Agents While You Sleep (or Walk to the Pub)","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-15/cursor-cloud-agents-while-you-sleep/"},"url":"https://petegraham.com/pr-preview/pr-15/cursor-cloud-agents-while-you-sleep/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Cursor Cloud Agents While You Sleep (or Walk to the Pub)</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-15/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-15/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-15/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-15/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-15/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-15/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-15/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-15/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-15/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-15/'>petegraham.com</a>
+    <a href='/pr-preview/pr-15/blog/'>Articles</a>
+    <a href='/pr-preview/pr-15/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-15/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Cursor Cloud Agents While You Sleep (or Walk to the Pub)</h1>
+    </header>
+    <section id="post-body">
+        <p>The dream is simple: use Cursor Cloud Agents to code while you sleep.</p>
+
+<p>Or, more realistically in my case last Friday, while walking to the pub.</p>
+
+<p>I wrote about my first pass at this recently in <a href="/cursor-agents/">Cursor Agents</a>. That worked, but there was still friction. I could ask an agent to make changes, but then I still had to pull the branch on my laptop and run everything locally to see if it actually worked.</p>
+
+<p>That was fine for occasional use, but not exactly the “mobile-first, slightly chaotic, get stuff done from anywhere” workflow I was aiming for.</p>
+
+<h2 id="the-big-upgrade-deploy-previews-from-agent-created-prs">The big upgrade: deploy previews from agent-created PRs</h2>
+
+<p>Next step was getting Cloud Agents to set up GitHub deploy previews for pull requests using GitHub Actions. This was a massive quality-of-life improvement.</p>
+
+<p>Here is the workflow it created: <a href="https://github.com/pxg/petegraham.com/blob/main/.github/workflows/pr-preview.yml">Deploy PR preview workflow</a>.</p>
+
+<p>Now when an agent opens a PR, I can review the code and the live preview without needing to run anything locally first. That closes a huge loop for me.</p>
+
+<p>Before this, “reviewing” meant reading diffs and guessing.
+Now reviewing means opening the preview on my phone and seeing what actually happened.</p>
+
+<h2 id="the-bit-that-feels-like-the-future">The bit that feels like the future</h2>
+
+<p>The most impressive part of Cursor Cloud Agents is the VM setup and testing workflow.</p>
+
+<p>It does not just edit files and hope for the best. It can run checks, test the change, and even record videos of manual walkthroughs. That means I can ask for design tweaks, then watch proof of what changed, while I am on mobile.</p>
+
+<p>That is peak (or peek) future energy.</p>
+
+<p>This website is where this feels most obvious. If I ask for a navigation tweak or spacing change, I can review the result in a desktop-style preview and artifact video from my iPhone. No remote desktop hacks. No SSH gymnastics. No “I’ll check later when I’m back at my laptop.”</p>
+
+<h2 id="iphone-workflow-very-close-not-perfect">iPhone workflow: very close, not perfect</h2>
+
+<p>This is already very good.</p>
+
+<p>Still, I would love a proper native iPhone app experience for the Cursor Cloud Agent workflow, especially around reviewing diffs, previews and artifacts in one smooth flow.</p>
+
+<p>The GitHub mobile app helps a lot, but there is still some tab-hopping and minor faff between tools.</p>
+
+<p>Homepage review from an iPhone is now genuinely practical though, which was not true for me a few months ago.</p>
+
+<h2 id="what-works-for-me-and-what-does-not">What works (for me) and what does not</h2>
+
+<h3 id="1-work-in-small-increments">1) Work in small increments</h3>
+
+<p>Cloud Agents are very good most of the time, but you get better results with tighter scope.</p>
+
+<p>Small prompts. Small PRs. Quick feedback loops.</p>
+
+<p>If I try to bundle too much in one go, quality drops and review gets harder.</p>
+
+<h3 id="2-if-its-worth-doing-its-worth-doing-badly-is-useful-here">2) “If it’s worth doing, it’s worth doing badly” is useful here</h3>
+
+<p>I mean this in the best possible way.</p>
+
+<p>Get the rough version done first. Then iterate.</p>
+
+<p>Cloud Agents are fantastic at accelerating that loop: draft, test, review, tweak. You can polish after you know the shape is right.</p>
+
+<h3 id="3-usage-limits-are-real">3) Usage limits are real</h3>
+
+<p>If you run lots of agents, you will find the limits.</p>
+
+<p>I definitely have.</p>
+
+<p>One useful proxy number from this repo: I have already merged 10 Cursor-generated PRs since starting this experiment in early February. That is enough volume to feel both the magic and the limits.</p>
+
+<h2 id="what-i-am-trying-next">What I am trying next</h2>
+
+<p>The next experiment is building an app with Cursor Cloud Agents rather than just iterating on a website.</p>
+
+<p>I also want to try more plugins/tools in that workflow, including the credit-card-related one, to see where the practical boundaries are right now.</p>
+
+<p>My current take: this is already useful, already weirdly good on mobile, and still early. The workflow is not perfect, but it is absolutely heading in the right direction.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">February 28, 2026</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-15/'>
+        <img class="avatar" src='/pr-preview/pr-15/assets/images/avatar.png' srcset='/pr-preview/pr-15/assets/images/avatar.png 1x, /pr-preview/pr-15/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-15/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-15/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
