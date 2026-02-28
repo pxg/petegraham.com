@@ -11,7 +11,7 @@ High-level PR preview lifecycle: build, publish, comment, clean up.
 
 ## What I wanted
 
-The goal was to keep things lightweight:
+The goal was to keep things simple:
 
 1.  Keep normal deploys to `main` exactly as they are
     
@@ -20,7 +20,7 @@ The goal was to keep things lightweight:
 3.  Clean up preview files automatically when the PR is closed
     
 
-## How we wired it
+## How it works
 
 I split things into two GitHub Actions workflows.
 
@@ -68,6 +68,4 @@ Without write permissions, the preview action can't publish to `gh-pages` or com
 
 ## Result
 
-Now each pull request gets a working preview URL in the PR conversation, and I can review content/layout changes before merging. It's a small change, but it makes the whole writing and publishing loop feel much smoother.
-
-If I keep this workflow, the next thing I want to add is a quick smoke check for broken internal links in each preview build.
+Now each pull request gets a working preview URL in the PR conversation, and I can review content/layout changes before merging. It's a small change, but it makes the whole development process feel much easier.
