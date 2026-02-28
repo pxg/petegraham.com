@@ -8,7 +8,7 @@
     
       
       <item>
-        <title>Setting Up GitHub PR Previews for This Jekyll Site</title>
+        <title>GitHub pages PR Previews</title>
         
         
           <description>&lt;p&gt;I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.&lt;/p&gt;
