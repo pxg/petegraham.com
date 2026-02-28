@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Today I learnt about the command line program cal 📅" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cal is a great little command line program that will render a calendar of the current month in the terminal, great for checking dates very quickly." />
+<meta property="og:description" content="Cal is a great little command line program that will render a calendar of the current month in the terminal, great for checking dates very quickly." />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-7/TIL/cal/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-7/TIL/cal/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-29T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Today I learnt about the command line program cal 📅" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2021-07-29T00:00:00+00:00","datePublished":"2021-07-29T00:00:00+00:00","description":"Cal is a great little command line program that will render a calendar of the current month in the terminal, great for checking dates very quickly.","headline":"Today I learnt about the command line program cal 📅","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-7/TIL/cal/"},"url":"https://petegraham.com/pr-preview/pr-7/TIL/cal/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Today I learnt about the command line program cal 📅</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-7/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-7/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-7/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-7/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-7/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-7/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-7/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-7/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-7/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+    <a class="brand" href='/pr-preview/pr-7/'>petegraham.com</a>
+    <a href='/pr-preview/pr-7/blog/'>Articles</a>
+    <a href='/pr-preview/pr-7/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-7/'>About</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Today I learnt about the command line program cal 📅</h1>
+        <h2 class="headline"></h2>
+    </header>
+    <section id="post-body">
+
+        <p>Cal is a great little command line program that will render a calendar of the current month in the terminal, great for checking dates very quickly.</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain">$ cal
+
+      July 2021
+ Mo Tu We Th Fr Sa Su
+           1  2  3  4
+  5  6  7  8  9 10 11
+ 12 13 14 15 16 17 18
+ 19 20 21 22 23 24 25
+ 26 27 28 29 30 31</code></pre></figure>
+
+<p>It come pre-installed on MacOS, however an annoyance for me is it renders Sunday as the first day of the week. To render Monday as the first day of the week I ended up installing gcal with <code class="language-plaintext highlighter-rouge">brew install gcal</code>. I added the following alias to my <code class="language-plaintext highlighter-rouge">~/.zshrc</code> file:</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain">alias cal='gcal --starting-day=1'</code></pre></figure>
+
+<p>You can view other months and years, the following command will show July 1983:</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain">cal -m 7 1983</code></pre></figure>
+
+<p>Really useful for reminding myself I was born on a Wednesday!</p>
+
+
+    </section>
+</article>
+
+<nav id="post-nav">
+    
+    
+        <span class="next">
+            <a href='/pr-preview/pr-7/TIL/python_type_hints/'>
+                Next TIL <span class="arrow">→</span>
+            </a>
+        </span>
+    
+</nav>
+
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-7/'>
+        <img class="avatar" src='/pr-preview/pr-7/assets/images/avatar.png'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-7/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-7/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

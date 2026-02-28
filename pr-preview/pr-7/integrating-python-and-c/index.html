@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Integrating Python and C code" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Calling C code from Python using c_types" />
+<meta property="og:description" content="Calling C code from Python using c_types" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-7/integrating-python-and-c/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-7/integrating-python-and-c/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-03-07T15:39:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Integrating Python and C code" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2016-03-07T15:39:00+00:00","datePublished":"2016-03-07T15:39:00+00:00","description":"Calling C code from Python using c_types","headline":"Integrating Python and C code","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-7/integrating-python-and-c/"},"url":"https://petegraham.com/pr-preview/pr-7/integrating-python-and-c/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Integrating Python and C code</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-7/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-7/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-7/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-7/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-7/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-7/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-7/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-7/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-7/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+    <a class="brand" href='/pr-preview/pr-7/'>petegraham.com</a>
+    <a href='/pr-preview/pr-7/blog/'>Articles</a>
+    <a href='/pr-preview/pr-7/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-7/'>About</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Integrating Python and C code</h1>
+    </header>
+    <section id="post-body">
+        <p>For years I’ve heard people talking about interfacing Python code with C. Reasons you’d want to do this are:</p>
+
+<ol>
+  <li>For performance critical parts of a system</li>
+  <li>To use a specific C library or other existing C code</li>
+</ol>
+
+<p>Now while a lot of developers talk about doing this, no-one appears to be doing it. Until recently I though this was myth Python developers told to each other, maybe to stop getting upset when people say Python is slow.</p>
+
+<p>Late last year I’ve begun working on a TV streaming and scheduling software project, we need to interface the <a href="http://www.live555.com/">LIVE555</a> C library with Python code. We were going to need to interface Python with C!</p>
+
+<p>I was concerned getting this to work was going to be a pain, it turns out Python and C integration is surpringly seamless. This is probably becuase some of the Python internals are written in C. I hit a couple of pitfalls and found it tricky to find information on a couple of things so these are my notes.</p>
+
+<p>#Hello c_types</p>
+
+<p>Let’s start with a very simple example. I have the following C code in a file called <code class="language-plaintext highlighter-rouge">get_details.c</code> all the code examples are on <a href="">Github</a>.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">get_age</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="mi">32</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Pete is %d years old </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">get_age</span><span class="p">());</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>I can compile the code with <code class="language-plaintext highlighter-rouge">gcc get_details.c</code> and run the code with <code class="language-plaintext highlighter-rouge">./a.out</code>.</p>
+
+<p>I want to be able to call the C <code class="language-plaintext highlighter-rouge">get_age</code> function in Python. This is achieved by using <a href="https://docs.python.org/3.5/library/ctypes.html">c_types</a> library which is built-in to the language.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">dll</span> <span class="o">=</span> <span class="n">cdll</span><span class="p">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="s">'./a.out'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Pete is {} years old'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">dll</span><span class="p">.</span><span class="n">get_age</span><span class="p">()))</span></code></pre></figure>
+
+<p><a href="https://www.youtube.com/watch?v=fdKsgBNEHUU">Whoomp! There it is.</a></p>
+
+<p>#Hello Pete</p>
+
+<p>Let’s look at a seconds example. This time I want to call the <code class="language-plaintext highlighter-rouge">get_name</code> C function:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="nf">get_name</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="s">"Pete"</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>As C doesn’t have an inbuilt string type this function returns a char pointer instead. This means we have to do a bit more work to call the function in Python:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">dll</span> <span class="o">=</span> <span class="n">cdll</span><span class="p">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="s">'./a.out'</span><span class="p">)</span>
+<span class="n">get_name</span> <span class="o">=</span> <span class="n">dll</span><span class="p">.</span><span class="n">get_name</span>
+<span class="n">get_name</span><span class="p">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_char_p</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">get_name</span><span class="p">()</span>
+<span class="n">name_string</span> <span class="o">=</span> <span class="n">name</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'Hello {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">name_string</span><span class="p">))</span></code></pre></figure>
+
+<p>The first extra thing we’ve done is tell Python about the return type of the function, this lets Python map C data type, this is done with <code class="language-plaintext highlighter-rouge">get_name.restype = c_char_p</code>. A list of all the possible types are <a href="https://docs.python.org/3.5/library/ctypes.html#fundamental-data-types">here</a>.</p>
+
+<p>The other extra step is to decode the <code class="language-plaintext highlighter-rouge">name</code> variable as it contains bytes and we want to work with a string.</p>
+
+<p>#Hello bananas</p>
+
+<p>Next let’s look at how to call C functions which require parameters. I have the following function which calculates how much my bananas are worth:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">calc_banana_cost</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">banana_cost</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">banana_cost</span> <span class="o">*</span> <span class="n">number</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>None, integers, bytes objects and (unicode) strings are the only native Python objects that can directly be used as parameters in function calls. Other types of paramater need to be set with <code class="language-plaintext highlighter-rouge">argtypes</code>.</p>
+
+<h1 id="string-buffer">String buffer</h1>
+
+<h1 id="arrays">Arrays</h1>
+
+<p>#Testing</p>
+
+<p>xdist utils</p>
+
+<p>#Conclusion</p>
+
+<p>This is a brief introduction to</p>
+
+<p>If you refer to the ctypes documentation you can see more advanced techniques such as:</p>
+<ul>
+  <li>Passing python functions to C to be used as callbacks</li>
+  <li>Dealing with arrays and pointers</li>
+</ul>
+
+<p>In a follow-up article I’ll be writing about how we used <a href="https://docs.python.org/3.5/c-api/structures.html">PyObject</a> to simply passing data from C to Python.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">March 7, 2016</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-7/'>
+        <img class="avatar" src='/pr-preview/pr-7/assets/images/avatar.png' srcset='/pr-preview/pr-7/assets/images/avatar.png 1x, /pr-preview/pr-7/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-7/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-7/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
