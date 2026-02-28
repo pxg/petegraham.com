@@ -733,6 +733,21 @@ h2.month {
 
 /* Media Queries */
 @media screen and (max-width: 540px) {
+    nav.main-nav {
+        padding: 10px 12px 0;
+        gap: 3px;
+    }
+
+    nav.main-nav a {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    nav.main-nav a.brand {
+        padding: 6px 6px 6px 0;
+        font-size: 12px;
+    }
+
     #wrapper { padding:20px 20px 20px 20px;}
     #header { margin-bottom: 60px; border-bottom: 1px solid #eee; }
     .post { margin: 40px 0; }
