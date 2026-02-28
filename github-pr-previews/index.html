@@ -15,12 +15,14 @@
 <link rel="canonical" href="https://petegraham.com/github-pr-previews/" />
 <meta property="og:url" content="https://petegraham.com/github-pr-previews/" />
 <meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:image" content="https://petegraham.com/assets/images/posts/IMG_8868.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-02-28T00:00:00+00:00" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://petegraham.com/assets/images/posts/IMG_8868.png" />
 <meta property="twitter:title" content="GitHub Pages PR Previews" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.","headline":"GitHub Pages PR Previews","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/github-pr-previews/"},"url":"https://petegraham.com/github-pr-previews/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.","headline":"GitHub Pages PR Previews","image":"https://petegraham.com/assets/images/posts/IMG_8868.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/github-pr-previews/"},"url":"https://petegraham.com/github-pr-previews/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <title>Pete Graham - CTO - GitHub Pages PR Previews</title>
@@ -53,6 +55,14 @@
     <header>
         <h1>GitHub Pages PR Previews</h1>
         
+            
+            
+            <img
+                class="post-header-image"
+                src="/assets/images/posts/IMG_8868.png"
+                alt="GitHub Pages PR Previews"
+                decoding="async">
+        
     </header>
     <section id="post-body">
         <p>I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.</p>
@@ -62,6 +72,7 @@
 <h2 id="what-i-wanted">What I wanted</h2>
 
 <p>The goal was to keep things simple:</p>
+
 <ol>
   <li>Keep normal deploys to <code class="language-plaintext highlighter-rouge">main</code> exactly as they are</li>
   <li>Generate a preview URL for each pull request</li>
@@ -69,21 +80,26 @@
 </ol>
 
 <h2 id="how-it-works">How it works</h2>
+
 <p>I split things into two GitHub Actions workflows. The first workflow handles the normal site deploy to the special <code class="language-plaintext highlighter-rouge">gh-pages</code> deployment branch on pushes to the <code class="language-plaintext highlighter-rouge">main</code> branch.</p>
 
 <p>The second workflow runs on pull request events (opened, reopened, synchronize, and closed). For open PRs, it builds Jekyll with a PR-specific base URL like <a href="https://petegraham.com/pr-preview/pr-13/">https://petegraham.com/pr-preview/pr-13/</a>.</p>
 
 <p>That base URL is important so CSS, links, and assets resolve correctly under the preview path.After building, the workflow deploys <code class="language-plaintext highlighter-rouge">_site</code> on the <code class="language-plaintext highlighter-rouge">gh-pages</code> branch into a subdirectory for the PR:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gh-pages/pr-preview/pr-&lt;PR_NUMBER&gt;/
 </code></pre></div></div>
+
 <p>When the PR is closed, the same workflow removes that preview directory.</p>
 
 <h2 id="the-one-detail-that-saves-headaches">The one detail that saves headaches</h2>
+
 <p>My main deploy workflow now excludes the preview umbrella directory from clean-up (<code class="language-plaintext highlighter-rouge">clean-exclude: pr-preview</code>). Without that, a regular deploy to <code class="language-plaintext highlighter-rouge">main</code> can wipe all preview sites.</p>
 
 <p><img src="/assets/images/posts/pr_preview_gh_pages_layout.svg" alt="" /></p>
 
 <p>So the setup works because the two workflows cooperate:</p>
+
 <ul>
   <li>main deploy publishes the production site</li>
   <li>PR deploy publishes preview folders</li>
@@ -91,7 +107,9 @@
 </ul>
 
 <h2 id="one-time-github-settings">One-time GitHub settings</h2>
+
 <p>I also had to make sure repository settings matched the workflow expectations:</p>
+
 <ul>
   <li>GitHub Pages source set to <code class="language-plaintext highlighter-rouge">gh-pages</code> (root)</li>
   <li>Actions workflow permissions set to read and write</li>
@@ -100,6 +118,7 @@
 <p>Without write permissions, the preview action can’t publish to <code class="language-plaintext highlighter-rouge">gh-pages</code> or comment preview links on pull requests.</p>
 
 <h2 id="result">Result</h2>
+
 <p>Now each pull request gets a working preview URL in the PR conversation, and I can review content/layout changes before merging. It’s a small change, but it makes this mobile first development process feel much easier.</p>
 
         <p>
