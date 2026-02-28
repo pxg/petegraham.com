@@ -281,6 +281,67 @@ nav.main-nav a.cta {
     margin: 10px auto 24px;
 }
 
+.about-visual-pillars {
+    margin: 30px 0 28px;
+}
+
+.about-visual-pillars__title {
+    margin: 0 0 16px;
+    font: 600 21px/1.35 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #222;
+    letter-spacing: -0.01em;
+}
+
+.about-visual-pillars__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.about-visual-pillar {
+    border: 1px solid #e6e6e6;
+    border-top: 3px solid #f28c28;
+    border-radius: 8px;
+    padding: 16px 14px 14px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.about-visual-pillar__icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f28c28;
+    background: #fff2e5;
+}
+
+.about-visual-pillar__icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.about-visual-pillar h3 {
+    margin: 0 0 8px;
+    font: 600 16px/1.35 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1e2025;
+}
+
+.about-visual-pillar p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #555;
+}
+
 /* Typography */
 /*Accent color*/
 a,
@@ -816,6 +877,11 @@ h2.month {
     .post h2.headline { font-size: 13px; }
     .post h1 { font-size:24px; }
     .post h2 { font-size:20px; }
+
+    .about-visual-pillars__grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
 }
 
 /* petegraham.co.uk custom styles */
