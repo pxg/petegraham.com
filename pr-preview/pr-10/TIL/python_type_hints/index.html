@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Today I learnt about Python type hints 🐍" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Up until today I knew type hints existed in Python and had read code which used them but hadn’t written any. I wanted to decide if this is a useful technique for me. Let’s say I have the following function:" />
+<meta property="og:description" content="Up until today I knew type hints existed in Python and had read code which used them but hadn’t written any. I wanted to decide if this is a useful technique for me. Let’s say I have the following function:" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-10/TIL/python_type_hints/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-10/TIL/python_type_hints/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Today I learnt about Python type hints 🐍" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2021-08-02T00:00:00+00:00","datePublished":"2021-08-02T00:00:00+00:00","description":"Up until today I knew type hints existed in Python and had read code which used them but hadn’t written any. I wanted to decide if this is a useful technique for me. Let’s say I have the following function:","headline":"Today I learnt about Python type hints 🐍","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-10/TIL/python_type_hints/"},"url":"https://petegraham.com/pr-preview/pr-10/TIL/python_type_hints/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Today I learnt about Python type hints 🐍</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-10/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-10/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-10/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-10/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-10/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-10/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-10/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-10/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-10/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-10/'>petegraham.com</a>
+    <a href='/pr-preview/pr-10/blog/'>Articles</a>
+    <a href='/pr-preview/pr-10/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-10/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Today I learnt about Python type hints 🐍</h1>
+        <h2 class="headline"></h2>
+    </header>
+    <section id="post-body">
+
+        <p>Up until today I knew type hints existed in Python and had read code which used them but hadn’t written any. I wanted to decide if this is a useful technique for me. Let’s say I have the following function:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span></code></pre></figure>
+
+<p>I like the idea that I could automatically detect if someone calls it with parameters which aren’t numbers. I wrote a few different calls to test how the function behaves.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Returns 8
+</span>
+<span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Returns -8
+</span>
+<span class="n">product</span><span class="p">(</span><span class="mf">2.1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Returns 8.4
+</span>
+<span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Returns 2 a bit odd
+</span>
+<span class="n">product</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Returns aa which is unexpected
+</span>
+<span class="n">product</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'2'</span><span class="p">)</span>
+<span class="c1"># Throws TypeError: can't multiply sequence by non-int of type 'str'
+</span>
+<span class="n">product</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">)</span>
+<span class="c1"># Throws TypeError: can't multiply sequence by non-int of type 'str'</span></code></pre></figure>
+
+<p>Here’s a type hint version of the same code:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span></code></pre></figure>
+
+<p>I was hoping the Python interpreter would throw an exception if I call:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">product</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></code></pre></figure>
+
+<p>It doesn’t, so whilst type hints are useful for documenting what type of parameters should be used, and the return type, on their own type hints won’t help catch errors.</p>
+
+<h2 id="mypy">Mypy</h2>
+<p>To get the behaviour I wanted I needed to install Mypy:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">pip</span> <span class="n">install</span> <span class="n">MyPy</span></code></pre></figure>
+
+<p>Then by running:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">mypy</span> <span class="n">my_python_file</span><span class="p">.</span><span class="n">py</span></code></pre></figure>
+
+<p>I got the following output:</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain">types_experiments.py:7: error: Argument 1 to "product" has incompatible type "float"; expected "int"
+types_experiments.py:9: error: Argument 1 to "product" has incompatible type "str"; expected "int"
+Found 2 errors in 1 file (checked 1 source file)</code></pre></figure>
+
+<p>Very good! However interestingly Mypy is ok with:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+<p>So it’s happy with treating <code class="language-plaintext highlighter-rouge">True</code> as <code class="language-plaintext highlighter-rouge">1</code> which surprised me.</p>
+
+<h2 id="python-number-type">Python Number Type</h2>
+<p>My function calculates the product of two numbers, so I’d expect the following to be a valid call:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">product</span><span class="p">(</span><span class="mf">2.1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span></code></pre></figure>
+
+<p>However I specified the parameter types to be <code class="language-plaintext highlighter-rouge">int</code> so this isn’t valid and Mypy tells me off! There’s no “number type” in Python but <a href="https://www.python.org/dev/peps/pep-0484/#the-numeric-tower">PEP 484</a> states if we set the type to be <code class="language-plaintext highlighter-rouge">float</code> then an argument of type <code class="language-plaintext highlighter-rouge">int</code> is acceptable. So our function now looks like:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span></code></pre></figure>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>On the one hand I like Python type hints as they are adding extra detail to the code conveying how it should be used. It also feels similar to typing in Swift which I’m a fan of. On the other hand the fact the Python interpreter ignores the type hints and you’re required to run checks separately with MyPy makes this feel a bit more of a faff, also I found Mypy a bit slow to run so maybe this would work best as a CI step.</p>
+
+
+    </section>
+</article>
+
+<nav id="post-nav">
+    
+        <span class="prev">
+                <a href='/pr-preview/pr-10/TIL/cal/'>
+                    <span class="arrow">←</span> Previous TIL
+                </a>
+        </span>
+    
+    
+        <span class="next">
+            <a href='/pr-preview/pr-10/TIL/jekyll_order_collection/'>
+                Next TIL <span class="arrow">→</span>
+            </a>
+        </span>
+    
+</nav>
+
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-10/'>
+        <img class="avatar" src='/pr-preview/pr-10/assets/images/avatar.png'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-10/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-10/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

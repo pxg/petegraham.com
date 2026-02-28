@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Setting Up GitHub PR Previews for This Jekyll Site" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence." />
+<meta property="og:description" content="I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence." />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-10/github-pr-previews/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-10/github-pr-previews/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Setting Up GitHub PR Previews for This Jekyll Site" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.","headline":"Setting Up GitHub PR Previews for This Jekyll Site","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-10/github-pr-previews/"},"url":"https://petegraham.com/pr-preview/pr-10/github-pr-previews/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Setting Up GitHub PR Previews for This Jekyll Site</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-10/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-10/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-10/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-10/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-10/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-10/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-10/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-10/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-10/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-10/'>petegraham.com</a>
+    <a href='/pr-preview/pr-10/blog/'>Articles</a>
+    <a href='/pr-preview/pr-10/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-10/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Setting Up GitHub PR Previews for This Jekyll Site</h1>
+    </header>
+    <section id="post-body">
+        <p>I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.</p>
+
+<p>So I finally set up PR previews for this blog.</p>
+
+<h2 id="what-i-wanted">What I wanted</h2>
+
+<p>The goal was to keep things lightweight:</p>
+
+<ol>
+  <li>Keep normal deploys to <code class="language-plaintext highlighter-rouge">main</code> exactly as they are</li>
+  <li>Generate a preview URL for each pull request</li>
+  <li>Clean up preview files automatically when the PR is closed</li>
+</ol>
+
+<h2 id="how-we-wired-it">How we wired it</h2>
+
+<p>I split things into two GitHub Actions workflows.</p>
+
+<p>The first workflow handles the normal site deploy to <code class="language-plaintext highlighter-rouge">gh-pages</code> on pushes to <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+<p>The second workflow runs on pull request events (<code class="language-plaintext highlighter-rouge">opened</code>, <code class="language-plaintext highlighter-rouge">reopened</code>, <code class="language-plaintext highlighter-rouge">synchronize</code>, and <code class="language-plaintext highlighter-rouge">closed</code>). For open PRs, it builds Jekyll with a PR-specific base URL like:</p>
+
+<p><code class="language-plaintext highlighter-rouge">/pr-preview/pr-&lt;PR_NUMBER&gt;</code></p>
+
+<p>That base URL is important so CSS, links, and assets resolve correctly under the preview path.</p>
+
+<p>After building, the workflow deploys <code class="language-plaintext highlighter-rouge">_site</code> into a subdirectory on <code class="language-plaintext highlighter-rouge">gh-pages</code>:</p>
+
+<p><code class="language-plaintext highlighter-rouge">gh-pages/pr-preview/pr-&lt;PR_NUMBER&gt;/</code></p>
+
+<p>When the PR is closed, the same workflow removes that preview directory.</p>
+
+<h2 id="the-one-detail-that-saves-headaches">The one detail that saves headaches</h2>
+
+<p>My main deploy workflow now excludes the preview umbrella directory from clean-up (<code class="language-plaintext highlighter-rouge">clean-exclude: pr-preview</code>). Without that, a regular deploy to <code class="language-plaintext highlighter-rouge">main</code> can wipe all preview sites.</p>
+
+<p>So the setup works because the two workflows cooperate:</p>
+
+<ul>
+  <li>main deploy publishes the production site</li>
+  <li>PR deploy publishes preview folders</li>
+  <li>preview folders are preserved until a PR is closed</li>
+</ul>
+
+<h2 id="one-time-github-settings">One-time GitHub settings</h2>
+
+<p>I also had to make sure repository settings matched the workflow expectations:</p>
+
+<ul>
+  <li>GitHub Pages source set to <code class="language-plaintext highlighter-rouge">gh-pages</code> (root)</li>
+  <li>Actions workflow permissions set to read and write</li>
+</ul>
+
+<p>Without write permissions, the preview action can’t publish to <code class="language-plaintext highlighter-rouge">gh-pages</code> or comment preview links on pull requests.</p>
+
+<h2 id="result">Result</h2>
+
+<p>Now each pull request gets a working preview URL in the PR conversation, and I can review content/layout changes before merging. It’s a small change, but it makes the whole writing and publishing loop feel much smoother.</p>
+
+<p>If I keep this workflow, the next thing I want to add is a quick smoke check for broken internal links in each preview build.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">February 28, 2026</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-10/'>
+        <img class="avatar" src='/pr-preview/pr-10/assets/images/avatar.png' srcset='/pr-preview/pr-10/assets/images/avatar.png 1x, /pr-preview/pr-10/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-10/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-10/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
