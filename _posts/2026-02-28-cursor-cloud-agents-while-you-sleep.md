@@ -11,7 +11,7 @@ I wrote about my first pass at this recently in [Cursor Agents](/cursor-agents/)
 
 That was fine for occasional use, but not exactly the "mobile-first, slightly chaotic, get stuff done from anywhere" workflow I was aiming for.
 
-![Temporary Robocop placeholder image](/assets/images/posts/robocop-cloud-agents-placeholder.svg)
+![Temporary Robocop placeholder image](../assets/images/posts/robocop-cloud-agents-placeholder.svg)
 
 Until I swap in the real image, please imagine Robocop quietly reviewing PR previews while I nap.
 
