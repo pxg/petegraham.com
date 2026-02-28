@@ -11,7 +11,7 @@
         <title>GitHub pages PR Previews</title>
         
         
-          <description>&lt;p&gt;I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.&lt;/p&gt;
+          <description>&lt;p&gt;I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.&lt;/p&gt;
 
 </description>
         

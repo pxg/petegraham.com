@@ -10,8 +10,8 @@
 <meta property="og:title" content="GitHub pages PR Previews" />
 <meta name="author" content="Pete Graham" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence." />
-<meta property="og:description" content="I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence." />
+<meta name="description" content="I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions." />
+<meta property="og:description" content="I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions." />
 <link rel="canonical" href="https://petegraham.com/github-pr-previews/" />
 <meta property="og:url" content="https://petegraham.com/github-pr-previews/" />
 <meta property="og:site_name" content="Pete Graham - CTO" />
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="GitHub pages PR Previews" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.","headline":"GitHub pages PR Previews","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/github-pr-previews/"},"url":"https://petegraham.com/github-pr-previews/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.","headline":"GitHub pages PR Previews","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/github-pr-previews/"},"url":"https://petegraham.com/github-pr-previews/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <title>Pete Graham - CTO - GitHub pages PR Previews</title>
@@ -55,9 +55,7 @@
         
     </header>
     <section id="post-body">
-        <p>I’ve been using Cursor Agents a lot more for this site, which means I’m often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.</p>
-
-<p>So I finally set up PR previews for this blog.</p>
+        <p>I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.</p>
 
 <p>![](/assets/images/posts/pr_preview_workflow.svg)</p>
 
@@ -68,9 +66,15 @@
 <p>The goal was to keep things lightweight:</p>
 
 <ol>
-  <li>Keep normal deploys to <code class="language-plaintext highlighter-rouge">main</code> exactly as they are</li>
-  <li>Generate a preview URL for each pull request</li>
-  <li>Clean up preview files automatically when the PR is closed</li>
+  <li>
+    <p>Keep normal deploys to <code class="language-plaintext highlighter-rouge">main</code> exactly as they are</p>
+  </li>
+  <li>
+    <p>Generate a preview URL for each pull request</p>
+  </li>
+  <li>
+    <p>Clean up preview files automatically when the PR is closed</p>
+  </li>
 </ol>
 
 <h2 id="how-we-wired-it">How we wired it</h2>
@@ -102,9 +106,15 @@
 <p>So the setup works because the two workflows cooperate:</p>
 
 <ul>
-  <li>main deploy publishes the production site</li>
-  <li>PR deploy publishes preview folders</li>
-  <li>preview folders are preserved until a PR is closed</li>
+  <li>
+    <p>main deploy publishes the production site</p>
+  </li>
+  <li>
+    <p>PR deploy publishes preview folders</p>
+  </li>
+  <li>
+    <p>preview folders are preserved until a PR is closed</p>
+  </li>
 </ul>
 
 <h2 id="one-time-github-settings">One-time GitHub settings</h2>
@@ -112,8 +122,12 @@
 <p>I also had to make sure repository settings matched the workflow expectations:</p>
 
 <ul>
-  <li>GitHub Pages source set to <code class="language-plaintext highlighter-rouge">gh-pages</code> (root)</li>
-  <li>Actions workflow permissions set to read and write</li>
+  <li>
+    <p>GitHub Pages source set to <code class="language-plaintext highlighter-rouge">gh-pages</code> (root)</p>
+  </li>
+  <li>
+    <p>Actions workflow permissions set to read and write</p>
+  </li>
 </ul>
 
 <p>Without write permissions, the preview action can’t publish to <code class="language-plaintext highlighter-rouge">gh-pages</code> or comment preview links on pull requests.</p>
