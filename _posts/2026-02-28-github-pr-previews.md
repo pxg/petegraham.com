@@ -68,4 +68,4 @@ Without write permissions, the preview action can't publish to `gh-pages` or com
 
 ## Result
 
-Now each pull request gets a working preview URL in the PR conversation, and I can review content/layout changes before merging. It's a small change, but it makes the whole development process feel much easier.
+Now each pull request gets a working preview URL in the PR conversation, and I can review content/layout changes before merging. It's a small change, but it makes the whole mobile first development process feel much easier.
