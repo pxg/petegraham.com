@@ -364,6 +364,16 @@ em, i { font-style: italic; }
 
 }
 
+.post .post-header-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 430px;
+    object-fit: cover;
+    margin: 0 auto 30px;
+    border-radius: 8px;
+}
+
 .post #post-body {
     max-width: 68ch;
     margin: 0 auto;
@@ -816,6 +826,7 @@ h2.month {
     .post h2.headline { font-size: 13px; }
     .post h1 { font-size:24px; }
     .post h2 { font-size:20px; }
+    .post .post-header-image { max-height: 280px; margin-bottom: 22px; }
 }
 
 /* petegraham.co.uk custom styles */
