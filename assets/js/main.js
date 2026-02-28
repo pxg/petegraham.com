@@ -32,5 +32,18 @@ function retina() {
 		$(image).attr("src", path);
 	});
 };
- 
-$(document).ready(retina);
+
+function updateCompactNav() {
+	var $nav = $("nav.main-nav");
+
+	if (!$nav.length)
+		return;
+
+	$nav.toggleClass("is-compact", window.scrollY > 24);
+};
+
+$(document).ready(function() {
+	retina();
+	updateCompactNav();
+	$(window).on("scroll resize", updateCompactNav);
+});
