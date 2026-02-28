@@ -11,6 +11,10 @@ I wrote about my first pass at this recently in [Cursor Agents](/cursor-agents/)
 
 That was fine for occasional use, but not exactly the "mobile-first, slightly chaotic, get stuff done from anywhere" workflow I was aiming for.
 
+![Temporary Robocop placeholder image](/assets/images/posts/robocop-cloud-agents-placeholder.svg)
+
+Until I swap in the real image, please imagine Robocop quietly reviewing PR previews while I nap.
+
 ## The big upgrade: deploy previews from agent-created PRs
 
 Next step was getting Cloud Agents to set up GitHub deploy previews for pull requests using GitHub Actions. This was a massive quality-of-life improvement.
@@ -29,6 +33,8 @@ The most impressive part of Cursor Cloud Agents is the VM setup and testing work
 It does not just edit files and hope for the best. It can run checks, test the change, and even record videos of manual walkthroughs. That means I can ask for design tweaks, then watch proof of what changed, while I am on mobile.
 
 That is peak (or peek) future energy.
+
+Part man. Part machine. Part CI pipeline.
 
 This website is where this feels most obvious. If I ask for a navigation tweak or spacing change, I can review the result in a desktop-style preview and artifact video from my iPhone. No remote desktop hacks. No SSH gymnastics. No "I'll check later when I'm back at my laptop."
 
@@ -65,6 +71,8 @@ Cloud Agents are fantastic at accelerating that loop: draft, test, review, tweak
 If you run lots of agents, you will find the limits.
 
 I definitely have.
+
+At one point it felt like Robocop got paused by rate limits and had to file paperwork before protecting the repo.
 
 One useful proxy number from this repo: I have already merged 10 Cursor-generated PRs since starting this experiment in early February. That is enough volume to feel both the magic and the limits.
 
