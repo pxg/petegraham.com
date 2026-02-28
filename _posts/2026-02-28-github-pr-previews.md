@@ -3,9 +3,7 @@ title: GitHub pages PR Previews
 date: 2026-02-28
 layout: post
 ---
-I've been using Cursor Agents a lot more for this site, which means I'm often reviewing changes in pull requests from my phone. The missing piece in that workflow was simple: I wanted every PR to have a live preview link so I could click, scan the page, and merge with confidence.
-
-So I finally set up PR previews for this blog.
+I've been using Cursor Cloud Agents to develop this site, which means I'm often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.
 
 !\[\]({{ "/assets/images/posts/pr\_preview\_workflow.svg" | relative\_url }})
 
@@ -16,8 +14,11 @@ High-level PR preview lifecycle: build, publish, comment, clean up.
 The goal was to keep things lightweight:
 
 1.  Keep normal deploys to `main` exactly as they are
+    
 2.  Generate a preview URL for each pull request
+    
 3.  Clean up preview files automatically when the PR is closed
+    
 
 ## How we wired it
 
@@ -48,15 +49,20 @@ How production files and PR preview folders coexist on `gh-pages`.
 So the setup works because the two workflows cooperate:
 
 *   main deploy publishes the production site
+    
 *   PR deploy publishes preview folders
+    
 *   preview folders are preserved until a PR is closed
+    
 
 ## One-time GitHub settings
 
 I also had to make sure repository settings matched the workflow expectations:
 
 *   GitHub Pages source set to `gh-pages` (root)
+    
 *   Actions workflow permissions set to read and write
+    
 
 Without write permissions, the preview action can't publish to `gh-pages` or comment preview links on pull requests.
 
