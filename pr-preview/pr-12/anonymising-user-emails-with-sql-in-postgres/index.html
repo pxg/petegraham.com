@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Anonymising email addresses for GDPR &amp; safe development" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Technique for anonymising emails in Postgres using SQL" />
+<meta property="og:description" content="Technique for anonymising emails in Postgres using SQL" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-12/anonymising-user-emails-with-sql-in-postgres/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-12/anonymising-user-emails-with-sql-in-postgres/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-04-23T09:23:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Anonymising email addresses for GDPR &amp; safe development" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2018-04-23T09:23:00+00:00","datePublished":"2018-04-23T09:23:00+00:00","description":"Technique for anonymising emails in Postgres using SQL","headline":"Anonymising email addresses for GDPR &amp; safe development","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-12/anonymising-user-emails-with-sql-in-postgres/"},"url":"https://petegraham.com/pr-preview/pr-12/anonymising-user-emails-with-sql-in-postgres/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Anonymising email addresses for GDPR & safe development</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-12/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-12/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-12/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-12/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-12/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-12/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-12/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-12/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-12/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-12/'>petegraham.com</a>
+    <a href='/pr-preview/pr-12/blog/'>Articles</a>
+    <a href='/pr-preview/pr-12/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-12/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Anonymising email addresses for GDPR & safe development</h1>
+    </header>
+    <section id="post-body">
+        <p>A lot of software has the ability to email users. When developing software it’s often useful to be able to test systems end to end by actually sending emails. This has the pitfall that emails can be accidentally sent from a staging or development environment to a real user, or even worst an entire user base. You want to avoid this at all costs unless you’re a fan of EDD: Embarrassment Driven Development.</p>
+
+<p>In order to avoid this embarrassment many people disable email sending in all environments except production. The compromise here is the system is only ever fully testable in production.</p>
+
+<p>GDPR states that we shouldn’t have Personally Identifiable Information in development environments. Anonymising email addresses not only keeps the GDPR Police happy but avoids the danger of emailing users by mistake. The following SQL anonymises user email addresses in a database table:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UPDATE user SET email = id || '@petegraham.co.uk';
+</code></pre></div></div>
+
+<p>It changes the <code class="language-plaintext highlighter-rouge">user</code> table’s data from this:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>jeff@amazon.com</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>shingy@aol.com</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>jony@apple.com</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To this:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>1@petegraham.co.uk</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2@petegraham.co.uk</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>3@petegraham.co.uk</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The provided SQL is known to work with Postgres but the technique should work on other SQL databases. You’ll notice all my users now have email addresses with the format <code class="language-plaintext highlighter-rouge">n@petegraham.co.uk</code> this is because I have the petegraham.co.uk domain set-up with a catch-all email address.</p>
+
+<h2 id="catch-all-email-addresses">Catch-all email addresses</h2>
+<p>A catch-all email address is a special email addresses for a domain, it “catches” any emails sent to addresses at the domain which aren’t real email addresses. So if you were to email <a href="mailto:a-completely-made-up-address@petegraham.co.uk">a-completely-made-up-address@petegraham.co.uk</a> it would go to the catch-all address.</p>
+
+<p>Having a catch-all email address can be incredibly useful for testing systems where users need to have unique emails addresses, especially when testing registrations forms. Without this people end up having to exhaust their Hotmail or Yahoo email addresses from the 90s to be able to test. I use <a href="https://gsuite.google.com">G Suite</a> for the petegraham.co.uk email, however other email providers have catch-all functionality.</p>
+
+<h2 id="development-back-ups">Development back-ups</h2>
+<p>If you’re backing up your database to an S3 bucket it’s a good idea to using two buckets:</p>
+<ol>
+  <li>The real back-ups with limited access</li>
+  <li>Annoymised back-ups which the entire development team can access</li>
+</ol>
+
+<p>The S3 buckets should have different credentials allowing you to be much more selective with who has access to your users data. It’s possible to use the same technique I wrote about in <a href="/s3-automatic-image-compression/">S3 Automatic Image Compression</a> to take a newly uploaded production back-up, annoymise it, then upload this to the other bucket.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">April 23, 2018</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-12/'>
+        <img class="avatar" src='/pr-preview/pr-12/assets/images/avatar.png' srcset='/pr-preview/pr-12/assets/images/avatar.png 1x, /pr-preview/pr-12/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-12/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-12/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

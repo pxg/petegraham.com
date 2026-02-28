@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Upgrading a Django 1.8 site to Python 3" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Case study of getting a site running on Python 3.4.3" />
+<meta property="og:description" content="Case study of getting a site running on Python 3.4.3" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-12/django-and-python-3/" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-12/django-and-python-3/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-08-21T12:19:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Upgrading a Django 1.8 site to Python 3" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2015-08-21T12:19:00+00:00","datePublished":"2015-08-21T12:19:00+00:00","description":"Case study of getting a site running on Python 3.4.3","headline":"Upgrading a Django 1.8 site to Python 3","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/pr-preview/pr-12/django-and-python-3/"},"url":"https://petegraham.com/pr-preview/pr-12/django-and-python-3/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Upgrading a Django 1.8 site to Python 3</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-12/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-12/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-12/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-12/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-12/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-12/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-12/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-12/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-12/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-12/'>petegraham.com</a>
+    <a href='/pr-preview/pr-12/blog/'>Articles</a>
+    <a href='/pr-preview/pr-12/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-12/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Upgrading a Django 1.8 site to Python 3</h1>
+    </header>
+    <section id="post-body">
+        <p>In my <a href="/django-upgrade-maverick-style/">last article</a> I covered the steps of upgrading a Django 1.5 site to 1.8. For my next trick I will port the site to Python 3. But why should we use Python 3 I hear you ask. Python 2.7 is good enough.
+For me there are two main reasons:</p>
+
+<ol>
+  <li>Python 3 is a better language. In particular it’s easier for newcomers to learn.</li>
+  <li>Continuing to use Python 2 causes technical debt. Package maintainers need to support both versions of the language, this time and effort could be better spent on new features or bug fixes.</li>
+</ol>
+
+<p>For more discussion on the topic listen to this <a href="http://frompythonimportpodcast.com/2014/03/31/episode-017-the-one-about-python-3/">from python import podcast Python 3 espisode</a>.</p>
+
+<p>An overview of my approach for upgrading the site.</p>
+
+<ol>
+  <li>Upgrade Django version from 1.5 to 1.8. <a href="/django-upgrade-maverick-style/">Done</a>.</li>
+  <li>Upgrade other libraries to latest Python 2.7 versions. <a href="/django-upgrade-maverick-style/">Done</a>.</li>
+  <li>Run 2 to 3 migrations tools</li>
+  <li>Run site on Python 3</li>
+</ol>
+
+<h2 id="can-i-use-python-3">Can I use Python 3?</h2>
+
+<p>Install the caniusepython3 package then run it to check your requirements file:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip <span class="nb">install </span>caniusepython3
+caniusepython3 <span class="nt">-r</span> requirements.txt
+
+...
+
+You need 4 projects to transition to Python 3.
+Of those 4 projects, 4 have no direct dependencies blocking their transition:
+
+  django-admin-sortable
+  fabric
+  pywurfl
+  xhtml2pdf</code></pre></figure>
+
+<p>Quel désastre! Four packages aren’t supported. Let’s dig into if we can still port.</p>
+
+<p>Fabric isn’t an issue, it’s run on the laptop deploying not the server. I have Python 2 and 3 installed on my laptop. Alternatively you could try <a href="https://gist.github.com/mok0/99b51e95ceeb4f3fd28b">this gist</a> to get Fabric running on Python 3.</p>
+
+<p>According to the README on the <a href="https://github.com/iambrandontaylor/django-admin-sortable">django-admin-sortable Github</a> “django-admin-sortable 1.7.1 and higher are compatible with Python 3.”. Strangely caniusepython3 doesn’t think it is. Let’s move on.</p>
+
+<p>I can see on the <a href="https://pypi.python.org/pypi/pywurfl/">pywurfl Pypi page</a> <em>“pywurfl is a Python 3 language package”</em> OK great. Let’s move on to the last package.</p>
+
+<p>A quick google for xhtml2pdf python 3 shows <a href="https://github.com/chrisglass/xhtml2pdf/issues/190">some discussion</a> on Github which says even though Python 3 isn’t supported it might work.</p>
+
+<p>Lessons learnt:</p>
+
+<ul>
+  <li>Don’t believe everything caniusepython3 says.</li>
+  <li>Man-up. Install Python 3 and see what breaks.</li>
+</ul>
+
+<h2 id="installing-python-3-virtual-environments">Installing Python 3 Virtual Environments</h2>
+
+<p>If you’re running a Mac then the easiest way to install Python 3 is to go to <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a> download and run the installer. This will install Python 3 but leave the system Python 2.7 as the default. At the time of writing the latest stable version of Python is 3.4.3.</p>
+
+<p>Optional step listen to <a href="https://open.spotify.com/album/2fUrnjG4BPBH52aEAv1XyA">Jean Michel Jarre</a> to add to the futuristic feeling.</p>
+
+<p>Next create a virtual environment with Python 3. In the example I’m using <a href="https://virtualenvwrapper.readthedocs.org/en/latest/">virtualenvwrapper</a>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkvirtualenv <span class="nt">--python</span><span class="o">=</span>/usr/local/bin/python3 graduates-python-3</code></pre></figure>
+
+<p>Now comes the scary step. Let’s try and install our requirements:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+
+...
+blah blah pip is installing packages
+...
+
+Collecting <span class="nv">wsgiref</span><span class="o">==</span>0.1.2 <span class="o">(</span>from <span class="nt">-r</span> requirements.txt <span class="o">(</span>line 10<span class="o">))</span>
+  Downloading wsgiref-0.1.2.zip
+    Complete output from <span class="nb">command </span>python setup.py egg_info:
+    Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+      File <span class="s2">"&lt;string&gt;"</span>, line 20, <span class="k">in</span> &lt;module&gt;
+      File <span class="s2">"/private/var/folders/ny/0wbl966d11v2j9brxg1vtqy00000gn/T/pip-build-vaxm8il7/wsgiref/setup.py"</span>, line 5, <span class="k">in</span> &lt;module&gt;
+        import ez_setup
+      File <span class="s2">"/private/var/folders/ny/0wbl966d11v2j9brxg1vtqy00000gn/T/pip-build-vaxm8il7/wsgiref/ez_setup/__init__.py"</span>, line 170
+        print <span class="s2">"Setuptools version"</span>,version,<span class="s2">"or greater has been installed."</span>
+                                 ^
+    SyntaxError: Missing parentheses <span class="k">in </span>call to <span class="s1">'print'</span>
+
+    <span class="nt">----------------------------------------</span>
+Command <span class="s2">"python setup.py egg_info"</span> failed with error code 1 <span class="k">in</span> /private/var/folders/ny/0wbl966d11v2j9brxg1vtqy00000gn/T/pip-build-vaxm8il7/wsgiref</code></pre></figure>
+
+<p>Noooo! There’s an error with <a href="https://docs.python.org/2/library/wsgiref.html">wsgiref</a> and what’s worse, it’s to do with the bloody print statement needing brackets.</p>
+
+<p>It’s been a couple of years since I worked on this site, and to be honest I don’t remember what wsgiref is used for. I search in the project and can’t find a reference to it, so I remove it. I’m sure we’ll find out if we need it later, if not we’ve dropped a redundant requirement.</p>
+
+<h2 id="python-3-code-changes">Python 3 code changes</h2>
+
+<p>Now is the time when you’re advised to run the <a href="https://docs.python.org/2/library/2to3.html">2to3 Automated code translation tool</a>. I opt for the “run the site and see what breaks” method instead, as I’m interested in digging into the differences between Python 2 and 3:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">runserver</span>
+
+<span class="p">...</span>
+
+  <span class="n">File</span> <span class="s">"/Users/pxg/Projects/graduates/graduates/applicant/admin.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">6</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="kn">from</span> <span class="nn">graduates.applicant.download_as_csv</span> <span class="kn">import</span> <span class="n">download_as_csv</span>
+  <span class="n">File</span> <span class="s">"/Users/pxg/Projects/graduates/graduates/applicant/download_as_csv.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">103</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="o">@</span><span class="n">download_as_csv</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="nb">basestring</span><span class="p">)</span>
+<span class="nb">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s">'basestring'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span></code></pre></figure>
+
+<p>I can see this code is related to downloading CSV files, when I dig into this I find out that the project used to support downloading CSVs for the client. It turned out the client preferred PDFs, so this is in fact obsolete code. I delete it. I am the eradicator of technical debt!</p>
+
+<p>I run the site again and hit a syntax error. It appears to be coming from the xhtml2pdf package.</p>
+
+<p>From reseaching this further is appears that the xhtml2pdf code on Github supports Python 3 but the version on Pypi doesn’t:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip uninstall xhtml2pdf</code></pre></figure>
+
+<p>I update my requirements to install from Github with this magical syntax:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nt">-e</span> git://github.com/chrisglass/xhtml2pdf.git#egg<span class="o">=</span>xhtml2pdf</code></pre></figure>
+
+<p>Great success! The homepage of the site has loaded. Now let’s check the rest of it. When I submit one of my forms and it saves I now have a new error:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">TypeError at /apply
+Unicode-objects must be encoded before hashing</code></pre></figure>
+
+<p>The culprit appears to be this line:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">instance</span><span class="p">.</span><span class="nb">hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">hexdigest</span><span class="p">()</span></code></pre></figure>
+
+<p>The fix is straightforward, we just need to specify the string encoding:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">instance</span><span class="p">.</span><span class="nb">hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)).</span><span class="n">hexdigest</span><span class="p">()</span></code></pre></figure>
+
+<p>I hit another error later in the multi-step form:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">name</span> <span class="s">'basestring'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span></code></pre></figure>
+
+<p>This error can be tracked to this line in <code class="language-plaintext highlighter-rouge">widgets.py</code>:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span></code></pre></figure>
+
+<p>Looking on Stack Overflow the top rated answer is to change the code to this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">string_types</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span></code></pre></figure>
+
+<p>I try submitting my form again. A new error!</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="s">'dict_items'</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s">'append'</span></code></pre></figure>
+
+<p>Looking into the code further I realise it originates from <a href="https://djangosnippets.org/snippets/1688/">https://djangosnippets.org/snippets/1688/</a>. The perils of copy and pasting code!</p>
+
+<p>No-one on the internet has solved this problem so I’m going to have to roll up my sleeves and solve it myself. The fix is to change:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">month_choices</span> <span class="o">=</span> <span class="n">MONTHS</span><span class="p">.</span><span class="n">items</span><span class="p">()</span></code></pre></figure>
+
+<p>To:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">month_choices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">MONTHS</span><span class="p">.</span><span class="n">items</span><span class="p">())</span></code></pre></figure>
+
+<p>The error occurred because <code class="language-plaintext highlighter-rouge">MONTHS.items()</code> is a list in Python 2, but a view in Python 3. The <a href="https://docs.python.org/3.3/library/stdtypes.html#dict-views">Python docs</a> explain this much better than I could.</p>
+
+<p>On the final step of the form I notice my form drop-down for University are all displaying as “University Object”.</p>
+
+<p><img src="/assets/images/posts/uni_dropdown.png" alt="University drop-down" /></p>
+
+<p>This is fixed by changing:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span></code></pre></figure>
+
+<p>On my University model to:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span></code></pre></figure>
+
+<p>From the Django docs: <em>“On Python 3, as all strings are natively considered Unicode, only use the __str__() method (the __unicode__() method is obsolete). If you’d like compatibility with Python 2, you can decorate your model class with python_2_unicode_compatible().”</em> - <a href="https://docs.djangoproject.com/en/1.8/ref/models/instances/">https://docs.djangoproject.com/en/1.8/ref/models/instances/</a></p>
+
+<p>In the Django docs I find their <a href="https://docs.djangoproject.com/en/1.8/topics/python3/">Porting to Python 3 guide</a>. I should have probably read before I started, but who likes to read the instructions!</p>
+
+<h2 id="one-more-thing">One more thing…</h2>
+
+<p>I think I’m finished but then I go to test downloading applicants as PDF functionality and see:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="s">'str'</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">support</span> <span class="n">the</span> <span class="nb">buffer</span> <span class="n">interface</span></code></pre></figure>
+
+<p>The problem is because StringIO has changed. I change the old code:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">cStringIO</span> <span class="kn">import</span> <span class="n">StringIO</span></code></pre></figure>
+
+<p>To:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span></code></pre></figure>
+
+<p>This fixes the issue but I’m getting another error with the applicant PDF download code:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">next</span> <span class="n">error</span><span class="p">:</span> <span class="nb">iter</span><span class="p">.</span><span class="nb">next</span><span class="p">()</span></code></pre></figure>
+
+<p>This is a straight forward fix <code class="language-plaintext highlighter-rouge">iter.next()</code> needs to be changed to <code class="language-plaintext highlighter-rouge">next(iter)</code>. Am I finished? Nope I hit another error:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">string</span> <span class="n">argument</span> <span class="n">expected</span><span class="p">,</span> <span class="n">got</span> <span class="s">'bytes'</span></code></pre></figure>
+
+<p>After a lot of head scratching and a <a href="http://stackoverflow.com/questions/32075135/python-3-in-memory-zipfile-error-string-argument-expected-got-bytes">post</a> on Stack Overflow I learn in Python3 you need to use <code class="language-plaintext highlighter-rouge">ByteIO</code> insead of <code class="language-plaintext highlighter-rouge">StringIO</code> because strings are natively considered Unicode not bytes:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">ByteIO</span> <span class="k">as</span> <span class="n">StringIO</span></code></pre></figure>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I’ve been lucky with this site that I’ve not had to manually port any Python 3 packages. Also a number of the hurdles I hit were caused by redundant requirements or functionality so could be removed rather than fixed.</p>
+
+<p>Porting older codebases to Python 3 can be a bit of a pain. However for new projects there’s no reason to not use Python 3. Due to the ease of running two versions of Python, you can always start with Python 3, then drop back to Python 2.7 if you find a particular package doesn’t support Python 3 yet.</p>
+
+<p>When you encounter a dependency that doesn’t seam to support Python 3, have a decent search on Google, Stack Overflow and Github. There are often already Python 3 fixes or forks available, especially for popular packages.</p>
+
+<p>The most troublesome code to fix was code that was copied from somewhere on the internet. In both cases the code was complicated to debug as it was an abstracted reusable solution. If you can write simpler code to do the job then I recommend considering doing this over copy and pasting complex abstract solutions.</p>
+
+<p>I recently spoke about upgrading Django sites to Python 3 at the London Django Meet-up. Here are the <a href="/slides/django-and-python-3/">slides</a> and <a href="https://skillsmatter.com/skillscasts/6509-london-django-august-2015-meetup">video</a>.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">August 21, 2015</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/pr-preview/pr-12/'>
+        <img class="avatar" src='/pr-preview/pr-12/assets/images/avatar.png' srcset='/pr-preview/pr-12/assets/images/avatar.png 1x, /pr-preview/pr-12/assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-12/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-12/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
