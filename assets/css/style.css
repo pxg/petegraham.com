@@ -61,11 +61,17 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 /* Base */
 html, body { height: 100%; }
 
+:root {
+    --surface-off-white: #f7f5f1;
+    --surface-content: #fff;
+}
+
 body {
     font:17px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #666;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    background: var(--surface-content);
 }
 
 h1 {
@@ -81,10 +87,15 @@ h2 {
     color: #bbb;
 }
 
+.profile {
+    background: var(--surface-off-white);
+}
+
 .profile #wrapper {
     padding: 100px 40px 0px;
     max-width: 700px;
     margin: 0 auto;
+    background: transparent;
 }
 
 .profile #header {
@@ -196,6 +207,7 @@ nav.main-nav a.cta {
   max-width: 700px;
   margin: 0 auto;
   padding: 60px 40px 100px 40px;
+  background: var(--surface-content);
 }
 
 #wrapper.home {
