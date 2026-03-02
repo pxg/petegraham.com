@@ -10,7 +10,7 @@ I've been [using Cursor Cloud Agents](/cursor-agents/) to develop this site, whi
 
 ## What I wanted
 
-The goal was to simple:
+The goal was simple:
 
 1.  Keep automated deploys to production by pushing to the main branch
 2.  Generate a preview URL for each pull request
@@ -18,11 +18,11 @@ The goal was to simple:
 
 ## How it works
 
-This is achieved with two GitHub Actions workflows. The first workflow handles the normal production deploys on pushes to the `main` branch. This is the standard for how GitHub pages works out-of-the-box. The new workflow builds the changes on `main` and pushed them to the `gh-pages` deployment branch.  
+This is achieved with two GitHub Actions workflows. The first workflow handles the normal production deploys on pushes to the `main` branch. This is the standard for how GitHub pages works out-of-the-box. The new workflow builds the changes on `main` and pushes them to the `gh-pages` deployment branch.  
 
 The second workflow runs on pull request events (opened, reopened, synchronize, and closed). For open PRs, it builds Jekyll with a PR-specific base URL like [https://petegraham.com/pr-preview/pr-13/](https://petegraham.com/pr-preview/pr-13/). Because the source code for this site is public I'm comfortable with the preview sites also being available publicly.
 
-That base URL is important so CSS, links, and assets resolve correctly under the preview path.After building, the workflow deploys `_site` on the `gh-pages` branch into a subdirectory for the PR:
+That base URL is important so CSS, links, and assets resolve correctly under the preview path. After building, the workflow deploys `_site` on the `gh-pages` branch into a subdirectory for the PR:
 ```
 gh-pages/pr-preview/pr-<PR_NUMBER>/
 ```
