@@ -81,7 +81,7 @@
 
 <h2 id="how-it-works">How it works</h2>
 
-<p>This is achieved with two GitHub Actions workflows. The first workflow handles the normal production deploys on pushes to the <code class="language-plaintext highlighter-rouge">main</code> branch. This is the standard for how GitHub pages works out-of-the-box. The new workflow builds the changes on <code class="language-plaintext highlighter-rouge">main</code> and pushes them to the <code class="language-plaintext highlighter-rouge">gh-pages</code> deployment branch.</p>
+<p>This is achieved with two <a href="https://github.com/pxg/petegraham.com/tree/main/.github/workflows">GitHub Actions workflows</a>. The first workflow handles the normal production deploys on pushes to the <code class="language-plaintext highlighter-rouge">main</code> branch. This is the standard for how GitHub pages works out-of-the-box. The new workflow builds the changes on <code class="language-plaintext highlighter-rouge">main</code> and pushes them to the <code class="language-plaintext highlighter-rouge">gh-pages</code> deployment branch.</p>
 
 <p>The second workflow runs on pull request events (opened, reopened, synchronize, and closed). For open PRs, it builds Jekyll with a PR-specific base URL like <a href="https://petegraham.com/pr-preview/pr-13/">https://petegraham.com/pr-preview/pr-13/</a>. Because the source code for this site is public I’m comfortable with the preview sites also being available publicly.</p>
 
