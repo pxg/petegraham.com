@@ -47,7 +47,7 @@ This is a catchphrase popularised by fellow tech enthusiast Wilf Grainger, get t
 
 If you run lots of agents, you will find the limits. It's very easy to use up tokens because it's so easy to collaborate with the Cloud Agents, since starting last Friday I've merged over a dozen Cursor-generated PRs.
 
-At one point it felt like rate limits were to Cursor Cloud Agents what stairs are to ED209.
+At one point it felt like rate limits were to Cursor Cloud Agents what stairs are to ED-209.
 
 ![ED209 failing on stairs](../assets/images/posts/ed209-stairs.gif)
 
@@ -57,4 +57,4 @@ An exciting update is the kind people at Cursor decided to give me $100 in Cloud
 
 The next experiment is building an app with Cursor Cloud Agents rather than just iterating on a website. I also want to try more plugins/tools in that workflow, including the credit-card-related one, to see where the boundaries are right now.
 
-My current take: this is early days but already useful and weirdly good on mobile. The workflow isn't perfect, but it's absolutely heading in the right direction, and I can see this become standard functionality offered by Claude, GitHub Copilot and the other big players.
+My current take: this is early days but already useful and works much better than I expected on mobile. The workflow isn't perfect, but it's absolutely heading in the right direction, and I can see this become standard functionality offered by Claude, GitHub Copilot and the other big players.
