@@ -24,9 +24,6 @@ archive: true
                 decoding="async">
         {% endif %}
     </header>
-    {% if page.image %}
-    <img class="post-hero" src='{{ page.image | relative_url }}' alt="">
-    {% endif %}
     <section id="post-body">
         {{content}}
         <p>
