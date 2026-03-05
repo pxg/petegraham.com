@@ -8,31 +8,31 @@
     
       
       <item>
-        <title>GitHub Pages PR Previews</title>
+        <title>Cursor Cloud Agents Code While You Sleep</title>
         
         
-          <description>&lt;p&gt;I’ve been using Cursor Cloud Agents to develop this site, which means I’m often reviewing changes in PRs (pull requests) from my phone. The missing piece in my workflow was a way for each PR to have a live preview link so I could test changed and merge with confidence. I’ve now set this up using GitHub actions.&lt;/p&gt;
+          <description>&lt;p&gt;The dream is simple: use Cursor Cloud Agents to code while you sleep. Or, in my case last Friday, while walking to the pub.&lt;/p&gt;
 
 </description>
         
-        <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
-        <link>https://petegraham.com/github-pr-previews/</link>
-        <guid isPermaLink="true">https://petegraham.com/github-pr-previews/</guid>
+        <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/cursor-cloud-agents-while-you-sleep/</link>
+        <guid isPermaLink="true">https://petegraham.com/cursor-cloud-agents-while-you-sleep/</guid>
       </item>
       
     
       
       <item>
-        <title>Cursor Cloud Agents While You Sleep (or Walk to the Pub)</title>
+        <title>GitHub Pages PR Previews</title>
         
         
-          <description>&lt;p&gt;The dream is simple: use Cursor Cloud Agents to code while you sleep.&lt;/p&gt;
+          <description>&lt;p&gt;I’ve been &lt;a href=&quot;/cursor-agents/&quot;&gt;using Cursor Cloud Agents&lt;/a&gt; to develop this site, which means I’m often reviewing pull requests (PRs) from my phone. The missing piece in my workflow was a way for each PR to have a preview site so I could test the changes allowing me to then merge them with confidence. I’ve now set this up using GitHub actions.&lt;/p&gt;
 
 </description>
         
-        <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
-        <link>https://petegraham.com/cursor-cloud-agents-while-you-sleep/</link>
-        <guid isPermaLink="true">https://petegraham.com/cursor-cloud-agents-while-you-sleep/</guid>
+        <pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate>
+        <link>https://petegraham.com/github-pr-previews/</link>
+        <guid isPermaLink="true">https://petegraham.com/github-pr-previews/</guid>
       </item>
       
     
