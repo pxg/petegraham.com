@@ -55,6 +55,6 @@ An exciting update is the kind people at Cursor decided to give me $100 in Cloud
 
 ## What I'm trying next
 
-The next experiment is building an app with Cursor Cloud Agents rather than just iterating on a website. I also want to try more plugins/tools in that workflow, including the credit-card-related one, to see where the practical boundaries are right now.
+The next experiment is building an app with Cursor Cloud Agents rather than just iterating on a website. I also want to try more plugins/tools in that workflow, including the credit-card-related one, to see where the boundaries are right now.
 
 My current take: this is early days but already useful and weirdly good on mobile. The workflow isn't perfect, but it's absolutely heading in the right direction, and I can see this become standard functionality offered by Claude, GitHub Copilot and the other big players.
