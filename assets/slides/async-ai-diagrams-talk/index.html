@@ -21,7 +21,7 @@
         <section class="title-slide">
           <h1>AI Diagrams</h1>
           <h3>From Whiteboards to AI-Assisted Workflows</h3>
-          <p class="about-role">Pete Graham, Fractional CTO</p>
+          <p class="about-role">Pete Graham, Fractional CTO and Developer</p>
           <p class="muted">
             <a href="https://petegraham.com" target="_blank" rel="noopener noreferrer">petegraham.com</a>
           </p>
@@ -152,6 +152,8 @@ It should show:
           <h2>Workflow v1 diagram</h2>
           <p class="fallback-link">
             <a href="https://github.com/pxg/petegraham.com/blob/main/Projects/Async%20AI%20Diagrams%20Talk/Mermaid%20Diagram.md" target="_blank" rel="noopener noreferrer">Open on GitHub</a>
+            <br/>
+            <a href="https://github.com/pxg/petegraham.com/blob/main/.cursor/rules/mermaid-compatibility.mdc">Cursor rule</a>
           </p>
           <div class="mermaid-diagram">flowchart TD
 A[Drawing] --> D[AI Coding Tool]
@@ -166,32 +168,6 @@ I --> J[Export to repo]</div>
           <aside class="notes">
             Walk through how this flow felt in practice.
             Keep this high level and set up why v2 adds a decision branch.
-          </aside>
-        </section>
-
-        <section>
-          <h2>Workflow v2 diagram</h2>
-          <p class="fallback-link">
-            <a href="https://github.com/pxg/petegraham.com/blob/main/Projects/Async%20AI%20Diagrams%20Talk/Mermaid%20Diagram%20v2.md" target="_blank" rel="noopener noreferrer">Open on GitHub</a>
-            <br/>
-            <a href="https://github.com/pxg/petegraham.com/blob/main/.cursor/rules/mermaid-compatibility.mdc">Cursor rule</a>
-          </p>
-          <div class="mermaid-diagram">flowchart TD
-A[Drawing] --> D[AI Coding Tool]
-B[Dodgy Diagram] --> D
-C[Text-based Documentation] --> D
-D --> E[Mermaid Diagram]
-E --> F{Issues with diagram?}
-F -->|No| G[We're Done]
-F -->|Yes| K{Fight with AI tool}
-K -->|Lose| H[Import Excalidraw]
-K -->|Win| G
-H --> I[Edit]
-I --> J[Export to repo]
-J --> G</div>
-          <aside class="notes">
-            Call out the real-world nuance, sometimes you can prompt your way out, sometimes you cannot.
-            This branch made the workflow honest.
           </aside>
         </section>
 
