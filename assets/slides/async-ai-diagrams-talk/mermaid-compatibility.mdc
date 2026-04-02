@@ -1,0 +1,26 @@
+---
+description: Mermaid syntax compatibility for Cursor and GitHub previews
+alwaysApply: true
+---
+
+# Mermaid Compatibility
+
+Use Mermaid syntax that renders in both Cursor preview and GitHub.
+
+- Prefer `flowchart TD` or `flowchart LR`.
+- For decision edges with labels, use `A -->|label| B`.
+- Do not use `A -- label --> B`.
+- Avoid alternative labeled-edge forms that are inconsistently supported.
+- Keep node IDs simple, put display text in brackets.
+- When apostrophes or punctuation are present, quote labels when needed, for example `X["We're Done"]`.
+
+## Example
+
+```mermaid
+flowchart TD
+    F{Looks Rubbish?}
+    G["We're Done"]
+    H[Import Excalidraw]
+    F -->|No| G
+    F -->|Yes| H
+```
