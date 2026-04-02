@@ -67,6 +67,12 @@ Simply push to main:
 git push
 ```
 
+## Publishing slide decks
+
+Slide deck publishing is managed from the Obsidian repo:
+
+`/Users/petegraham/Documents/Obsidian Vault/Projects/Async AI Diagrams Talk/publish-to-pxg.sh`
+
 ## PR preview workflow
 
 This repository now includes two GitHub Actions workflows:
