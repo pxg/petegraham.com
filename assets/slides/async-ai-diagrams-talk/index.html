@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async AI Diagrams Talk</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css"
+      id="theme"
+    />
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide">
+          <h1>AI Diagrams</h1>
+          <h3>From Whiteboards to AI-Assisted Workflows</h3>
+          <p class="about-role">Pete Graham, Fractional CTO</p>
+          <p class="muted">
+            <a href="https://petegraham.com" target="_blank" rel="noopener noreferrer">petegraham.com</a>
+          </p>
+          <p class="muted">
+            <a href="https://linkedin.com/in/petexgraham" target="_blank" rel="noopener noreferrer">linkedin.com/in/petexgraham</a>
+          </p>
+          <aside class="notes">
+            Quick intro. Set expectation, this is practical, not theoretical.
+            Mention that audience will see real workflow friction, not just success.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Back in the office era</h2>
+          <div class="right-image-layout">
+            <div>
+              <p>Co-located teams<br/>Whiteboards everywhere</p>
+            </div>
+            <div class="right-image-wrap">
+              <img
+                class="right-image right-image-top-crop"
+                src="assets/images/office-era-whiteboard.png"
+                alt="Whiteboard collaboration session"
+              />
+            </div>
+          </div>
+          <aside class="notes">
+            Tell short story about keeping whiteboard photos in Git repos.
+            Highlight how diagrams were collaborative but hard to preserve and update.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Then remote happened</h2>
+          <div class="right-image-layout">
+            <div>
+              <p>We replaced whiteboard collaboration with Excalidraw</p>
+              <ul>
+                <li>Open source and free</li>
+                <li>Hand-drawn aesthetic</li>
+                <li>Live collaboration</li>
+              </ul>
+            </div>
+            <div class="right-image-wrap">
+              <img
+                class="right-image right-image-contain"
+                src="assets/images/progress-not-perfection.png"
+                alt="Progress not perfection meme"
+              />
+            </div>
+          </div>
+          <aside class="notes">
+            Mention COVID transition quickly.
+            Explain why Excalidraw worked culturally, not only technically.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Rise of AI coding</h2>
+          <div class="right-image-layout">
+            <div>
+              <p>Documentation renaissance</p>
+              <ul>
+                <li>Text-based docs stored in Git with code</li>
+                <li>Tools improve with context from docs</li>
+                <li>How do diagrams fit into this?</li>
+              </ul>
+            </div>
+            <div class="right-image-wrap">
+              <img
+                class="right-image right-image-center-crop"
+                src="assets/images/ai-coding-era.png"
+                alt="AI coding era visual"
+              />
+            </div>
+          </div>
+          <aside class="notes">
+            Frame the central question, if AI helps with prose docs, what about architecture visuals?
+          </aside>
+        </section>
+
+        <section>
+          <h2>Investor deck experiment</h2>
+          <pre class="prompt-block"><code>Can you generate me a software platform architecture diagram in the style of an AWS diagram. 
+This diagram will go in an investor deck so must look professional.
+
+It should show:
+- A react native mobile app
+- The app should be calling an API which lives on AWS and connects to a postgres RDS database
+- The API is making calls to the external APIs:
+  - Anthropic
+  - Strava
+  - Garmin
+  - Apple HealthKit
+- The API also has a data science service which it calls which is also hosted on AWS</code></pre>
+          <aside class="notes">
+            Read this quickly, then pause to show this was the exact kind of high-level prompt that often works well for first drafts.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Investor deck experiment</h2>
+          <img
+            class="investor-image"
+            src="assets/images/chatgpt-diagram.png"
+            alt="AI generated investor deck architecture diagram"
+          />
+          <aside class="notes">
+            Explain the request, React Native app, AWS API, RDS, external APIs, data science service.
+            Mention that one model was comically bad, another was surprisingly good on first pass.
+          </aside>
+        </section>
+
+        <section class="what-works-slide">
+          <h2>What Actually Works</h2>
+          <img
+            class="investor-image"
+            src="assets/images/hand-drawn-workflow.png"
+            alt="Hand-drawn workflow for AI diagram process"
+          />
+          <aside class="notes">
+            Emphasize trade-off, generation speed versus visual control.
+            Mention your compatibility rule because preview engines differ.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Workflow v1 diagram</h2>
+          <p class="fallback-link">
+            <a href="https://github.com/pxg/obsidian_sync/blob/main/Projects/Async%20AI%20Diagrams%20Talk/Mermaid%20Diagram.md" target="_blank" rel="noopener noreferrer">Open on GitHub</a>
+          </p>
+          <div class="mermaid-diagram">flowchart TD
+A[Drawing] --> D[AI Coding Tool]
+B[Dodgy Diagram] --> D
+C[Text-based Documentation] --> D
+D --> E[Mermaid Diagram]
+E --> F{Issues with diagram?}
+F -->|No| G[We're Done]
+F -->|Yes| H[Import Excalidraw]
+H --> I[Edit]
+I --> J[Export to repo]</div>
+          <aside class="notes">
+            Walk through how this flow felt in practice.
+            Keep this high level and set up why v2 adds a decision branch.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Workflow v2 diagram</h2>
+          <p class="fallback-link">
+            <a href="https://github.com/pxg/obsidian_sync/blob/main/Projects/Async%20AI%20Diagrams%20Talk/Mermaid%20Diagram%20v2.md" target="_blank" rel="noopener noreferrer">Open on GitHub</a>
+            <br/>
+            <a href="https://github.com/pxg/obsidian_sync/blob/main/.cursor/rules/mermaid-compatibility.mdc">Cursor rule</a>
+          </p>
+          <div class="mermaid-diagram">flowchart TD
+A[Drawing] --> D[AI Coding Tool]
+B[Dodgy Diagram] --> D
+C[Text-based Documentation] --> D
+D --> E[Mermaid Diagram]
+E --> F{Issues with diagram?}
+F -->|No| G[We're Done]
+F -->|Yes| K{Fight with AI tool}
+K -->|Lose| H[Import Excalidraw]
+K -->|Win| G
+H --> I[Edit]
+I --> J[Export to repo]
+J --> G</div>
+          <aside class="notes">
+            Call out the real-world nuance, sometimes you can prompt your way out, sometimes you cannot.
+            This branch made the workflow honest.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Demo time</h2>
+          <ol>
+            <li><a href="https://excalidraw.com/">Excalidraw</a> Mermaid import</li>
+            <li>Excalisave plugin</li>
+            <li>Export as SVG</li>
+          </ol>
+          <aside class="notes">
+            Keep this practical and brisk.
+            Mention Excalidraw URL and Excalisave flow.
+            Prepare backup screenshot in case live demo has issues.
+          </aside>
+        </section>
+
+        <!--
+        <section>
+          <h2>What actually works</h2>
+          <ul>
+            <li>Use AI for structure and first drafts</li>
+            <li>Use human judgment for layout and narrative emphasis</li>
+            <li>Keep diagrams versioned in Git-friendly formats</li>
+          </ul>
+          <aside class="notes">
+            This is the key takeaway slide.
+            Reinforce that hybrid workflows beat purist workflows.
+          </aside>
+        </section>
+        -->
+
+        <section>
+          <h2>Backup demo diagram</h2>
+          <p class="fallback-link">
+            <a href="https://github.com/pxg/obsidian_sync/blob/main/Projects/Async%20AI%20Diagrams%20Talk/Excalidraw%20Import%20Diagram.svg" target="_blank" rel="noopener noreferrer">Excalidraw Drawing Initial Import</a>
+          </p>
+          <p class="fallback-link">
+            <a href="https://github.com/pxg/obsidian_sync/blob/main/Projects/Async%20AI%20Diagrams%20Talk/Excalidraw%20Diagram.svg" target="_blank" rel="noopener noreferrer">Excalidraw Drawing with colours</a>
+          </p>
+          <aside class="notes">
+            Fallback slide in case the live import or export flow fails.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Excalidraw Import Diagram</h2>
+          <img
+            class="investor-image"
+            src="assets/images/excalidraw-import-diagram.svg"
+            alt="Excalidraw import diagram"
+          />
+        </section>
+
+        <section>
+          <h2>Excalidraw Diagram</h2>
+          <img
+            class="investor-image"
+            src="assets/images/excalidraw-diagram-colours.svg"
+            alt="Excalidraw diagram with colours"
+          />
+        </section>
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: "loose",
+        theme: "dark",
+      });
+
+      let mermaidRenderCount = 0;
+
+      async function renderMermaidDiagrams() {
+        const nodes = document.querySelectorAll(".mermaid-diagram");
+        for (const node of nodes) {
+          if (node.dataset.rendered === "true") continue;
+          const definition = node.textContent.trim();
+          const id = "mermaid-" + mermaidRenderCount++;
+          try {
+            const { svg } = await mermaid.render(id, definition);
+            node.innerHTML = svg;
+            node.dataset.rendered = "true";
+          } catch (err) {
+            node.dataset.rendered = "error";
+            node.innerHTML = "<p>Diagram failed to render.</p>";
+            console.error("Mermaid render error:", err);
+          }
+        }
+      }
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        transition: "fade",
+        backgroundTransition: "fade",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+
+      Reveal.on("ready", renderMermaidDiagrams);
+      Reveal.on("slidechanged", renderMermaidDiagrams);
+    </script>
+  </body>
+</html>
