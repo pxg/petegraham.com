@@ -379,6 +379,19 @@ em, i { font-style: italic; }
     margin: 0 auto;
 }
 
+/* Keep article list spacing compact without affecting site-wide lists */
+.post #post-body ul,
+.post #post-body ol {
+    margin: 0.4rem 0 1rem;
+    padding-left: 1.25rem;
+}
+
+.post #post-body li {
+    margin: 0.2rem 0;
+    padding: 0;
+    list-style-position: outside;
+}
+
 .post h1, h1.post-list {
     margin-bottom: 18px;
     color: #222;
