@@ -2,6 +2,7 @@
 title: My Second Brain Setup is an AI Dev Tool in Disguise
 date: 2026-04-08
 layout: post
+image: /assets/images/posts/second-brain-mobile-hero.png
 ---
 The best AI tools assume you are using a laptop. Claude Code, Codex and Cursor are all designed for someone chained to a desk with a big monitor and a mechanical keyboard. I am increasingly interested in [ultra-portable computing](/magic-keyboard-on-iphone/), so that is not me.
 
@@ -51,11 +52,11 @@ The bigger takeaway from this experiment is that the capability is already here:
 
 To see why this matters, it helps to look at alternatives. Most tools solve part of the problem, but not all of it.
 
-| Tool                | Mobile         | Real-time chat | Works with your own files | Model quality |
+| Tool                | Mobile         | Real-time chat | Works with local files you control | Model quality |
 | ------------------- | -------------- | -------------- | -------------------- | ------------- |
 | Claude.ai Projects  | Yes            | Yes            | No                   | High          |
-| Notion Agents       | Yes            | Partial        | Yes (cloud only)     | Good          |
-| Mem 2.0             | Yes            | Yes            | Cloud only           | Good          |
+| Notion Agents       | Yes            | Partial        | No                   | Good          |
+| Mem 2.0             | Yes            | Yes            | No                   | Good          |
 | Obsidian AI plugins | Mainly desktop | Partial        | Yes                  | Varies        |
 | Google NotebookLM   | Yes            | Yes            | No                   | Good          |
 | This experiment     | Yes            | Yes            | Yes                  | High          |
