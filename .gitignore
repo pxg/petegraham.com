@@ -1,4 +1,6 @@
 _site/
+.bundle/
+vendor/bundle/
 .sass-cache/
 .cursor/
 .DS_Store
