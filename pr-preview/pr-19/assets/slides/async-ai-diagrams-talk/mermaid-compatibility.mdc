@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Pete Graham - CTO" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Mermaid syntax compatibility for Cursor and GitHub previews" />
+<meta property="og:description" content="Mermaid syntax compatibility for Cursor and GitHub previews" />
+<link rel="canonical" href="https://petegraham.com/pr-preview/pr-19/assets/slides/async-ai-diagrams-talk/mermaid-compatibility.mdc" />
+<meta property="og:url" content="https://petegraham.com/pr-preview/pr-19/assets/slides/async-ai-diagrams-talk/mermaid-compatibility.mdc" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pete Graham - CTO" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Pete Graham"},"description":"Mermaid syntax compatibility for Cursor and GitHub previews","headline":"Pete Graham - CTO","url":"https://petegraham.com/pr-preview/pr-19/assets/slides/async-ai-diagrams-talk/mermaid-compatibility.mdc"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO</title>
+  <link rel="apple-touch-icon" href='/pr-preview/pr-19/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/pr-preview/pr-19/assets/images/favicon.svg'>
+  <link rel="icon" href='/pr-preview/pr-19/assets/images/favicon.ico'>
+  <link rel="manifest" href='/pr-preview/pr-19/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/pr-preview/pr-19/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/pr-preview/pr-19/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/pr-preview/pr-19/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/pr-preview/pr-19/rss.xml'>
+  <link rel="stylesheet" href='/pr-preview/pr-19/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/pr-preview/pr-19/'>petegraham.com</a>
+    <a href='/pr-preview/pr-19/blog/'>Articles</a>
+    <a href='/pr-preview/pr-19/TIL/'>TIL </a>
+    <a href='/pr-preview/pr-19/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    # Mermaid Compatibility
+
+Use Mermaid syntax that renders in both Cursor preview and GitHub.
+
+- Prefer `flowchart TD` or `flowchart LR`.
+- For decision edges with labels, use `A -->|label| B`.
+- Do not use `A -- label --> B`.
+- Avoid alternative labeled-edge forms that are inconsistently supported.
+- Keep node IDs simple, put display text in brackets.
+- When apostrophes or punctuation are present, quote labels when needed, for example `X["We're Done"]`.
+
+## Example
+
+```mermaid
+flowchart TD
+    F{Looks Rubbish?}
+    G["We're Done"]
+    H[Import Excalidraw]
+    F -->|No| G
+    F -->|Yes| H
+```
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/pr-preview/pr-19/assets/js/main.js'></script>
+  <script src='/pr-preview/pr-19/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
