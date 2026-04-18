@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">gh-pages layout for production and previews</title>
+  <desc id="desc">Diagram showing production files and pull request preview folders coexisting on the gh-pages branch.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .box { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 12; }
+      .path { font: 700 20px Arial, sans-serif; fill: #0f172a; }
+      .text { font: 400 16px Arial, sans-serif; fill: #334155; }
+      .tag-main { fill: #dcfce7; stroke: #16a34a; stroke-width: 2; rx: 10; }
+      .tag-pr { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; rx: 10; }
+      .label-main { font: 700 16px Arial, sans-serif; fill: #166534; }
+      .label-pr { font: 700 16px Arial, sans-serif; fill: #1e40af; }
+      .note { font: 600 16px Arial, sans-serif; fill: #0f172a; }
+      .mono { font: 400 15px 'Courier New', monospace; fill: #111827; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="500" />
+  <text class="title" x="40" y="55">Why clean-exclude keeps previews safe</text>
+
+  <rect class="box" x="40" y="95" width="1120" height="300" />
+  <text class="path" x="70" y="140">gh-pages/</text>
+
+  <rect class="tag-main" x="80" y="175" width="150" height="36" />
+  <text class="label-main" x="103" y="199">main deploy</text>
+  <text class="text" x="80" y="240">Production site root updated on pushes to main.</text>
+
+  <rect class="tag-pr" x="560" y="175" width="190" height="36" />
+  <text class="label-pr" x="590" y="199">PR preview deploy</text>
+  <text class="mono" x="560" y="240">pr-preview/pr-101/</text>
+  <text class="mono" x="560" y="266">pr-preview/pr-102/</text>
+  <text class="mono" x="560" y="292">pr-preview/pr-103/</text>
+  <text class="text" x="560" y="320">Each open PR gets its own subfolder and URL.</text>
+
+  <text class="note" x="40" y="445">deploy-pages.yml uses clean-exclude: pr-preview so production deploys do not delete preview folders.</text>
+</svg>
