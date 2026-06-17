@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Speaking to Computers" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Experimenting with speech-to-text after a hand injury, from built-in dictation to Wispr Flow and Gemini" />
+<meta property="og:description" content="Experimenting with speech-to-text after a hand injury, from built-in dictation to Wispr Flow and Gemini" />
+<link rel="canonical" href="https://petegraham.com/speaking-to-computers/" />
+<meta property="og:url" content="https://petegraham.com/speaking-to-computers/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-06-17T10:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Speaking to Computers" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-06-17T10:00:00+00:00","datePublished":"2026-06-17T10:00:00+00:00","description":"Experimenting with speech-to-text after a hand injury, from built-in dictation to Wispr Flow and Gemini","headline":"Speaking to Computers","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/speaking-to-computers/"},"url":"https://petegraham.com/speaking-to-computers/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - Speaking to Computers</title>
+  <link rel="apple-touch-icon" href='/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/assets/images/favicon.svg'>
+  <link rel="icon" href='/assets/images/favicon.ico'>
+  <link rel="manifest" href='/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/rss.xml'>
+  <link rel="stylesheet" href='/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/'>petegraham.com</a>
+    <a href='/blog/'>Articles</a>
+    <a href='/TIL/'>TIL </a>
+    <a href='/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Speaking to Computers</h1>
+        
+    </header>
+    <section id="post-body">
+        <p>After injuring my hand, I had trouble using a keyboard. I still needed to work, so I decided to experiment with speech-to-text on both my phone and my laptop. It had been a long time since I’d tried this, and it turns out it’s considerably better than it used to be.</p>
+
+<h2 id="built-in-dictation">Built-in Dictation</h2>
+
+<p>I started by using the built-in dictation on the iPhone and macOS. This built-in functionality is actually pretty good. I was surprised the iPhone handles speech-to-text better. I guess it’s not that surprising because, as the name suggests and we sometimes forget, it is a phone. It seems to be more optimised for voice input than macOS. I guess part of it is because you’re closer to the microphone, but I do wonder if they’re using a slightly different architecture. On the MacBook, speech-to-text seems like a bit of a second-class citizen, but it’s still not bad.</p>
+
+<h2 id="wispr-flow">Wispr Flow</h2>
+
+<p>After getting slightly frustrated with having to edit myself on the MacBook, I installed <a href="https://wisprflow.ai/">Wispr Flow</a>, which is speech-to-text software from a startup called Wispr. It cleans up mistakes. I believe it runs local models but also connects to cloud-based models, and it does this as you speak and is incredibly performant. It feels almost instant. There are open-source alternatives, but I’ve not tried them yet.</p>
+
+<p>I was a bit concerned about Wispr Flow from a data-privacy point of view, because I’d be running pretty much everything I write through the software. However, after reviewing the settings, you can opt out of training and of them storing your data.</p>
+
+<p>You can also install Wispr Flow on your iPhone. As I said, the iPhone’s built-in functionality is already good, but I did find Wispr Flow slightly better for correcting mistakes.</p>
+
+<p>One thing I’ve noticed with Wispr Flow is that it seems more accurate when I speak for a while, at least a sentence or two. If I only say one or two words, it’s more likely to get them wrong. I guess that’s because it can figure out the context from the rest of the sentence. In fact, I dictated this paragraph in one go and it came out perfect the first time.</p>
+
+<h2 id="going-hands-free">Going Hands-Free</h2>
+
+<p>Now I was using speech-to-text for dictating emails and messages, and sometimes reports I write. What I wasn’t using it for was navigating around the phone, so I decided to use Siri for that. I’m not a big fan of Siri. I basically never use it, and this reminded me why. It was OK for launching apps, but I still found it wasn’t good enough to use the phone hands-free.</p>
+
+<p>In my case I injured my left hand, so it wasn’t a problem to use my right hand to navigate the phone, or the MacBook using a trackpad. In a situation where you couldn’t use your hands at all, I just don’t feel Siri is up to scratch.</p>
+
+<h2 id="other-software">Other Software</h2>
+
+<p>I use <a href="https://claude.ai/code">Claude Code</a> quite frequently. It has its own built-in voice input. I found this a bit fiddly, tried it a few times, and just fell back to dictating as I would for any other input.</p>
+
+<h2 id="having-it-read-back-to-you">Having It Read Back to You</h2>
+
+<p>What I was impressed with is the narration into Google Gemini, which is particularly good. Something I didn’t expect to find useful is that Google Gemini will also read the response back to you, which is genuinely handy if you’re researching things, asking questions, or doing tasks around the house with a phone running in the background.</p>
+
+<h2 id="where-it-struggles">Where It Struggles</h2>
+
+<p>This prompted me to research whether there’s a Google-based solution. Another problem I’ve had, which this reminded me of, is that I don’t speak with received pronunciation, especially with words starting with “th”. It seems all of the speech-to-text software I’ve tried so far has struggled with it. I’m curious to try the Google solutions to see if they can adapt to my accent, or maybe I just need elocution lessons.</p>
+
+<h2 id="what-id-still-like-to-see">What I’d Still Like to See</h2>
+
+<p>Another thing I think would be useful, especially as most of this software runs the converted text through a large language model, is some sort of dictionary or even a knowledge base. That context would help stop it misspelling people’s names and company names. It would let the software understand the things I’m likely to be writing about and make a better guess at the right choice, because these are the little things I see it getting wrong, along with punctuation. Going back to edit is quite fiddly, and if you can type at a normal speed it probably ends up about the same speed as typing, or slower. Of course, the marketing materials will tell you that speech input is umpteen times faster.</p>
+
+<p>If this could get to the point where it’s completely seamless, it would be a game changer. At the moment I always have to review the text after dictating, which makes the workflow feel a bit clunky and disjointed, and less natural than just typing or speaking alone.</p>
+
+<h2 id="will-i-keep-using-it">Will I Keep Using It?</h2>
+
+<p>What will be interesting is to see whether I keep using this once my hand has recovered. I will say it feels much more natural than I expected. I always found the idea of talking to a computer a bit weird and preferred typing, but it feels a little like being a high-powered 80s businessman dictating to his secretary. For first drafts in particular, this feels like a very good way to get something out. In fact, I dictated this whole article in one go, then ran it through Claude Code to clean it up before publishing.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">june 17, 2026</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/'>
+        <img class="avatar" src='/assets/images/avatar.png' srcset='/assets/images/avatar.png 1x, /assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/assets/js/main.js'></script>
+  <script src='/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
