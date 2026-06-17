@@ -3,6 +3,8 @@ layout: post
 title: Speaking to Computers
 description: Experimenting with speech-to-text after a hand injury, from built-in dictation to Wispr Flow and Gemini
 date: 2026-06-17 10:00:00
+image: /assets/images/posts/speaking-to-computers-hero.jpg
+image_alt: A businessman dictating to a Terminator robot typing on a laptop in a 1980s wood-panelled office
 ---
 
 After injuring my hand, I had trouble using a keyboard. I still needed to work, so I decided to experiment with speech-to-text on both my phone and my laptop. It had been a long time since I'd tried this, and it turns out it's considerably better than it used to be.
