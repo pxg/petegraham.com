@@ -1,6 +1,6 @@
 ---
 title: I Built a Terminal App to Check My Email
-date: 2026-06-05
+date: 2026-06-23
 layout: post
 image: /assets/images/posts/inbox-cli-hero.png
 image_alt: inbox-cli terminal showing an Inbox Zero message with pink border on a dark background
@@ -9,7 +9,7 @@ It's 2026, and a lot of businesses still run on email. I work with multiple comp
 
 I've also started composing email drafts in Obsidian as part of my [second brain setup](/my-second-brain-setup-is-an-ai-dev-tool-in-disguise/). Writing replies there is lovely, but it meant a lot of copying and pasting: out of Gmail into Obsidian to write the reply, then back into Gmail to send. This all works, but it's actually pretty clunky, especially if you're doing it dozens of times a day.
 
-So to avoid getting distracted by the fun of the internet and to match my new Obsidian-based workflow, I've built [inbox-cli](https://pypi.org/project/inbox-cli/), a terminal app that loads the unread mail from all my inboxes in one view, lets me triage it quickly, draft replies straight into my Obsidian vault, and send them without ever opening a browser.
+So to avoid getting distracted by the fun of the internet and to match my new Obsidian-based workflow, I've built [inbox-cli](https://github.com/pxg/inbox-cli).
 
 ## The solution
 
@@ -43,11 +43,11 @@ Under the hood, inbox-cli leans on gog to talk to Gmail, with OAuth set up per m
 
 I'd be delighted if other people find this useful and want to use it. But I'd also be genuinely happy if I'm the only user, as it works very well for me and I use it daily.
 
-There's a larger idea here that I keep coming back to. There's been a predicted SaaS-apocalypse where people stop buying SaaS products and vibe code their own solutions. I'm not currently convinced this will happen, the defensibility of most successful SaaS companies is much more than their user interfaces and code.
+There's a larger idea here that I keep coming back to. There's been a predicted SaaS-apocalypse where people stop buying SaaS products and vibe code their own solutions. I'm not currently convinced this will happen. The defensibility of most successful SaaS companies runs much deeper than their user interfaces and code.
 
-However, I do believe AI-based development tools mean we can have more personal software, tools that reflect how we actually want to work rather than how someone else decided.
+However, I do believe AI-based development tools mean we can have more personal software, tools that reflect how we actually want to work rather than how someone else decided we should.
 
-The potential for high levels of customisation at the UX and workflow level is highly exciting.
+The potential for deep customisation at the UX and workflow level is highly exciting.
 
 ## A note on the cost of building
 
