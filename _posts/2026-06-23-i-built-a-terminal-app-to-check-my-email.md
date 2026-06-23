@@ -23,7 +23,7 @@ You can also mark emails as read and open them in the browser to read, as I didn
 
 The key for me was that the solution had to be fast, distraction-free, and simple to use.
 
-I started with [gog](https://github.com/steipete/gog), a command-line tool for interacting with Google products, which inbox-cli still uses under the hood. gog is great, but remembering the commands was a challenge, and its default output didn't fit the low-friction user experience I was looking for.
+I started with [gog](https://github.com/openclaw/gogcli), a command-line tool for interacting with Google products, which inbox-cli still uses under the hood. gog is great, but remembering the commands was a challenge, and its default output didn't fit the low-friction user experience I was looking for.
 
 I then prototyped it with a Cursor skill (which also works with Claude Code). This let me test whether I was happy with the workflow, and it also forced some technical decisions early.
 
