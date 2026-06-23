@@ -2,6 +2,8 @@
 title: I Built a Terminal App to Check My Email
 date: 2026-06-05
 layout: post
+image: /assets/images/posts/inbox-cli-hero.png
+image_alt: inbox-cli terminal showing an Inbox Zero message with pink border on a dark background
 ---
 It's 2026, and a lot of businesses still run on email. I work with multiple companies, which means I need to check multiple email inboxes. The problem for me is the browser. I don't hate the browser, but the moment I open Gmail, I find myself getting dragged into reading articles, watching videos, and looking at stupid gifs.
 
