@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="I Built a Terminal App to Check My Email" />
+<meta name="author" content="Pete Graham" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="It’s 2026, and a lot of businesses still run on email. I work with multiple companies, which means I need to check multiple email inboxes. The problem for me is the browser. I don’t hate the browser, but the moment I open Gmail, I find myself getting dragged into reading articles, watching videos, and looking at stupid gifs." />
+<meta property="og:description" content="It’s 2026, and a lot of businesses still run on email. I work with multiple companies, which means I need to check multiple email inboxes. The problem for me is the browser. I don’t hate the browser, but the moment I open Gmail, I find myself getting dragged into reading articles, watching videos, and looking at stupid gifs." />
+<link rel="canonical" href="https://petegraham.com/i-built-a-terminal-app-to-check-my-email/" />
+<meta property="og:url" content="https://petegraham.com/i-built-a-terminal-app-to-check-my-email/" />
+<meta property="og:site_name" content="Pete Graham - CTO" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-06-05T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="I Built a Terminal App to Check My Email" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-06-05T00:00:00+00:00","datePublished":"2026-06-05T00:00:00+00:00","description":"It’s 2026, and a lot of businesses still run on email. I work with multiple companies, which means I need to check multiple email inboxes. The problem for me is the browser. I don’t hate the browser, but the moment I open Gmail, I find myself getting dragged into reading articles, watching videos, and looking at stupid gifs.","headline":"I Built a Terminal App to Check My Email","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/i-built-a-terminal-app-to-check-my-email/"},"url":"https://petegraham.com/i-built-a-terminal-app-to-check-my-email/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <title>Pete Graham - CTO - I Built a Terminal App to Check My Email</title>
+  <link rel="apple-touch-icon" href='/assets/images/apple-touch-icon.png'>
+  <link rel="icon" type="image/svg+xml" href='/assets/images/favicon.svg'>
+  <link rel="icon" href='/assets/images/favicon.ico'>
+  <link rel="manifest" href='/assets/images/site.webmanifest'>
+  <link rel="icon" type="image/png" sizes="192x192" href='/assets/images/web-app-manifest-192x192.png'>
+  <link rel="icon" type="image/png" sizes="512x512" href='/assets/images/web-app-manifest-512x512.png'>
+  <link rel="stylesheet" href='/assets/css/style.css'>
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href='/rss.xml'>
+  <link rel="stylesheet" href='/assets/css/highlight.css'>
+</head>
+<body>
+
+  <nav class="main-nav">
+  <div class="nav-content">
+    <a class="brand" href='/'>petegraham.com</a>
+    <a href='/blog/'>Articles</a>
+    <a href='/TIL/'>TIL </a>
+    <a href='/'>About</a>
+  </div>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>I Built a Terminal App to Check My Email</h1>
+        
+    </header>
+    <section id="post-body">
+        <p>It’s 2026, and a lot of businesses still run on email. I work with multiple companies, which means I need to check multiple email inboxes. The problem for me is the browser. I don’t hate the browser, but the moment I open Gmail, I find myself getting dragged into reading articles, watching videos, and looking at stupid gifs.</p>
+
+<p>I’ve also started composing email drafts in Obsidian as part of my <a href="/my-second-brain-setup-is-an-ai-dev-tool-in-disguise/">second brain setup</a>. Writing replies there is lovely, but it meant a lot of copying and pasting: out of Gmail into Obsidian to write the reply, then back into Gmail to send. This all works, but it’s actually pretty clunky, especially if you’re doing it dozens of times a day.</p>
+
+<p>So to avoid getting distracted by the fun of the internet and to match my new Obsidian-based workflow, I’ve built <a href="https://pypi.org/project/inbox-cli/">inbox-cli</a>, a terminal app that loads the unread mail from all my inboxes in one view, lets me triage it quickly, draft replies straight into my Obsidian vault, and send them without ever opening a browser.</p>
+
+<h2 id="the-solution">The solution</h2>
+
+<p>inbox-cli is a TUI, a terminal user interface, similar to tools such as Claude Code. I’ve open sourced it, and the code is available on <a href="https://github.com/pxg/inbox-cli">GitHub</a>.</p>
+
+<p>When you run <code class="language-plaintext highlighter-rouge">inbox</code>, all your unread mail across accounts shows up in one list, and you move through it with the arrow keys. Enter starts a reply, which opens as a markdown file in Obsidian. When you’re happy with the draft, one keystroke sends it.</p>
+
+<p>You can also mark emails as read and open them in the browser to read, as I didn’t want to recreate an HTML rendering engine in the terminal. That felt a bit silly.</p>
+
+<h2 id="how-i-built-it">How I built it</h2>
+
+<p>The key for me was that the solution had to be fast, distraction-free, and simple to use.</p>
+
+<p>I started with <a href="https://github.com/steipete/gog">gog</a>, a command-line tool for interacting with Google products, which inbox-cli still uses under the hood. gog is great, but remembering the commands was a challenge, and its default output didn’t fit the low-friction user experience I was looking for.</p>
+
+<p>I then prototyped it with a Cursor skill (which also works with Claude Code). This let me test whether I was happy with the workflow, and it also forced some technical decisions early.</p>
+
+<p>I ended up creating several small skills that talked to each other. This made it easier to develop, as I could swap out one piece of the workflow at a time.</p>
+
+<p>The skills fetched from each inbox in turn rather than in parallel, which made it feel slow, and on top of that I was waiting for the LLM to respond on every action. It was never going to be the responsive, low-friction user experience I wanted, but that was never the point. As a way to prototype and pin down a workflow before committing to building the real thing, it was a really useful approach. The skills ended up being an excellent initial specification for the software.</p>
+
+<p>A few things struck me along the way. Previously I wouldn’t have bothered building a tool for this, the effort wouldn’t have been worth it, but with AI development tools it’s much simpler to justify. I also wouldn’t have considered checking my email from the command line at all, but after spending time using TUIs like Claude Code, I’ve come round to the idea that the terminal can be a genuinely fun and distraction-free way to use a computer. Being a command-line tool makes the Obsidian integration feel natural rather than bolted on, much like the way Unix tools can be combined to interact with each other.</p>
+
+<p>All of the code was written by AI. There was still considerable work getting it from a proof of concept to something I now use as the primary way I check my email: testing different technical approaches, then using the product and iterating on the user experience.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>Under the hood, inbox-cli leans on gog to talk to Gmail, with OAuth set up per mailbox. gog installs via Homebrew on macOS, and getting it authenticated for each account is the most fiddly part of the setup. Once that’s done, inbox-cli handles the rest: it lists unread mail, opens replies as markdown in your vault, and sends them. It even re-fetches in the background, so the list stays current.</p>
+
+<h2 id="will-anyone-else-use-it">Will anyone else use it?</h2>
+
+<p>I’d be delighted if other people find this useful and want to use it. But I’d also be genuinely happy if I’m the only user, as it works very well for me and I use it daily.</p>
+
+<p>There’s a larger idea here that I keep coming back to. There’s been a predicted SaaS-apocalypse where people stop buying SaaS products and vibe code their own solutions. I’m not currently convinced this will happen, the defensibility of most successful SaaS companies is much more than their user interfaces and code.</p>
+
+<p>However, I do believe AI-based development tools mean we can have more personal software, tools that reflect how we actually want to work rather than how someone else decided.</p>
+
+<p>The potential for high levels of customisation at the UX and workflow level is highly exciting.</p>
+
+<h2 id="a-note-on-the-cost-of-building">A note on the cost of building</h2>
+
+<p>People like to claim the cost of writing code is trending towards zero. I don’t agree. To start with, the tokens aren’t free, but the broader point is fair: AI can usually write more than acceptable code, so the effort of producing it is much lower. That’s a good thing, it lowers the barrier to building things.</p>
+
+<p>Where I think people go wrong is assuming the cost of building a <em>product</em> is also heading to zero. You can have AI build you a clone of something well known, and it might roughly resemble the original. It may even technically work, especially if you’ve used good practices like automated testing. But building something that’s genuinely delightful to use, that is stable and responsive, takes effort and multiple iterations.</p>
+
+<p>This is the craft, incrementally tweaking the behaviour until the experience feels right. This part still takes considerable effort, and I don’t see that going away any time soon. Even getting something as simple as inbox-cli from prototype to something I’m happy to use every day was a good reminder of that.</p>
+
+        <p>
+        If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
+        </p>
+    </section>
+    <h2 class="headline">june 5, 2026</h2>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href='/'>
+        <img class="avatar" src='/assets/images/avatar.png' srcset='/assets/images/avatar.png 1x, /assets/images/avatar@2x.png 2x'>
+        <div>
+            <span class="dark">Pete Graham</span>
+            <span>Bridging Technology Strategy & Business Scaling</span>
+        </div>
+    </a>
+
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+<!-- TODO: hide current post here -->
+
+
+
+
+
+  </section>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='/assets/js/main.js'></script>
+  <script src='/assets/js/highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1161798-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
