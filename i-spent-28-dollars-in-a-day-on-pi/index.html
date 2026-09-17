@@ -7,7 +7,7 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="I spent $28 in a day on Pi" />
+<meta property="og:title" content="I Spent $28 in a Day on Pi" />
 <meta name="author" content="Pete Graham" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="I’ve been using AI software development tools for a number of years now. I was an early user of GitHub Copilot before switching to Cursor; more recently, I’ve been using a combination of Cursor and Claude Code. I’ve also dabbled with Lovable along the way." />
@@ -20,12 +20,12 @@
 <meta property="article:published_time" content="2026-09-17T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://petegraham.com/assets/images/posts/pi-pork-pies-hero.webp" />
-<meta property="twitter:title" content="I spent $28 in a day on Pi" />
+<meta property="twitter:title" content="I Spent $28 in a Day on Pi" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-09-17T00:00:00+00:00","datePublished":"2026-09-17T00:00:00+00:00","description":"I’ve been using AI software development tools for a number of years now. I was an early user of GitHub Copilot before switching to Cursor; more recently, I’ve been using a combination of Cursor and Claude Code. I’ve also dabbled with Lovable along the way.","headline":"I spent $28 in a day on Pi","image":"https://petegraham.com/assets/images/posts/pi-pork-pies-hero.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/i-spent-28-dollars-in-a-day-on-pi/"},"url":"https://petegraham.com/i-spent-28-dollars-in-a-day-on-pi/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pete Graham"},"dateModified":"2026-09-17T00:00:00+00:00","datePublished":"2026-09-17T00:00:00+00:00","description":"I’ve been using AI software development tools for a number of years now. I was an early user of GitHub Copilot before switching to Cursor; more recently, I’ve been using a combination of Cursor and Claude Code. I’ve also dabbled with Lovable along the way.","headline":"I Spent $28 in a Day on Pi","image":"https://petegraham.com/assets/images/posts/pi-pork-pies-hero.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://petegraham.com/i-spent-28-dollars-in-a-day-on-pi/"},"url":"https://petegraham.com/i-spent-28-dollars-in-a-day-on-pi/"}</script>
 <!-- End Jekyll SEO tag -->
 
-  <title>Pete Graham - CTO - I spent $28 in a day on Pi</title>
+  <title>Pete Graham - CTO - I Spent $28 in a Day on Pi</title>
   <link rel="apple-touch-icon" href='/assets/images/apple-touch-icon.png'>
   <link rel="icon" type="image/svg+xml" href='/assets/images/favicon.svg'>
   <link rel="icon" href='/assets/images/favicon.ico'>
@@ -53,7 +53,7 @@
   <section id="wrapper" class="">
     <article class="post">
     <header>
-        <h1>I spent $28 in a day on Pi</h1>
+        <h1>I Spent $28 in a Day on Pi</h1>
         
             
             
@@ -73,9 +73,9 @@
 
 <p>Pi is quick to set up, and the user experience feels very similar to Claude Code; in fact, it’s compatible with Claude Code configuration and skills. Developers enjoy using it as it’s highly configurable, so you can make it work exactly how you want, so somewhat of a Vim philosophy but for a coding harness.</p>
 
-<p>An example is that it doesn’t include an in-built plan mode; instead, most people instruct it to plan using markdown files. This is how I prefer to work anyway, so plans are documented along with code, and so I can collaborate on them with the LLM.</p>
+<p>An example is that it doesn’t include an in-built plan mode; instead, most people instruct it to plan using markdown files. This is how I prefer to work anyway, so plans are documented along with code, and I can collaborate on them with the LLM.</p>
 
-<p>I started by configuring it to use an Anthropic API key, meaning you are paying for usage rather than on a fixed-fee plan. This is the default way Pi works out of the box. I used Anthropic’s Sonnet 5 model out of the box, which is an affordable model compared to Opus or the very expensive Claude Fable.</p>
+<p>I started by configuring it to use an Anthropic API key, meaning you are paying for usage rather than on a fixed-fee plan. This is the default way Pi works. I used Anthropic’s Sonnet 5, which is an affordable model compared to Opus or the very expensive Claude Fable.</p>
 
 <p>I was very much enjoying using Pi; however, it shows token spend in the UI, which made me very aware of what I was spending. Researching the most cost-effective way to use Pi, it suggested that I should pay $10 for a GitHub Copilot subscription. I burnt through this surprisingly quickly and so switched back to my Anthropic API key, which I then needed to top up with credit.</p>
 
@@ -85,9 +85,9 @@
 
 <p>Some detective work into why Pi used so much credit discovered that unlike Claude Code, Pi doesn’t compact conversations, so after a day in one session the context had grown to nearly 500,000 tokens, including a database dump and hundreds of shell commands, and it was re-sending all of that on every turn. About 91% of the bill was context; only 9% paid for generated text. Pi’s cache also expires after five minutes by default, which made stepping away expensive, but a longer cache would only have saved about 10%. The expensive bit was never starting a fresh session.</p>
 
-<p>While this was an expensive mistake, it did make me think of the cost of LLM usage; it’s well known that Cursor and Anthropic are subsidising usage of their AI coding tools, as this area is currently a bit of a land grab. I was made aware of this last year when I was using AWS Bedrock and <a href="https://cline.bot/">Cline</a> for a particularly sensitive project I was working on last year where I didn’t want the code shared with another company</p>
+<p>While this was an expensive mistake, it did make me think of the cost of LLM usage; it’s well known that Cursor and Anthropic are subsidising usage of their AI coding tools, as this area is currently a bit of a land grab. I was made aware of this last year when I was using AWS Bedrock and <a href="https://cline.bot/">Cline</a> for a particularly sensitive project I was working on last year where I didn’t want the code shared with another company.</p>
 
-<p>For now I’ve switched back to Claude Code. I like the idea of using something open source, but I don’t think the economics for Pi stack up for me at this point in time. I may try using it with the <a href="https://www.npmjs.com/package/pi-claude-bridge">Claude Code plugin</a> under the hood, but from what I’ve read, this isn’t as efficient as using Claude Code directly and feels a bit like a hack. Perhaps if I upgrade my MacBook in future, I’ll try running it again using open-weight models.</p>
+<p>For now I’ve switched back to Claude Code. I like the idea of using something open source, but I don’t think the economics for Pi stack up for me at this point in time. I may try using it with the <a href="https://www.npmjs.com/package/pi-claude-bridge">Claude Code plugin</a> under the hood, but from what I’ve read, it bills against the Claude subscription I already have, though it still feels a bit like a hack. Perhaps if I upgrade my MacBook in future, I’ll try running it again using open-weight models.</p>
 
         <p>
         If you'd like to contact me then you can email <a href="mailto:writing@petegraham.co.uk">writing@petegraham.co.uk</a>.
